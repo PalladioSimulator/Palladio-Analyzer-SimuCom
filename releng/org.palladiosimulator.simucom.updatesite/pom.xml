@@ -10,5 +10,14 @@
 
 	<artifactId>org.palladiosimulator.simucom.updatesite</artifactId>
 	<packaging>eclipse-repository</packaging>
+	
+		<build>
+		<plugins>
+			<plugin>
+				<groupId>org.palladiosimulator</groupId>
+				<artifactId>tycho-document-bundle-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
 
 </project>
