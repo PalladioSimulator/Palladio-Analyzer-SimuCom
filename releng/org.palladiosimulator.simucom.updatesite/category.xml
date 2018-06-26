@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <site>
-   <feature url="features/org.palladiosimulator.simucom.feature_4.1.0.qualifier.jar" id="org.palladiosimulator.simucom.feature" version="4.1.0.qualifier">
+   <feature url="features/org.palladiosimulator.simucom.feature_4.1.1.qualifier.jar" id="org.palladiosimulator.simucom.feature" version="4.1.1.qualifier">
       <category name="org.palladiosimulator.analyzer.category"/>
    </feature>
-      <feature url="features/org.palladiosimulator.simucom.feature.source_4.1.0.qualifier.jar" id="org.palladiosimulator.simucom.feature.source" version="4.1.0.qualifier">
+      <feature url="features/org.palladiosimulator.simucom.feature.source_4.1.1.qualifier.jar" id="org.palladiosimulator.simucom.feature.source" version="4.1.1.qualifier">
       <category name="org.palladiosimulator.analyzer.source.category"/>
    </feature>
    <category-def name="org.palladiosimulator.analyzer.category" label="Palladio Analyzer Features">
