@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+		
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.palladiosimulator.simucom</groupId>
+		<artifactId>parent</artifactId>
+		<version>4.1.0-SNAPSHOT</version>
+	</parent>
+	<artifactId>bundles</artifactId>
+	<packaging>pom</packaging>
+	
+	<modules>
+		<module>de.uka.ipd.sdq.codegen.simucontroller</module>
+		<module>de.uka.ipd.sdq.pcm.codegen.m2m</module>
+		<module>de.uka.ipd.sdq.pcm.codegen.simucom</module>
+		<module>de.uka.ipd.sdq.simucom.rerunsimulation</module>
+		<module>de.uka.ipd.sdq.simucomframework</module>
+		<module>de.uka.ipd.sdq.simucomframework.simucomstatus</module>
+		<module>de.uka.ipd.sdq.simucomframework.simulationdock</module>
+		<module>de.uka.ipd.sdq.simucomframework.variables</module>
+		<module>de.uka.ipd.sdq.simulation</module>
+		<module>org.palladiosimulator.simucom.reliability</module>
+	</modules>
+	
+</project>
