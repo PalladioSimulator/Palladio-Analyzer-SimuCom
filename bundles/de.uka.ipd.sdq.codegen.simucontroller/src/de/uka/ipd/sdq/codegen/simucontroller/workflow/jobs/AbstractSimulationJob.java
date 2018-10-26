@@ -80,7 +80,8 @@ public abstract class AbstractSimulationJob<C extends AbstractSimulationWorkflow
         // this.add(new CompletionJob(configuration));
 
         // 5. Transform Event Model Elements
-        this.add(new EventsTransformationJob(configuration));
+        this.add(new EventsTransformationJob(configuration.getStoragePluginID(), configuration.getEventMiddlewareFile(),
+				false));
 
         // 6. Apply connector completion transformation
         if (configuration.getSimulateLinkingResources()) {
