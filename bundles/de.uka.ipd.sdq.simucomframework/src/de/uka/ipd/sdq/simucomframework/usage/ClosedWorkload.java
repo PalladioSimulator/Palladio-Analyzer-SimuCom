@@ -13,7 +13,7 @@ import java.util.Queue;
 public class ClosedWorkload implements ICancellableWorkloadDriver {
 
     private final int population;
-    private final IUserFactory userFactory;
+    private final IClosedWorkloadUserFactory userFactory;
     private final Queue<ClosedWorkloadUser> users;
     /** is null, unless a new think time has been set. */
     private String newThinkTime = null;
@@ -26,7 +26,7 @@ public class ClosedWorkload implements ICancellableWorkloadDriver {
      * @param population
      *            Number of users in the system
      */
-    public ClosedWorkload(final IUserFactory userFactory, final int population) {
+    public ClosedWorkload(final IClosedWorkloadUserFactory userFactory, final int population) {
         super();
         this.userFactory = userFactory;
         this.population = population;
@@ -71,16 +71,13 @@ public class ClosedWorkload implements ICancellableWorkloadDriver {
     private void startUsers(final int count) {
         for (int i = 0; i < count; i++) {
             final ClosedWorkloadUser user = (ClosedWorkloadUser) userFactory.createUser();
-            if (newThinkTime != null) {
-                user.setThinkTime(newThinkTime);
-            }
             user.startUserLife();
             this.users.add(user);
         }
     }
 
     public void setThinkTime(final String newThinkTime) {
-        this.newThinkTime = newThinkTime;
+        userFactory.setThinkTimeSpec(newThinkTime);
         for (ClosedWorkloadUser user : users) {
             user.setThinkTime(newThinkTime);
         }
