@@ -15,6 +15,8 @@ public class ClosedWorkload implements ICancellableWorkloadDriver {
     private final int population;
     private final IUserFactory userFactory;
     private final Queue<ClosedWorkloadUser> users;
+    /** is null, unless a new think time has been set. */
+    private String newThinkTime = null;
 
     /**
      * Constructor of the closed workload driver
@@ -69,8 +71,18 @@ public class ClosedWorkload implements ICancellableWorkloadDriver {
     private void startUsers(final int count) {
         for (int i = 0; i < count; i++) {
             final ClosedWorkloadUser user = (ClosedWorkloadUser) userFactory.createUser();
+            if (newThinkTime != null) {
+                user.setThinkTime(newThinkTime);
+            }
             user.startUserLife();
             this.users.add(user);
+        }
+    }
+
+    public void setThinkTime(final String newThinkTime) {
+        this.newThinkTime = newThinkTime;
+        for (ClosedWorkloadUser user : users) {
+            user.setThinkTime(newThinkTime);
         }
     }
 }

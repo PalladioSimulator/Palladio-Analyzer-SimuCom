@@ -23,7 +23,7 @@ public class ClosedWorkloadUser extends SimuComSimProcess implements IUser {
     private static final Logger LOGGER = Logger.getLogger(ClosedWorkloadUser.class.getName());
 
     private final IScenarioRunner scenarioRunner;
-    private final String thinkTime;
+    private String thinkTime;
 
     // private static int USERCOUNT = 0;
     private int runCount = 0;
@@ -154,4 +154,7 @@ public class ClosedWorkloadUser extends SimuComSimProcess implements IUser {
         this.requestStop = true;
     }
 
+    public void setThinkTime(final String newThinkTimeSpec) {
+        this.thinkTime = newThinkTimeSpec;
+    }
 }
