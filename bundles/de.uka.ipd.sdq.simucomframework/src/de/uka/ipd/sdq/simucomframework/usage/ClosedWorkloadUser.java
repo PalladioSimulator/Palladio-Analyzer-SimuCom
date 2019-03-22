@@ -72,8 +72,8 @@ public class ClosedWorkloadUser extends SimuComSimProcess implements IUser {
                 if (getModel().getConfiguration().getSimulateFailures()) {
                     this.getModel().getFailureStatistics().increaseRunCount();
                     if (getModel().getConfiguration().isDebug()) {
-                        this.getModel().getFailureStatistics()
-                                .printRunCount(LOGGER, getModel().getSimulationControl().getCurrentSimulationTime());
+                        this.getModel().getFailureStatistics().printRunCount(LOGGER,
+                                getModel().getSimulationControl().getCurrentSimulationTime());
                     }
                 }
                 scenarioRunner(this);
@@ -82,8 +82,8 @@ public class ClosedWorkloadUser extends SimuComSimProcess implements IUser {
                 }
             } catch (final FailureException exception) {
                 if (getModel().getConfiguration().getSimulateFailures()) {
-                    this.getModel().getFailureStatistics()
-                            .increaseUnhandledFailureCounter(exception.getFailureType(), currentSessionId);
+                    this.getModel().getFailureStatistics().increaseUnhandledFailureCounter(exception.getFailureType(),
+                            currentSessionId);
                 }
             } finally {
                 // Increase measurements counter manually as usage scenario run
@@ -113,7 +113,7 @@ public class ClosedWorkloadUser extends SimuComSimProcess implements IUser {
      */
     @Override
     public void scenarioRunner(final SimuComSimProcess thread) {
-    	// execute
+        // execute
         ((TriggeredProbe) this.usageStartStopProbes.get(0)).takeMeasurement(getRequestContext());
         this.scenarioRunner.scenarioRunner(thread);
         ((TriggeredProbe) this.usageStartStopProbes.get(1)).takeMeasurement(getRequestContext());

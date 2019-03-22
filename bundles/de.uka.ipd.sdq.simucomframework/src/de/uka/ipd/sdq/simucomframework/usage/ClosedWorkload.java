@@ -40,7 +40,7 @@ public class ClosedWorkload implements ICancellableWorkloadDriver {
     public void run() {
         startUsers(population);
     }
-    
+
     @Override
     public void cancel() {
         this.setPopulation(0);
@@ -66,9 +66,6 @@ public class ClosedWorkload implements ICancellableWorkloadDriver {
         }
     }
 
-    /**
-     *
-     */
     private void startUsers(final int count) {
         for (int i = 0; i < count; i++) {
             final ClosedWorkloadUser user = (ClosedWorkloadUser) userFactory.createUser();
