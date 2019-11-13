@@ -6,7 +6,7 @@ Bundle-Version: 4.1.1.qualifier
 Bundle-ClassPath: .
 Bundle-Vendor: sdq.ipd.uka.de
 Bundle-Localization: plugin
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-RequiredExecutionEnvironment: JavaSE-11
 Export-Package: de.uka.ipd.sdq.simucomframework.simucomstatus,
  de.uka.ipd.sdq.simucomframework.simucomstatus.impl,
  de.uka.ipd.sdq.simucomframework.simucomstatus.util
