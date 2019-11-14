@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: SimuCom CodeGenerator Xtend Templates
 Bundle-SymbolicName: de.uka.ipd.sdq.pcm.codegen.simucom
-Bundle-Version: 4.1.1.qualifier
+Bundle-Version: 4.2.0.qualifier
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore;visibility:=reexport,
  org.eclipse.ocl;visibility:=reexport,
