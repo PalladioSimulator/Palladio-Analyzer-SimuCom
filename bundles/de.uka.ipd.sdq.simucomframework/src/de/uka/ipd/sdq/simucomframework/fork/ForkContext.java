@@ -3,6 +3,7 @@ package de.uka.ipd.sdq.simucomframework.fork;
 import de.uka.ipd.sdq.simucomframework.Context;
 import de.uka.ipd.sdq.simucomframework.SimuComSimProcess;
 import de.uka.ipd.sdq.simucomframework.resources.AbstractSimulatedResourceContainer;
+import de.uka.ipd.sdq.simucomframework.resources.IAssemblyAllocationLookup;
 import de.uka.ipd.sdq.simucomframework.variables.stackframe.SimulatedStack;
 
 /**
@@ -40,19 +41,13 @@ public class ForkContext extends Context {
      */
     private static final long serialVersionUID = 6701742993106975705L;
 
-    @Override
-    public AbstractSimulatedResourceContainer findResource(final String assemblyContextID) {
-        // Use my parents allocation information to do my look ups
-        return parentContext.findResource(assemblyContextID);
-    }
-
     public Context getParentContext() {
         return parentContext;
     }
 
-    @Override
-    protected void initialiseAssemblyContextLookup() {
-        // Emtpy as we use our parents allocation lookup
-    }
+	@Override
+	public IAssemblyAllocationLookup<AbstractSimulatedResourceContainer> getAssemblyAllocationLookup() {
+		return getParentContext().getAssemblyAllocationLookup();
+	}
 
 }

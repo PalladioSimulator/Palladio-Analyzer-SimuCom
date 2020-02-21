@@ -1,17 +1,13 @@
 package de.uka.ipd.sdq.simucomframework;
 
-import java.util.HashMap;
+import org.palladiosimulator.pcm.resourceenvironment.ResourceContainer;
 
-import org.palladiosimulator.commons.emfutils.EMFLoadHelper;
-
-import org.palladiosimulator.pcm.core.composition.AssemblyContext;
-import org.palladiosimulator.pcm.repository.PassiveResource;
-import de.uka.ipd.sdq.scheduler.IPassiveResource;
 import de.uka.ipd.sdq.simucomframework.exceptions.ResourceContainerNotFound;
 import de.uka.ipd.sdq.simucomframework.model.SimuComModel;
 import de.uka.ipd.sdq.simucomframework.resources.AbstractSimulatedResourceContainer;
+import de.uka.ipd.sdq.simucomframework.resources.IAssemblyAllocationLookup;
+import de.uka.ipd.sdq.simucomframework.resources.ISimulatedModelEntityAccess;
 import de.uka.ipd.sdq.simucomframework.resources.SimulatedLinkingResourceContainer;
-import de.uka.ipd.sdq.simucomframework.resources.SimulatedResourceContainer;
 import de.uka.ipd.sdq.simucomframework.variables.StackContext;
 
 /**
@@ -31,17 +27,7 @@ public abstract class Context extends StackContext {
      * Central registry which contains all simulated resources
      */
     private ResourceRegistry registry = null;
-
-    /**
-     * AssemblyContextID -> ResourceContainer Object (Deployment Link)
-     */
-    private final HashMap<String, AbstractSimulatedResourceContainer> assemblyLinkHash = new HashMap<String, AbstractSimulatedResourceContainer>();
-
-    /**
-     * AssemblyContextID -> PassiveRessource
-     */
-    private final HashMap<String, IPassiveResource> assemblyPassiveResourceHash = new HashMap<String, IPassiveResource>();
-
+    
     /**
      * The thread to which this context belongs
      */
@@ -51,7 +37,7 @@ public abstract class Context extends StackContext {
      * Simulation model
      */
     private SimuComModel myModel = null;
-
+    
     /**
      * Initialise a new context for the given simulation model
      * 
@@ -59,11 +45,10 @@ public abstract class Context extends StackContext {
      *            The simulation model used in this context
      */
     public Context(SimuComModel myModel) {
-        if (myModel != null) { // This is for the prototype mapping, where we
+    	if (myModel != null) { // This is for the prototype mapping, where we
             // don't need resources
             this.registry = myModel.getResourceRegistry();
             this.myModel = myModel;
-            initialiseAssemblyContextLookup();
         } else {
             stack.createAndPushNewStackFrame();
         }
@@ -82,7 +67,8 @@ public abstract class Context extends StackContext {
      * @return The resource container in which the given assembly context is deployed
      */
     public AbstractSimulatedResourceContainer findResource(String assemblyContextID) {
-        AbstractSimulatedResourceContainer container = assemblyLinkHash.get(assemblyContextID);
+        AbstractSimulatedResourceContainer container = getAssemblyAllocationLookup()
+        		.getAllocatedEntity(assemblyContextID);
         if (container == null) {
             throw new ResourceContainerNotFound(
                     "Resource container for assembly context "
@@ -109,42 +95,12 @@ public abstract class Context extends StackContext {
         return (SimulatedLinkingResourceContainer) container;
     }
 
-    /**
-     * Create a deployment relationship between the given assembly context and the given resource
-     * container
-     * 
-     * @param assemblyContextID
-     *            ID of the assembly context to allocate
-     * @param resourceContainerID
-     *            ID of the resource container on which the assembly context is allocated
-     */
-    protected void linkAssemblyContextAndResourceContainer(String assemblyContextID, String resourceContainerID) {
-        assert registry.containsResourceContainer(resourceContainerID);
-        AbstractSimulatedResourceContainer container = registry.getResourceContainer(resourceContainerID);
-        assemblyLinkHash.put(assemblyContextID, container);
-    }
-
-    public IPassiveResource getPassiveRessourceInContext(final String resourceURI,
-            final AssemblyContext assemblyContext, AbstractSimulatedResourceContainer resourceContainer, long capacity) {
-        final PassiveResource resource = (PassiveResource) EMFLoadHelper.loadAndResolveEObject(resourceURI);
-        IPassiveResource pr = assemblyPassiveResourceHash.get(assemblyContext.getId() + resource.getId());
-
-        if (pr == null) {
-            pr = ((SimulatedResourceContainer) resourceContainer).createPassiveResource(resource, assemblyContext,
-                    capacity);
-            assemblyPassiveResourceHash.put(assemblyContext.getId() + resource.getId(), pr);
-        }
-
-        return pr;
-    }
-
-    /**
-     * Template method to be filled in by the generator. Calles
-     * linkAssemblyContextAndResourceContainer to create the deployment specified in the allocation
-     * model
-     */
-    protected abstract void initialiseAssemblyContextLookup();
-
+    public abstract IAssemblyAllocationLookup<AbstractSimulatedResourceContainer> getAssemblyAllocationLookup();
+    
+	public ISimulatedModelEntityAccess<ResourceContainer, AbstractSimulatedResourceContainer> getSimulatedResourceContainerAccess() {
+		return this.registry::getResourceContainer;
+	}
+    
     public SimuComSimProcess getThread() {
         return myThread;
     }
