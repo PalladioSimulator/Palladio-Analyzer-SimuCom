@@ -36,7 +36,7 @@ class SimAllocationXpt extends AllocationXpt {
 			package «a.fqnAllocationContextPackage()»;
 			 
 			public class «a.fqnAllocationContextClass()» 
-			extends de.uka.ipd.sdq.simucomframework.Context {
+			extends de.uka.ipd.sdq.simucomframework.SimuComContext {
 				public «a.fqnAllocationContextClass()»(de.uka.ipd.sdq.simucomframework.model.SimuComModel myModel) {
 					super(myModel);
 				}
