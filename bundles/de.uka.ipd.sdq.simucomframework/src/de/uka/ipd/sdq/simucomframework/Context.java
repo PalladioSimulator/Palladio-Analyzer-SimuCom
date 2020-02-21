@@ -37,7 +37,7 @@ public abstract class Context extends StackContext {
      * Simulation model
      */
     private SimuComModel myModel = null;
-    
+
     /**
      * Initialise a new context for the given simulation model
      * 
@@ -45,7 +45,7 @@ public abstract class Context extends StackContext {
      *            The simulation model used in this context
      */
     public Context(SimuComModel myModel) {
-    	if (myModel != null) { // This is for the prototype mapping, where we
+        if (myModel != null) { // This is for the prototype mapping, where we
             // don't need resources
             this.registry = myModel.getResourceRegistry();
             this.myModel = myModel;
@@ -95,8 +95,21 @@ public abstract class Context extends StackContext {
         return (SimulatedLinkingResourceContainer) container;
     }
 
+    /**
+     * The lookup allows to find the suitable simulation entity of the
+     * ResourceContainer to which an AssemblyContext is deployed to.
+     * 
+     * Subclasses need to provide the concrete implementation of the lookup mechanism.
+     * 
+     * @return the AssemblyContext allocation lookup
+     */
     public abstract IAssemblyAllocationLookup<AbstractSimulatedResourceContainer> getAssemblyAllocationLookup();
     
+    /**
+     * Provides access to simulation entities of resource containers based on their model entities.
+     * 
+     * @return the access facade to simulated resource containers.
+     */
 	public ISimulatedModelEntityAccess<ResourceContainer, AbstractSimulatedResourceContainer> getSimulatedResourceContainerAccess() {
 		return this.registry::getResourceContainer;
 	}

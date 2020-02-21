@@ -19,11 +19,9 @@ public class ForkContext extends Context {
     /**
      * Constructor of the parallel process
      * 
-     * @param parentContext
-     *            The current context of the parent thread. Used to evaluate variables in the
-     *            parallel process
-     * @param parent
-     *            The parent process
+     * @param parentContext The current context of the parent thread. Used to
+     *                      evaluate variables in the parallel process
+     * @param parent        The parent process
      */
     public ForkContext(final Context parentContext, final SimuComSimProcess parent) {
         super(parentContext.getModel());
@@ -45,9 +43,9 @@ public class ForkContext extends Context {
         return parentContext;
     }
 
-	@Override
-	public IAssemblyAllocationLookup<AbstractSimulatedResourceContainer> getAssemblyAllocationLookup() {
-		return getParentContext().getAssemblyAllocationLookup();
-	}
+    @Override
+    public IAssemblyAllocationLookup<AbstractSimulatedResourceContainer> getAssemblyAllocationLookup() {
+        return getParentContext().getAssemblyAllocationLookup();
+    }
 
 }
