@@ -20,40 +20,40 @@ import org.palladiosimulator.pcm.core.composition.AssemblyContext;
  */
 public interface IAssemblyAllocationLookup<AllocationType> {
 
-	/**
-	 * Provides a simple implementation of the interface based on HashMap. The
-	 * HashMap itself needs to be kept externally in order to provide editing
-	 * support.
-	 */
-	public class HashMapAssemblyAllocationLookup<AllocationType> implements IAssemblyAllocationLookup<AllocationType> {
-		protected final Map<String, AllocationType> internalMap;
+    /**
+     * Provides a simple implementation of the interface based on HashMap. The
+     * HashMap itself needs to be kept externally in order to provide editing
+     * support.
+     */
+    public class HashMapAssemblyAllocationLookup<AllocationType> implements IAssemblyAllocationLookup<AllocationType> {
+        protected final Map<String, AllocationType> internalMap;
 
-		public HashMapAssemblyAllocationLookup(Map<String, AllocationType> delegateMap) {
-			internalMap = Collections.unmodifiableMap(delegateMap);
-		}
+        public HashMapAssemblyAllocationLookup(Map<String, AllocationType> delegateMap) {
+            internalMap = Collections.unmodifiableMap(delegateMap);
+        }
 
-		@Override
-		public AllocationType getAllocatedEntity(String assemblyContextId) {
-			return internalMap.get(assemblyContextId);
-		}
-	}
+        @Override
+        public AllocationType getAllocatedEntity(String assemblyContextId) {
+            return internalMap.get(assemblyContextId);
+        }
+    }
 
-	/**
-	 * Get the entity to which the assembly context identified by the provided ID is
-	 * allocated to.
-	 * 
-	 * @param assemblyContextId The UUID of the assembly context
-	 * @return the entity
-	 */
-	AllocationType getAllocatedEntity(String assemblyContextId);
+    /**
+     * Get the entity to which the assembly context identified by the provided ID is
+     * allocated to.
+     * 
+     * @param assemblyContextId The UUID of the assembly context
+     * @return the entity
+     */
+    AllocationType getAllocatedEntity(String assemblyContextId);
 
-	/**
-	 * Get the entity to which the provided assembly context is allocated to.
-	 * 
-	 * @param context the assembly context
-	 * @return the entity
-	 */
-	default AllocationType getAllocatedEntity(AssemblyContext context) {
-		return getAllocatedEntity(context.getId());
-	}
+    /**
+     * Get the entity to which the provided assembly context is allocated to.
+     * 
+     * @param context the assembly context
+     * @return the entity
+     */
+    default AllocationType getAllocatedEntity(AssemblyContext context) {
+        return getAllocatedEntity(context.getId());
+    }
 }
