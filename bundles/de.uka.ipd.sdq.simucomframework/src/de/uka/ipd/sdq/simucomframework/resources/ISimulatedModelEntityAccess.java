@@ -17,12 +17,12 @@ import de.uka.ipd.sdq.identifier.Identifier;
 public interface ISimulatedModelEntityAccess<ModelEntity extends Identifier, SimulatedModelEntityType> {
 
     /**
-     * Gets the simulation entitiy for the model entity identified by the provided id.
+     * Gets the simulation entity for the model entity identified by the provided id.
      */
     SimulatedModelEntityType getSimulatedEntity(String modelEntityIdentifier);
 
     /**
-     * Gets the simulation entitiy for the model entity.
+     * Gets the simulation entity for the model entity.
      */
     default SimulatedModelEntityType getSimulatedEntity(ModelEntity modelEntity) {
         return getSimulatedEntity(modelEntity.getId());
