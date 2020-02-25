@@ -4,8 +4,8 @@ import java.io.Serializable;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
-
 import org.palladiosimulator.pcm.resourceenvironment.LinkingResource;
+
 import de.uka.ipd.sdq.scheduler.IActiveResource;
 import de.uka.ipd.sdq.simucomframework.SimuComSimProcess;
 import de.uka.ipd.sdq.simucomframework.exceptions.FailureException;
@@ -28,8 +28,8 @@ public class SimulatedLinkingResource extends AbstractScheduledResource {
     private static long resourceId = 1;
 
     private final LinkingResource linkingResource;
-    private final String throughput;
-    private final String latencySpec;
+    private String throughput;
+    private String latencySpec;
 
     // For resources that can fail (SimulatedLinkingResources):
     private final boolean canFail;
@@ -173,5 +173,23 @@ public class SimulatedLinkingResource extends AbstractScheduledResource {
 
     public LinkingResource getLinkingResource() {
         return this.linkingResource;
+    }
+
+    /**
+     * Change the linking resource throughput after its creation.
+     * 
+     * @param throughput the new throughput specification
+     */
+    public void setThroughput(String throughput) {
+        this.throughput = throughput;
+    }
+
+    /**
+     * Change the linking resource latency after its creation.
+     * 
+     * @param latency the new latency specification
+     */
+    public void setLatency(String latency) {
+        this.latencySpec = latency;
     }
 }
