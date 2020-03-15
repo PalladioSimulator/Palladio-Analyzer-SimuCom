@@ -133,14 +133,14 @@ public class ApplyConnectorCompletionsJob implements IBlackboardInteractingJob<M
      */
     private void addMiddleware(PCMAndCompletionModelHolder models, ResourceContainer resContainer) {
         AssemblyContext ctx = CompositionFactory.eINSTANCE.createAssemblyContext();
-        ctx.setEntityName("AssCtx Middleware " + resContainer.getEntityName());
+        ctx.setEntityName("AssCtx Middleware " + resContainer.getEntityName() + " " + resContainer.getId());
         ctx.setEncapsulatedComponent__AssemblyContext(models.getMiddlewareRepository().getComponents__Repository()
                 .get(0)); // TODO: Parameterise me!
         models.getSystem().getAssemblyContexts__ComposedStructure().add(ctx);
 
         models.getSystem().getAssemblyContexts__ComposedStructure().add(ctx);
         AllocationContext allocCtx = AllocationFactory.eINSTANCE.createAllocationContext();
-        allocCtx.setEntityName("AllocCtx Middleware " + resContainer.getEntityName());
+        allocCtx.setEntityName("AllocCtx Middleware " + resContainer.getEntityName() + resContainer.getId());
         allocCtx.setAssemblyContext_AllocationContext(ctx);
         allocCtx.setResourceContainer_AllocationContext(resContainer);
         models.getAllocation().getAllocationContexts_Allocation().add(allocCtx);
@@ -148,7 +148,7 @@ public class ApplyConnectorCompletionsJob implements IBlackboardInteractingJob<M
         if (LOGGER.isEnabledFor(Level.INFO)) {
             LOGGER.info("Added middleware component >"
                     + ctx.getEncapsulatedComponent__AssemblyContext().getEntityName() + "< to resource container >"
-                    + resContainer.getEntityName() + "<");
+                    + resContainer.getEntityName() + " (" + resContainer.getId() + ")" + "<");
         }
     }
 
