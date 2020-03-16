@@ -140,7 +140,7 @@ public class ApplyConnectorCompletionsJob implements IBlackboardInteractingJob<M
 
         models.getSystem().getAssemblyContexts__ComposedStructure().add(ctx);
         AllocationContext allocCtx = AllocationFactory.eINSTANCE.createAllocationContext();
-        allocCtx.setEntityName("AllocCtx Middleware " + resContainer.getEntityName() + resContainer.getId());
+        allocCtx.setEntityName("AllocCtx Middleware " + resContainer.getEntityName() + " " + resContainer.getId());
         allocCtx.setAssemblyContext_AllocationContext(ctx);
         allocCtx.setResourceContainer_AllocationContext(resContainer);
         models.getAllocation().getAllocationContexts_Allocation().add(allocCtx);
