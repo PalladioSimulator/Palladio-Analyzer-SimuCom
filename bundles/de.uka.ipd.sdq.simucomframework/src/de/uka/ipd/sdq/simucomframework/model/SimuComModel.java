@@ -12,6 +12,7 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.util.EContentAdapter;
 import org.palladiosimulator.probeframework.ProbeFrameworkContext;
 import org.palladiosimulator.probeframework.calculator.DefaultCalculatorFactory;
+import org.palladiosimulator.probeframework.calculator.ExtensibleCalculatorFactoryDelegatingFactory;
 import org.palladiosimulator.reliability.FailureStatistics;
 
 import de.uka.ipd.sdq.errorhandling.SeverityAndIssue;
@@ -104,7 +105,7 @@ public class SimuComModel extends SchedulerModel {
     private ProbeFrameworkContext initialiseProbeFramework() {
         // create ProbeFramework context
         final ProbeFrameworkContext result = new ProbeFrameworkContext(new RecorderAttachingCalculatorFactoryDecorator(
-                new DefaultCalculatorFactory(), this.config));
+                new ExtensibleCalculatorFactoryDelegatingFactory(), this.config));
 
         return result;
     }
