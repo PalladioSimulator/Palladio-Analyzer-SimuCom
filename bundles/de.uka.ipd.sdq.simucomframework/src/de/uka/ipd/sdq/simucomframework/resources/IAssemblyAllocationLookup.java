@@ -1,6 +1,12 @@
 package de.uka.ipd.sdq.simucomframework.resources;
 
+import java.util.Collection;
+import java.util.stream.Collectors;
+
 import org.palladiosimulator.pcm.core.composition.AssemblyContext;
+import org.palladiosimulator.pcm.repository.BasicComponent;
+
+import de.uka.ipd.sdq.identifier.Identifier;
 
 /**
  * Through the IAssemblyAllocationLookup interface it is possible to access the
@@ -33,6 +39,23 @@ public interface IAssemblyAllocationLookup<AllocationType> {
      * @return the entity
      */
     default AllocationType getAllocatedEntity(AssemblyContext context) {
+        if (context.getParentStructure__AssemblyContext() instanceof BasicComponent) {
+            throw new IllegalArgumentException("Only root assembly contexts can be allocated directly. "
+                    + "Please use getAllocatedEntity(Stack<AssemblyContext>).");
+        }
         return getAllocatedEntity(context.getId());
     }
+
+    /**
+     * Get the entity to which the provided assembly context within its hierarchical
+     * context is allocated to.
+     * 
+     * @param contextHierarchy the hierarchy of assembly contexts of component
+     *                         compositions
+     * @return the entity
+     */
+    default AllocationType getAllocatedEntity(Collection<AssemblyContext> contextHierarchy) {
+        return getAllocatedEntity(contextHierarchy.stream().map(Identifier::getId).collect(Collectors.joining("::")));
+    }
+
 }
