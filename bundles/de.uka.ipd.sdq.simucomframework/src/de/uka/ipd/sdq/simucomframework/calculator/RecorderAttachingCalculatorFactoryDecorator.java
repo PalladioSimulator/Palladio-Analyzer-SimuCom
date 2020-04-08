@@ -7,7 +7,7 @@ import org.palladiosimulator.edp2.models.measuringpoint.MeasuringPoint;
 import org.palladiosimulator.metricspec.MetricDescription;
 import org.palladiosimulator.probeframework.calculator.Calculator;
 import org.palladiosimulator.probeframework.calculator.IGenericCalculatorFactory;
-import org.palladiosimulator.probeframework.probes.ProbeConfiguration;
+import org.palladiosimulator.probeframework.calculator.CalculatorProbeSet;
 import org.palladiosimulator.recorderframework.IRecorder;
 import org.palladiosimulator.recorderframework.config.AbstractRecorderConfiguration;
 import org.palladiosimulator.recorderframework.config.IRecorderConfiguration;
@@ -38,8 +38,8 @@ public class RecorderAttachingCalculatorFactoryDecorator implements IGenericCalc
 
     @Override
     public Calculator buildCalculator(MetricDescription metric, MeasuringPoint measuringPoint,
-    		ProbeConfiguration probeConfiguration) {
-    	return setupRecorder(decoratedCalculatorFactory.buildCalculator(metric, measuringPoint, probeConfiguration));
+            CalculatorProbeSet probeConfiguration) {
+        return setupRecorder(decoratedCalculatorFactory.buildCalculator(metric, measuringPoint, probeConfiguration));
     }
 
     private Calculator setupRecorder(final Calculator calculator) {
