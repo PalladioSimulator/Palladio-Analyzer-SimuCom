@@ -56,8 +56,8 @@ public interface IAssemblyAllocationLookup<AllocationType> {
      */
     default AllocationType getAllocatedEntity(List<AssemblyContext> contextHierarchy) {
         return getAllocatedEntity(contextHierarchy.stream()
-                                                  .map(Identifier::getId)
-                                                  .collect(Collectors.joining("::")));
+            .map(Identifier::getId)
+            .collect(Collectors.joining("::")));
     }
 
 }
