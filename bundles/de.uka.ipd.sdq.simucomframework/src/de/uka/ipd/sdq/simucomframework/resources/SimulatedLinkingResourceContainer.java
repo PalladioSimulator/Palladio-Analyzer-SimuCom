@@ -21,16 +21,23 @@ public class SimulatedLinkingResourceContainer extends AbstractSimulatedResource
         super(myModel, id);
     }
 
-    public void addActiveResource(LinkingResource linkingResource, final String resourceContainerID) {
+    public SimulatedLinkingResource addActiveResourceWithoutCalculators(LinkingResource linkingResource,
+            final String resourceContainerID) {
         final SimulatedLinkingResource r = new SimulatedLinkingResource(linkingResource, myModel, resourceContainerID);
         activeResources.put(linkingResource.getCommunicationLinkResourceSpecifications_LinkingResource()
-                .getCommunicationLinkResourceType_CommunicationLinkResourceSpecification().getId(), r);
+            .getCommunicationLinkResourceType_CommunicationLinkResourceSpecification()
+            .getId(), r);
+        return r;
+    }
+
+    public void addActiveResource(LinkingResource linkingResource, final String resourceContainerID) {
+        var resource = addActiveResourceWithoutCalculators(linkingResource, resourceContainerID);
 
         // setup calculators
         // TODO: setup waiting time calculator
         // CalculatorHelper.setupWaitingTimeCalculator(r);
-        CalculatorHelper.setupDemandCalculator(r, this.myModel);
-        CalculatorHelper.setupActiveResourceStateCalculators(r, this.myModel);
+        CalculatorHelper.setupDemandCalculator(resource, this.myModel);
+        CalculatorHelper.setupActiveResourceStateCalculators(resource, this.myModel);
     }
 
     /**
