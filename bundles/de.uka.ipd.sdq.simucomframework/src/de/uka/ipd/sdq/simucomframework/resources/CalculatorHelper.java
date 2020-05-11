@@ -23,6 +23,7 @@ import org.palladiosimulator.pcmmeasuringpoint.LinkingResourceMeasuringPoint;
 import org.palladiosimulator.pcmmeasuringpoint.PcmmeasuringpointFactory;
 import org.palladiosimulator.probeframework.ProbeFrameworkContext;
 import org.palladiosimulator.probeframework.calculator.Calculator;
+import org.palladiosimulator.probeframework.calculator.DefaultCalculatorProbeSets;
 import org.palladiosimulator.probeframework.measurement.RequestContext;
 import org.palladiosimulator.probeframework.probes.EventProbe;
 import org.palladiosimulator.probeframework.probes.EventProbeList;
@@ -287,8 +288,10 @@ public final class CalculatorHelper {
             }
 
         });
-        return model.getProbeFrameworkContext().getCalculatorFactory()
-                .buildOverallStateOfActiveResourceCalculator(measuringPoint, scheduledResourceProbe);
+        return model.getProbeFrameworkContext()
+            .getGenericCalculatorFactory()
+            .buildCalculator(scheduledResourceProbe.getMetricDesciption(), measuringPoint,
+                    DefaultCalculatorProbeSets.createSingularProbeConfiguration(scheduledResourceProbe));
     }
 
     /**
