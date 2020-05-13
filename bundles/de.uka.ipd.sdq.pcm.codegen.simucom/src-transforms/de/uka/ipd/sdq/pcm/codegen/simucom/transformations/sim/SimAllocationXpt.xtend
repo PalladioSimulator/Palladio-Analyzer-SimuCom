@@ -13,6 +13,7 @@ import org.palladiosimulator.pcm.subsystem.SubSystem
 import org.palladiosimulator.pcm.system.System
 import org.palladiosimulator.analyzer.completions.Completion
 import org.palladiosimulator.pcm.core.entity.ComposedProvidingRequiringEntity
+import org.palladiosimulator.pcm.core.composition.ComposedStructure
 
 class SimAllocationXpt extends AllocationXpt {
 	@Inject extension M2TFileSystemAccess fsa
@@ -73,7 +74,7 @@ class SimAllocationXpt extends AllocationXpt {
 		«IF (context.assemblyContext_AllocationContext.encapsulatedComponent__AssemblyContext instanceof CompositeComponent) 
 		|| (context.assemblyContext_AllocationContext.encapsulatedComponent__AssemblyContext instanceof SubSystem)
 		|| (context.assemblyContext_AllocationContext.encapsulatedComponent__AssemblyContext instanceof Completion)»
-			«FOR assemblyContext : (context.assemblyContext_AllocationContext.encapsulatedComponent__AssemblyContext as CompositeComponent).assemblyContexts__ComposedStructure»
+			«FOR assemblyContext : (context.assemblyContext_AllocationContext.encapsulatedComponent__AssemblyContext as ComposedStructure).assemblyContexts__ComposedStructure»
 				«assemblyContext.compositeAllocation(context, fullAssemblyContextID, system)»
 			«ENDFOR»
 		«ENDIF»
@@ -90,10 +91,10 @@ class SimAllocationXpt extends AllocationXpt {
 		«IF (context.encapsulatedComponent__AssemblyContext instanceof CompositeComponent)
 		|| (context.encapsulatedComponent__AssemblyContext instanceof SubSystem)
 		|| (context.encapsulatedComponent__AssemblyContext instanceof Completion)»
-			«FOR assemblyContext : (context.encapsulatedComponent__AssemblyContext as CompositeComponent).assemblyContexts__ComposedStructure»
+			«FOR assemblyContext : (context.encapsulatedComponent__AssemblyContext as ComposedStructure).assemblyContexts__ComposedStructure»
 				«assemblyContext.compositeAllocation(allocCxt, context.id + parentid, system)»
 			«ENDFOR»
-			«FOR assemblyContext : (context.encapsulatedComponent__AssemblyContext as CompositeComponent).assemblyContexts__ComposedStructure»
+			«FOR assemblyContext : (context.encapsulatedComponent__AssemblyContext as ComposedStructure).assemblyContexts__ComposedStructure»
 				«assemblyContext.compositeAllocation(allocCxt, context.id, system)»
 			«ENDFOR»
 		«ENDIF»
