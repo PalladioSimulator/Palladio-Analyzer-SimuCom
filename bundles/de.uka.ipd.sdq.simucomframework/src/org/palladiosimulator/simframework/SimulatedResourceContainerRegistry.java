@@ -1,13 +1,16 @@
-package de.uka.ipd.sdq.simucomframework;
+package org.palladiosimulator.simframework;
+
+import java.util.List;
 
 import de.uka.ipd.sdq.simucomframework.resources.AbstractSimulatedResourceContainer;
+import de.uka.ipd.sdq.simucomframework.resources.SimulatedResourceContainer;
 /**
  * Interface for central registery for simulated resources
  * @author Jens Manig
  *
  */
 
-public interface ResourceContainerRegistry {
+public interface SimulatedResourceContainerRegistry {
 
 	/**
 	 * Add a PCM ResourceContainer
@@ -15,14 +18,14 @@ public interface ResourceContainerRegistry {
 	 * @param container
 	 *            the resource container to add
 	 */
-	//void addResourceContainer(AbstractSimulatedResourceContainer container);
+	void addResourceContainer(AbstractSimulatedResourceContainer container);
 
 	/**
      * @param resourceContainerID
      *            ID of the container
      * @return True if the given ID is known in the resource registry
      */
-    //public boolean containsResourceContainer(final String resourceContainerID);
+    public boolean containsResourceContainer(final String resourceContainerID);
 	
 	/**
 	 * Retrieve the resource container with the given ID
@@ -32,14 +35,7 @@ public interface ResourceContainerRegistry {
 	 * @return The queried resource container
 	 */
 	AbstractSimulatedResourceContainer getResourceContainer(String resourceContainerID);
-
-	/**
-	 * Remove the resource container with the given ID
-	 *
-	 * @param resourceContainerID
-	 *            ID of the container to remove. The container must exist in this registry
-	 * @return The queried resource container
-	 */
-	//AbstractSimulatedResourceContainer removeResourceContainerFromRegistry(String resourceContainerID);
+	
+	 public List<SimulatedResourceContainer> getSimulatedResourceContainers();
 
 }

@@ -14,7 +14,8 @@ Export-Package: de.uka.ipd.sdq.simucomframework,
  de.uka.ipd.sdq.simucomframework.probes,
  de.uka.ipd.sdq.simucomframework.resources,
  de.uka.ipd.sdq.simucomframework.stopcondition,
- de.uka.ipd.sdq.simucomframework.usage
+ de.uka.ipd.sdq.simucomframework.usage,
+ org.palladiosimulator.simframework
 Require-Bundle: de.uka.ipd.sdq.simucomframework.variables,
  org.apache.log4j,
  org.eclipse.core.runtime,

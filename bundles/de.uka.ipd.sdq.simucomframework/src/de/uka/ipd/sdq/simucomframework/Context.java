@@ -1,6 +1,7 @@
 package de.uka.ipd.sdq.simucomframework;
 
 import org.palladiosimulator.pcm.resourceenvironment.ResourceContainer;
+import org.palladiosimulator.simframework.SimulatedResourceContainerRegistry;
 
 import de.uka.ipd.sdq.simucomframework.exceptions.ResourceContainerNotFound;
 import de.uka.ipd.sdq.simucomframework.model.SimuComModel;
@@ -26,7 +27,7 @@ public abstract class Context extends StackContext {
     /**
      * Central registry which contains all simulated resources
      */
-    private ResourceContainerRegistry registry = null;
+    private SimulatedResourceContainerRegistry registry = null;
     
     /**
      * The thread to which this context belongs

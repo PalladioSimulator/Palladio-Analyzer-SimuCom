@@ -5,6 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.palladiosimulator.simframework.AbstractSimulatedResourceContainerFactory;
+import org.palladiosimulator.simframework.SimulatedResourceContainerRegistry;
+
 import de.uka.ipd.sdq.simucomframework.model.SimuComModel;
 import de.uka.ipd.sdq.simucomframework.resources.AbstractScheduledResource;
 import de.uka.ipd.sdq.simucomframework.resources.AbstractSimulatedResourceContainer;
@@ -17,7 +20,7 @@ import de.uka.ipd.sdq.simucomframework.resources.SimulatedResourceContainer;
  *
  * @author Steffen Becker, Sebastian Lehrig
  */
-public class ResourceRegistry implements ResourceContainerRegistry {
+public class ResourceRegistry implements SimulatedResourceContainerRegistry, AbstractSimulatedResourceContainerFactory {
 
     /** ResourceContainerID -> ResourceContainer Object */
     private final Map<String, AbstractSimulatedResourceContainer> resourceContainerHash = new HashMap<String, AbstractSimulatedResourceContainer>();
@@ -41,7 +44,7 @@ public class ResourceRegistry implements ResourceContainerRegistry {
      * @param container
      *            the resource container to add
      */
-
+    @Override
 	public void addResourceContainer(final AbstractSimulatedResourceContainer container) {
         assert (!this.resourceContainerHash.containsKey(container.getResourceContainerID()));
         this.resourceContainerHash.put(container.getResourceContainerID(), container);
@@ -54,7 +57,8 @@ public class ResourceRegistry implements ResourceContainerRegistry {
      *            PCM ID of the resource container to create
      * @return The simulated resource container object
      */
-    public AbstractSimulatedResourceContainer createResourceContainer(final String containerID) {
+    @Override
+	public AbstractSimulatedResourceContainer createResourceContainer(final SimuComModel myModel, final String containerID) {
         if (!this.resourceContainerHash.containsKey(containerID)) {
             final SimulatedResourceContainer container = new SimulatedResourceContainer(this.myModel, containerID);
             this.resourceContainerHash.put(container.getResourceContainerID(), container);
@@ -71,7 +75,8 @@ public class ResourceRegistry implements ResourceContainerRegistry {
      *         virtual as it does not exist in the PCMs original model. However, it exists in the
      *         simulation to unify resource container and link resource behavior.
      */
-	public AbstractSimulatedResourceContainer createLinkingResourceContainer(final String containerID) {
+	@Override
+	public AbstractSimulatedResourceContainer createLinkingResourceContainer(final SimuComModel myModel, final String containerID) {
         if (!this.resourceContainerHash.containsKey(containerID)) {
             final SimulatedLinkingResourceContainer container = new SimulatedLinkingResourceContainer(this.myModel,
                     containerID);
@@ -100,7 +105,7 @@ public class ResourceRegistry implements ResourceContainerRegistry {
         }
         return resourceContainers;
     }
-
+    @Override
     public List<SimulatedResourceContainer> getSimulatedResourceContainers() {
         final List<SimulatedResourceContainer> resourceContainers = new ArrayList<SimulatedResourceContainer>();
         for (final AbstractSimulatedResourceContainer container : this.resourceContainerHash.values()) {
@@ -116,7 +121,7 @@ public class ResourceRegistry implements ResourceContainerRegistry {
      *            ID of the container
      * @return True if the given ID is known in the resource registry
      */
-
+    @Override
     public boolean containsResourceContainer(final String resourceContainerID) {
         return this.resourceContainerHash.containsKey(resourceContainerID);
     }
@@ -128,6 +133,7 @@ public class ResourceRegistry implements ResourceContainerRegistry {
      *            ID of the container to retrieve. The container must exist in this registry
      * @return The queried resource container
      */
+    @Override
     public AbstractSimulatedResourceContainer getResourceContainer(final String resourceContainerID) {
         assert containsResourceContainer(resourceContainerID);
         return this.resourceContainerHash.get(resourceContainerID);
