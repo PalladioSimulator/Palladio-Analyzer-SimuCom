@@ -17,7 +17,7 @@ import de.uka.ipd.sdq.simucomframework.resources.SimulatedResourceContainer;
  *
  * @author Steffen Becker, Sebastian Lehrig
  */
-public class ResourceRegistry {
+public class ResourceRegistry implements ResourceContainerRegistry {
 
     /** ResourceContainerID -> ResourceContainer Object */
     private final Map<String, AbstractSimulatedResourceContainer> resourceContainerHash = new HashMap<String, AbstractSimulatedResourceContainer>();
@@ -41,7 +41,8 @@ public class ResourceRegistry {
      * @param container
      *            the resource container to add
      */
-    public void addResourceContainer(final SimulatedResourceContainer container) {
+
+	public void addResourceContainer(final AbstractSimulatedResourceContainer container) {
         assert (!this.resourceContainerHash.containsKey(container.getResourceContainerID()));
         this.resourceContainerHash.put(container.getResourceContainerID(), container);
     }
@@ -70,7 +71,7 @@ public class ResourceRegistry {
      *         virtual as it does not exist in the PCMs original model. However, it exists in the
      *         simulation to unify resource container and link resource behavior.
      */
-    public AbstractSimulatedResourceContainer createLinkingResourceContainer(final String containerID) {
+	public AbstractSimulatedResourceContainer createLinkingResourceContainer(final String containerID) {
         if (!this.resourceContainerHash.containsKey(containerID)) {
             final SimulatedLinkingResourceContainer container = new SimulatedLinkingResourceContainer(this.myModel,
                     containerID);
@@ -115,6 +116,7 @@ public class ResourceRegistry {
      *            ID of the container
      * @return True if the given ID is known in the resource registry
      */
+
     public boolean containsResourceContainer(final String resourceContainerID) {
         return this.resourceContainerHash.containsKey(resourceContainerID);
     }

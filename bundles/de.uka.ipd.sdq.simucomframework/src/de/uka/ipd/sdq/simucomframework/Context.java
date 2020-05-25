@@ -26,7 +26,7 @@ public abstract class Context extends StackContext {
     /**
      * Central registry which contains all simulated resources
      */
-    private ResourceRegistry registry = null;
+    private ResourceContainerRegistry registry = null;
     
     /**
      * The thread to which this context belongs
