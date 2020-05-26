@@ -3,7 +3,6 @@ package org.palladiosimulator.simframework;
 import java.util.List;
 
 import de.uka.ipd.sdq.simucomframework.resources.AbstractSimulatedResourceContainer;
-import de.uka.ipd.sdq.simucomframework.resources.SimulatedResourceContainer;
 /**
  * Interface for central registery for simulated resources
  * @author Jens Manig
@@ -18,7 +17,7 @@ public interface SimulatedResourceContainerRegistry {
 	 * @param container
 	 *            the resource container to add
 	 */
-	void addResourceContainer(AbstractSimulatedResourceContainer container);
+	public void addResourceContainer(AbstractSimulatedResourceContainer container);
 
 	/**
      * @param resourceContainerID
@@ -34,8 +33,13 @@ public interface SimulatedResourceContainerRegistry {
 	 *            ID of the container to retrieve. The container must exist in this registry
 	 * @return The queried resource container
 	 */
-	AbstractSimulatedResourceContainer getResourceContainer(String resourceContainerID);
+	public AbstractSimulatedResourceContainer getResourceContainer(String resourceContainerID);
 	
-	 public List<SimulatedResourceContainer> getSimulatedResourceContainers();
+	/**
+	 * Retrieve a list of resource containers from the registry
+	 * 
+	 * @return The list of resource containers
+	 */
+	public List<AbstractSimulatedResourceContainer> getSimulatedResourceContainers();
 
 }

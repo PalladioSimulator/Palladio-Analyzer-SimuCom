@@ -6,13 +6,13 @@ import de.uka.ipd.sdq.simucomframework.resources.AbstractSimulatedResourceContai
 public interface AbstractSimulatedResourceContainerFactory {
 
 	/**
-	 * Create and add a PCM ResourceContainer
+	 * Create a PCM ResourceContainer
 	 *
 	 * @param containerID
 	 *            PCM ID of the resource container to create
 	 * @return The simulated resource container object
 	 */
-	AbstractSimulatedResourceContainer createResourceContainer(final SimuComModel myModel, String containerID);
+	public AbstractSimulatedResourceContainer createResourceContainer(final SimuComModel myModel, String containerID);
 
 	/**
 	 * Create a simulated PCM LinkingResource
@@ -23,6 +23,6 @@ public interface AbstractSimulatedResourceContainerFactory {
 	 *         virtual as it does not exist in the PCMs original model. However, it exists in the
 	 *         simulation to unify resource container and link resource behavior.
 	 */
-	AbstractSimulatedResourceContainer createLinkingResourceContainer(final SimuComModel myModel, String containerID);
+	public AbstractSimulatedResourceContainer createLinkingResourceContainer(final SimuComModel myModel, String containerID);
 
 }

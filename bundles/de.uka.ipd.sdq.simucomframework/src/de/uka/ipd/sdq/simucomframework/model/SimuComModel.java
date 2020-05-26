@@ -220,7 +220,7 @@ public class SimuComModel extends SchedulerModel {
     public void initialiseResourceContainer(final IResourceContainerFactory resourceContainerFactory) {
         for (final String id : resourceContainerFactory.getResourceContainerIDList()) {
             final SimulatedResourceContainer rc = (SimulatedResourceContainer) resourceRegistry
-                    .createResourceContainer(this, id);
+                    .createResourceContainer(id);
             resourceContainerFactory.fillResourceContainerWithResources(rc);
         }
         for (final String id : resourceContainerFactory.getResourceContainerIDList()) {
@@ -230,7 +230,7 @@ public class SimuComModel extends SchedulerModel {
         }
         for (final String id : resourceContainerFactory.getLinkingResourceContainerIDList()) {
             final SimulatedLinkingResourceContainer rc = (SimulatedLinkingResourceContainer) resourceRegistry
-                    .createLinkingResourceContainer(this, id);
+                    .createLinkingResourceContainer(id);
             resourceContainerFactory.fillLinkingResourceContainer(rc);
         }
         resourceRegistry.activateAllActiveResources();

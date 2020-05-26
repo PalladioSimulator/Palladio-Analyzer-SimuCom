@@ -20,7 +20,7 @@ import de.uka.ipd.sdq.simucomframework.resources.SimulatedResourceContainer;
  *
  * @author Steffen Becker, Sebastian Lehrig
  */
-public class ResourceRegistry implements SimulatedResourceContainerRegistry, AbstractSimulatedResourceContainerFactory {
+public class ResourceRegistry implements SimulatedResourceContainerRegistry{
 
     /** ResourceContainerID -> ResourceContainer Object */
     private final Map<String, AbstractSimulatedResourceContainer> resourceContainerHash = new HashMap<String, AbstractSimulatedResourceContainer>();
@@ -50,6 +50,7 @@ public class ResourceRegistry implements SimulatedResourceContainerRegistry, Abs
         this.resourceContainerHash.put(container.getResourceContainerID(), container);
     }
 
+   
     /**
      * Create and add a PCM ResourceContainer
      *
@@ -57,15 +58,14 @@ public class ResourceRegistry implements SimulatedResourceContainerRegistry, Abs
      *            PCM ID of the resource container to create
      * @return The simulated resource container object
      */
-    @Override
-	public AbstractSimulatedResourceContainer createResourceContainer(final SimuComModel myModel, final String containerID) {
+    public AbstractSimulatedResourceContainer createResourceContainer(final String containerID) {
         if (!this.resourceContainerHash.containsKey(containerID)) {
             final SimulatedResourceContainer container = new SimulatedResourceContainer(this.myModel, containerID);
             this.resourceContainerHash.put(container.getResourceContainerID(), container);
         }
         return this.resourceContainerHash.get(containerID);
     }
-
+   
     /**
      * Create a simulated PCM LinkingResource
      *
@@ -75,8 +75,7 @@ public class ResourceRegistry implements SimulatedResourceContainerRegistry, Abs
      *         virtual as it does not exist in the PCMs original model. However, it exists in the
      *         simulation to unify resource container and link resource behavior.
      */
-	@Override
-	public AbstractSimulatedResourceContainer createLinkingResourceContainer(final SimuComModel myModel, final String containerID) {
+	public AbstractSimulatedResourceContainer createLinkingResourceContainer(final String containerID) {
         if (!this.resourceContainerHash.containsKey(containerID)) {
             final SimulatedLinkingResourceContainer container = new SimulatedLinkingResourceContainer(this.myModel,
                     containerID);
@@ -106,8 +105,8 @@ public class ResourceRegistry implements SimulatedResourceContainerRegistry, Abs
         return resourceContainers;
     }
     @Override
-    public List<SimulatedResourceContainer> getSimulatedResourceContainers() {
-        final List<SimulatedResourceContainer> resourceContainers = new ArrayList<SimulatedResourceContainer>();
+    public List<AbstractSimulatedResourceContainer> getSimulatedResourceContainers() {
+        final List<AbstractSimulatedResourceContainer> resourceContainers = new ArrayList<AbstractSimulatedResourceContainer>();
         for (final AbstractSimulatedResourceContainer container : this.resourceContainerHash.values()) {
             if (container instanceof SimulatedResourceContainer) {
                 resourceContainers.add((SimulatedResourceContainer) container);
