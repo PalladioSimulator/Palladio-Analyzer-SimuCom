@@ -3,7 +3,6 @@ package de.uka.ipd.sdq.simucomframework.model;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 
 import org.apache.log4j.Level;
@@ -11,7 +10,6 @@ import org.apache.log4j.Logger;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.util.EContentAdapter;
 import org.palladiosimulator.probeframework.ProbeFrameworkContext;
-import org.palladiosimulator.probeframework.calculator.DefaultCalculatorFactory;
 import org.palladiosimulator.probeframework.calculator.ExtensibleCalculatorFactoryDelegatingFactory;
 import org.palladiosimulator.reliability.FailureStatistics;
 
@@ -317,7 +315,6 @@ public class SimuComModel extends SchedulerModel {
         notifyStopListeners();
 
         this.getResourceRegistry().deactivateAllActiveResources();
-        this.getResourceRegistry().deactivateAllPassiveResources();
 
         if (LOGGER.isEnabledFor(Level.INFO)) {
             LOGGER.info("Simulation took " + getSimulationControl().getCurrentSimulationTime()

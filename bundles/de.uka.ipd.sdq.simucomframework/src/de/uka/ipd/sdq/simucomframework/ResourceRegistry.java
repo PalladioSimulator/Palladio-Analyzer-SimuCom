@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.palladiosimulator.simframework.AbstractSimulatedResourceContainerFactory;
 import org.palladiosimulator.simframework.SimulatedResourceContainerRegistry;
 
 import de.uka.ipd.sdq.simucomframework.model.SimuComModel;
@@ -157,7 +156,7 @@ public class ResourceRegistry implements SimulatedResourceContainerRegistry{
     /**
      * Start all simulated resources in the simulation framework
      */
-    public void activateAllActiveResources() {
+	public void activateAllActiveResources() {
         final ArrayList<AbstractScheduledResource> resources = new ArrayList<AbstractScheduledResource>();
         for (final AbstractSimulatedResourceContainer src : this.resourceContainerHash.values()) {
             resources.addAll(src.getActiveResources());
@@ -170,7 +169,7 @@ public class ResourceRegistry implements SimulatedResourceContainerRegistry{
     /**
      * Stop all resources in the simulation framework
      */
-    public void deactivateAllActiveResources() {
+	public void deactivateAllActiveResources() {
         final List<AbstractScheduledResource> resources = new ArrayList<AbstractScheduledResource>();
         for (final AbstractSimulatedResourceContainer src : this.resourceContainerHash.values()) {
             resources.addAll(src.getActiveResources());
@@ -180,8 +179,4 @@ public class ResourceRegistry implements SimulatedResourceContainerRegistry{
         }
     }
 
-    public void deactivateAllPassiveResources() {
-        // TODO Is it necessary to deactivate passive resources here or is this
-        // already done elsewhere?
-    }
 }
