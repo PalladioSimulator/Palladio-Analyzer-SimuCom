@@ -2,8 +2,10 @@ package org.palladiosimulator.simframework;
 
 import de.uka.ipd.sdq.simucomframework.model.SimuComModel;
 import de.uka.ipd.sdq.simucomframework.resources.AbstractSimulatedResourceContainer;
+import de.uka.ipd.sdq.simucomframework.resources.SimulatedLinkingResourceContainer;
+import de.uka.ipd.sdq.simucomframework.resources.SimulatedResourceContainer;
 
-public interface AbstractSimulatedResourceContainerFactory {
+public abstract class AbstractSimulatedResourceContainerFactory {
 
 	/**
 	 * Create a PCM ResourceContainer
@@ -12,7 +14,9 @@ public interface AbstractSimulatedResourceContainerFactory {
 	 *            PCM ID of the resource container to create
 	 * @return The simulated resource container object
 	 */
-	public AbstractSimulatedResourceContainer createResourceContainer(final SimuComModel myModel, String containerID);
+	public static AbstractSimulatedResourceContainer createResourceContainer(final SimuComModel myModel, String containerID) {
+        return new SimulatedResourceContainer(myModel, containerID);
+    }
 
 	/**
 	 * Create a simulated PCM LinkingResource
@@ -23,6 +27,8 @@ public interface AbstractSimulatedResourceContainerFactory {
 	 *         virtual as it does not exist in the PCMs original model. However, it exists in the
 	 *         simulation to unify resource container and link resource behavior.
 	 */
-	public AbstractSimulatedResourceContainer createLinkingResourceContainer(final SimuComModel myModel, String containerID);
+	public static AbstractSimulatedResourceContainer createLinkingResourceContainer(final SimuComModel myModel, String containerID) {
+        return new SimulatedLinkingResourceContainer(myModel, containerID);
+    }
 
 }
