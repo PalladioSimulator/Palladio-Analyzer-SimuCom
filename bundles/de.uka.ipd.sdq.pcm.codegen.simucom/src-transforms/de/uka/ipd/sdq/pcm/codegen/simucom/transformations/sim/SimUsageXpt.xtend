@@ -135,7 +135,7 @@ class SimUsageXpt extends UsageXpt {
 						
 						
 			
-						private de.uka.ipd.sdq.simucomframework.Context ctx = null;
+						private de.uka.ipd.sdq.simucomframework.SimuComContext ctx = null;
 						private final de.uka.ipd.sdq.simucomframework.model.SimuComModel simuComModel;
 						private de.uka.ipd.sdq.simucomframework.model.SimuComModel getModel() {
 							return this.simuComModel;
