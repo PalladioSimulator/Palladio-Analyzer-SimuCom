@@ -2,4 +2,5 @@
 <?eclipse version="3.2"?>
 <plugin>
    <extension-point id="de.uka.ipd.sdq.simucomframework.controller" name="SimuCom Controller" schema="schema/de.uka.ipd.sdq.simucomframework.controller.exsd"/>
+   <extension-point id="de.uka.ipd.sdq.simucomframework.resources.scheduledresource" name="Scheduled Resource" schema="schema/de.uka.ipd.sdq.simucomframework.resources.scheduledresource.exsd"/>
 </plugin>

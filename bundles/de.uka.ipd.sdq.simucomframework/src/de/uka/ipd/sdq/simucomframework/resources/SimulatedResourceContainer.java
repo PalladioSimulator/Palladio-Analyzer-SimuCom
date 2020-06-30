@@ -6,6 +6,12 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Level;
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IConfigurationElement;
+import org.eclipse.core.runtime.IExtension;
+import org.eclipse.core.runtime.IExtensionPoint;
+import org.eclipse.core.runtime.IExtensionRegistry;
+import org.eclipse.core.runtime.Platform;
 import org.palladiosimulator.pcm.core.composition.AssemblyContext;
 import org.palladiosimulator.pcm.repository.PassiveResource;
 import org.palladiosimulator.pcm.resourceenvironment.HDDProcessingResourceSpecification;
@@ -30,18 +36,19 @@ public class SimulatedResourceContainer extends AbstractSimulatedResourceContain
     private SimulatedResourceContainer parentResourceContainer;
 
     public SimulatedResourceContainer(final SimuComModel myModel, final String containerID) {
-        this(myModel,containerID,new LinkedList<SimulatedResourceContainer>(),null);
+        this(myModel, containerID, new LinkedList<SimulatedResourceContainer>(), null);
     }
 
-    protected SimulatedResourceContainer(final SimuComModel myModel, final String containerID, final List<SimulatedResourceContainer> nestedContainer, final SimulatedResourceContainer parent) {
+    protected SimulatedResourceContainer(final SimuComModel myModel, final String containerID,
+            final List<SimulatedResourceContainer> nestedContainer, final SimulatedResourceContainer parent) {
         super(myModel, containerID);
 
         this.nestedResourceContainers = nestedContainer;
         this.parentResourceContainer = parent;
     }
 
-    public IPassiveResource createPassiveResource(final PassiveResource resource,
-            final AssemblyContext assemblyContext, final long capacity) {
+    public IPassiveResource createPassiveResource(final PassiveResource resource, final AssemblyContext assemblyContext,
+            final long capacity) {
         final IPassiveResource newPassiveResource = getSimplePassiveResource(resource, assemblyContext, this.myModel,
                 capacity);
 
@@ -63,17 +70,17 @@ public class SimulatedResourceContainer extends AbstractSimulatedResourceContain
 
     public void addNestedResourceContainer(final String nestedResourceContainerId) {
         final AbstractSimulatedResourceContainer resourceContainer = this.myModel.getResourceRegistry()
-                .getResourceContainer(nestedResourceContainerId);
+            .getResourceContainer(nestedResourceContainerId);
         if ((resourceContainer == null) || (!(resourceContainer instanceof SimulatedResourceContainer))) {
             throw new RuntimeException("Could not initialize resouce container " + this.myContainerID
                     + ": Nested resource container " + nestedResourceContainerId + " is not available.");
         }
         this.nestedResourceContainers.add((SimulatedResourceContainer) resourceContainer);
     }
-    
+
     public void setParentResourceContainer(final String parentResourceContainerId) {
         final AbstractSimulatedResourceContainer resourceContainer = this.myModel.getResourceRegistry()
-                .getResourceContainer(parentResourceContainerId);
+            .getResourceContainer(parentResourceContainerId);
         if ((resourceContainer == null) || (!(resourceContainer instanceof SimulatedResourceContainer))) {
             throw new RuntimeException("Could not initialize resouce container " + this.myContainerID
                     + ": Parent resource container " + parentResourceContainerId + " is not available.");
@@ -110,20 +117,79 @@ public class SimulatedResourceContainer extends AbstractSimulatedResourceContain
         }
     }
 
+    private static final String ScheduledResourceExtensionPointId = "de.uka.ipd.sdq.simucomframework.resources.scheduledresource";
+    private static final String ScheduledResourceExtensionPointAttribute_Class = "class";
+
+    private IExtension[] getRegisteredSchedulerExtensions() {
+        IExtensionRegistry registry = Platform.getExtensionRegistry();
+        IExtensionPoint extensionPoint = registry.getExtensionPoint(ScheduledResourceExtensionPointId);
+        if (extensionPoint == null) {
+            // No extension point found!
+            return null;
+        }
+        IExtension[] extensions = extensionPoint.getExtensions();
+        return extensions;
+    }
+
+    private ScheduledResource createScheduledResourceFromExtension(ProcessingResourceSpecification activeResource,
+            SimuComModel myModel, String resourceContainerID, String schedulingStrategyID) {
+        IExtension[] registeredExtensions = getRegisteredSchedulerExtensions();
+        if (registeredExtensions == null) {
+            if (LOGGER.isEnabledFor(Level.DEBUG)) {
+                LOGGER.debug("No ProcessingResourceType extensions available!");
+            }
+            return null;
+        }
+
+        for (int i = 0; i < registeredExtensions.length; i++) {
+            IExtension registeredExtension = registeredExtensions[i];
+            IConfigurationElement[] elements = registeredExtension.getConfigurationElements();
+            String extensionIdentifer = registeredExtension.getUniqueIdentifier();
+            if (extensionIdentifer.equals(activeResource.getActiveResourceType_ActiveResourceSpecification()
+                .getId())) {
+                for (int j = 0; j < elements.length; j++) {
+                    IConfigurationElement element = elements[j];
+                    Object executableExtension = null;
+                    try {
+                        executableExtension = element
+                            .createExecutableExtension(ScheduledResourceExtensionPointAttribute_Class);
+                    } catch (CoreException e) {
+                    }
+                    if ((executableExtension != null) && (executableExtension instanceof IScheduledResourceFactory)) {
+                        return ((IScheduledResourceFactory) executableExtension).createScheduledResource(activeResource,
+                                this.myModel, resourceContainerID, schedulingStrategyID);
+                    }
+                }
+            }
+        }
+        if (LOGGER.isEnabledFor(Level.DEBUG)) {
+            LOGGER.debug("No ProcessingResourceType extension for ID: s "
+                    + activeResource.getActiveResourceType_ActiveResourceSpecification()
+                        .getId()
+                    + " found!");
+        }
+        return null;
+    }
+
     public ScheduledResource addActiveResourceWithoutCalculators(final ProcessingResourceSpecification activeResource,
             final String[] providedInterfaceIds, final String resourceContainerID, final String schedulingStrategyID) {
-    	
-		ScheduledResource scheduledResource = null;
-    	
-    	if (activeResource instanceof HDDProcessingResourceSpecification) {
-			scheduledResource = new HDDResource((HDDProcessingResourceSpecification) activeResource, this.myModel,
-					resourceContainerID, schedulingStrategyID);
-		} else {
-			scheduledResource = new ScheduledResource(activeResource, this.myModel, resourceContainerID,
-					schedulingStrategyID);
-    	}
 
-        final String resourceType = activeResource.getActiveResourceType_ActiveResourceSpecification().getId();
+        ScheduledResource scheduledResource = null;
+        ScheduledResource createdScheduledResourceFromExtension = createScheduledResourceFromExtension(activeResource,
+                this.myModel, resourceContainerID, schedulingStrategyID);
+
+        if (createdScheduledResourceFromExtension != null) {
+            scheduledResource = createdScheduledResourceFromExtension;
+        } else if (activeResource instanceof HDDProcessingResourceSpecification) {
+            scheduledResource = new HDDResource((HDDProcessingResourceSpecification) activeResource, this.myModel,
+                    resourceContainerID, schedulingStrategyID);
+        } else {
+            scheduledResource = new ScheduledResource(activeResource, this.myModel, resourceContainerID,
+                    schedulingStrategyID);
+        }
+
+        final String resourceType = activeResource.getActiveResourceType_ActiveResourceSpecification()
+            .getId();
 
         this.activeResources.put(resourceType, scheduledResource);
         // Currently, resources can also be looked up by the provided interface id
@@ -155,7 +221,8 @@ public class SimulatedResourceContainer extends AbstractSimulatedResourceContain
      *            itself for converting this demand into time spans
      */
     @Override
-    public void loadActiveResource(final SimuComSimProcess requestingProcess, final String typeID, final double demand) {
+    public void loadActiveResource(final SimuComSimProcess requestingProcess, final String typeID,
+            final double demand) {
         try {
             super.loadActiveResource(requestingProcess, typeID, demand);
         } catch (final ResourceContainerIsMissingRequiredResourceType e) {
@@ -201,8 +268,8 @@ public class SimulatedResourceContainer extends AbstractSimulatedResourceContain
                 }
                 throw new ResourceContainerIsMissingRequiredResourceType(e.getTypeID());
             } else {
-                this.parentResourceContainer.loadActiveResource(requestingProcess, providedInterfaceID, resourceServiceID,
-                        demand);
+                this.parentResourceContainer.loadActiveResource(requestingProcess, providedInterfaceID,
+                        resourceServiceID, demand);
             }
         }
     }
@@ -239,8 +306,8 @@ public class SimulatedResourceContainer extends AbstractSimulatedResourceContain
                 }
                 throw new ResourceContainerIsMissingRequiredResourceType(e.getTypeID());
             } else {
-                this.parentResourceContainer.loadActiveResource(requestingProcess, providedInterfaceID, resourceServiceID,
-                        parameterMap, demand);
+                this.parentResourceContainer.loadActiveResource(requestingProcess, providedInterfaceID,
+                        resourceServiceID, parameterMap, demand);
             }
         }
     }
