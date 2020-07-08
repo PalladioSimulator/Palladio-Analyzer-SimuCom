@@ -56,6 +56,8 @@ import java.util.HashSet
 import java.util.List
 import java.util.Set
 import org.eclipse.emf.ecore.EObject
+import org.palladiosimulator.pcm.core.composition.RequiredInfrastructureDelegationConnector
+import org.palladiosimulator.pcm.core.composition.ProvidedInfrastructureDelegationConnector
 
 class PCMext {
 	def findStart(List<AbstractAction> actions) {
@@ -100,20 +102,40 @@ class PCMext {
 		s.connectors__ComposedStructure.filter(typeof(ProvidedDelegationConnector)).filter[dc|
 			dc.outerProvidedRole_ProvidedDelegationConnector == p].size == 1
 	}
+	
+	def hasProvidedInfrastructureDelegationConnector(ComposedStructure s, ProvidedRole p) {
+		s.connectors__ComposedStructure.filter(typeof(ProvidedInfrastructureDelegationConnector)).filter[dc|
+			dc.outerProvidedRole__ProvidedInfrastructureDelegationConnector == p].size == 1
+	}
 
 	def getProvidedDelegationConnector(ComposedStructure s, ProvidedRole p) {
 		s.connectors__ComposedStructure.filter(typeof(ProvidedDelegationConnector)).filter[dc|
 			dc.outerProvidedRole_ProvidedDelegationConnector == p].head
+	}
+	
+	def getProvidedInfastructureDelegationConnector(ComposedStructure s, ProvidedRole p) {
+		s.connectors__ComposedStructure.filter(typeof(ProvidedInfrastructureDelegationConnector)).filter[dc|
+			dc.outerProvidedRole__ProvidedInfrastructureDelegationConnector == p].head
 	}
 
 	def hasRequiredDelegationConnector(ComposedStructure s, AssemblyContext ctx, RequiredRole r) {
 		s.connectors__ComposedStructure.filter(typeof(RequiredDelegationConnector)).filter[dc|
 			dc.innerRequiredRole_RequiredDelegationConnector == r].size == 1
 	}
+	
+	def hasRequiredInfrastructureDelegationConnector(ComposedStructure s, AssemblyContext ctx, RequiredRole r) {
+		s.connectors__ComposedStructure.filter(typeof(RequiredInfrastructureDelegationConnector)).filter[dc|
+			dc.innerRequiredRole__RequiredInfrastructureDelegationConnector == r].size == 1
+	}
 
 	def getRequiredDelegationConnector(ComposedStructure s, AssemblyContext ctx, RequiredRole r) {
 		s.connectors__ComposedStructure.filter(typeof(RequiredDelegationConnector)).filter[dc|
 			dc.innerRequiredRole_RequiredDelegationConnector == r].head
+	}
+	
+	def getRequiredInfrastructureDelegationConnector(ComposedStructure s, AssemblyContext ctx, RequiredRole r) {
+		s.connectors__ComposedStructure.filter(typeof(RequiredInfrastructureDelegationConnector)).filter[dc|
+			dc.innerRequiredRole__RequiredInfrastructureDelegationConnector == r].head
 	}
 
 	def hasProvidedInfrastructureDelegationConnector(ComposedStructure s, InfrastructureProvidedRole p) {
