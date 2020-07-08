@@ -127,9 +127,9 @@ abstract class ComposedStructureXpt {
 	
 	def dispatch portInit(InfrastructureProvidedRole role, ComposedStructure cs) '''
 		«role.portMemberVar()» = new «role.fqnPort()»(
-				«IF cs.hasProvidedDelegationConnector(role)»
-					my«cs.getProvidedDelegationConnector(role).assemblyContext_ProvidedDelegationConnector.javaName()».
-					«cs.getProvidedDelegationConnector(role).innerProvidedRole_ProvidedDelegationConnector.portGetterName()»()
+				«IF cs.hasProvidedInfrastructureDelegationConnector(role)»
+					my«cs.getProvidedInfastructureDelegationConnector(role).assemblyContext__ProvidedInfrastructureDelegationConnector.javaName()».
+					«cs.getProvidedInfastructureDelegationConnector(role).innerProvidedRole__ProvidedInfrastructureDelegationConnector.portGetterName()»()
 				«ELSE»
 				   null
 				«ENDIF»
@@ -190,14 +190,14 @@ abstract class ComposedStructureXpt {
 				/* From Connector «connector.id» */
 				my«connector.providingAssemblyContext__AssemblyInfrastructureConnector.javaName()».«connector.providedRole__AssemblyInfrastructureConnector.portGetterName()»()
 		«ELSE» 
-			«IF hasRequiredDelegationConnector(s,ctx,role)»
+			«IF hasRequiredInfrastructureDelegationConnector(s,ctx,role)»
 				«IF (s instanceof Completion)»
 					«role.requiredInterface__InfrastructureRequiredRole.delegatorClass(s.javaName()+"Delegator")»
 					new «role.requiredInterface__InfrastructureRequiredRole.implementationPackage()».delegates.«s.javaName()+"Delegator"»«role.requiredInterface__InfrastructureRequiredRole.javaName()»
 					(
 				«ENDIF»
-				«val connector2 = getRequiredDelegationConnector(s,ctx,role)»
-					this.myContext.getRole«connector2.outerRequiredRole_RequiredDelegationConnector.javaName()»()
+				«val connector2 = getRequiredInfrastructureDelegationConnector(s,ctx,role)»
+					this.myContext.getRole«connector2.outerRequiredRole__RequiredInfrastructureDelegationConnector.javaName()»()
 				«IF (s instanceof Completion)»
 					)
 				«ENDIF»
