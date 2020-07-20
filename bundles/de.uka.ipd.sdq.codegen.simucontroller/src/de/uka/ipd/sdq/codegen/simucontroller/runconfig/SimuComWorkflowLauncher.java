@@ -32,7 +32,7 @@ public class SimuComWorkflowLauncher extends AbstractPCMLaunchConfigurationDeleg
     @Override
     protected SimuComWorkflowConfiguration deriveConfiguration(ILaunchConfiguration configuration, String mode)
             throws CoreException {
-        SimuComWorkflowConfiguration config = new SimuComWorkflowConfiguration(configuration.getAttributes());
+    	SimuComWorkflowConfiguration config = new SimuComWorkflowConfiguration(configuration.getAttributes());
 
         AbstractWorkflowConfigurationBuilder builder;
         builder = new PCMWorkflowConfigurationBuilder(configuration, mode);
