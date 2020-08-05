@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map.Entry;
-
+import javax.inject.Inject;
 import org.apache.log4j.Logger;
 
 import de.uka.ipd.sdq.simucomframework.variables.exceptions.ValueNotInFrameException;
@@ -39,7 +39,7 @@ public class SimulatedStackframe<T> implements Serializable {
     public SimulatedStackframe(final SimulatedStackframe<T> parent) {
         this.parentFrame = parent;
     }
-
+    @Inject
     public SimulatedStackframe() {
         this.parentFrame = null;
     }

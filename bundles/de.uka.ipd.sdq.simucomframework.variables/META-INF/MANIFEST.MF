@@ -21,3 +21,4 @@ Bundle-Vendor: sdq.ipd.uka.de
 Bundle-ActivationPolicy: lazy
 Bundle-ClassPath: .
 Bundle-RequiredExecutionEnvironment: JavaSE-11
+Import-Package: javax.inject
