@@ -36,6 +36,8 @@ class SimUsageXpt extends UsageXpt {
 		val fileContent = '''
 			package main;
 			
+			import de.uka.ipd.sdq.scheduler.resources.active.IResourceTableManager;
+			
 			/**
 			* Main class of this SimuCom instance. Used as entry by the SimuCom Framework. The 
 			* simulation starts executing in the abstract base class and calls the methods of this 
@@ -47,7 +49,7 @@ class SimUsageXpt extends UsageXpt {
 			{
 				// Override abstract framework method and return the workloads of this usage model
 				protected de.uka.ipd.sdq.simucomframework.usage.IWorkloadDriver[] getWorkloads(
-					de.uka.ipd.sdq.simucomframework.SimuComConfig config) {
+					de.uka.ipd.sdq.simucomframework.SimuComConfig config, IResourceTableManager resourceTableManager) {
 						// Create «systemList.size» System(s)
 						«FOR system : systemList»
 							«system.fqn()» my«system.javaName()» = new «system.fqn()»(getModel());
@@ -183,7 +185,7 @@ class SimUsageXpt extends UsageXpt {
 			it as System].uniqueSystemList»
 		de.uka.ipd.sdq.simucomframework.usage.ClosedWorkload(
 			new «u.implementationPackage() + "." + u.javaName() + "Factory"»(getModel(), "«u.entityName.javaString()»",«FOR system : systemList SEPARATOR ","»«system.
-			systemVariableParameter»«ENDFOR»),
+			systemVariableParameter»«ENDFOR», resourceTableManager),
 			«_this.population»)
 	'''
 
