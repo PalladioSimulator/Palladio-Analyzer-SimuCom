@@ -30,6 +30,7 @@ class SimUsageFactoryXpt {
 		val fileName = _this.implementationPackage().fqnToDirectoryPath() + "/" + _this.javaName() + "Factory.java"
 		val fileContent = '''
 			package «_this.implementationPackage()»;
+			import de.uka.ipd.sdq.scheduler.resources.active.IResourceTableManager; 
 			public class «_this.javaName() + "Factory"» 
 			extends «_this.workload_UsageScenario.usageFactoryBaseClass»
 			{
@@ -66,7 +67,7 @@ class SimUsageFactoryXpt {
 			private «system.fqn()» my«system.javaName()» = null;
 		«ENDFOR»
 		public «_this.javaName() + "Factory"»(de.uka.ipd.sdq.simucomframework.model.SimuComModel model, String usageID, «FOR system : systemList SEPARATOR ","»«system.
-			systemVariableDecl»«ENDFOR»){
+			systemVariableDecl»«ENDFOR», IResourceTableManager resourceTableManager){
 			«_this.workload_UsageScenario.factoryConstructor»
 			this.model = model;
 			«FOR system : systemList»
@@ -82,7 +83,7 @@ class SimUsageFactoryXpt {
 
 	def dispatch String factoryConstructor(ClosedWorkload _this) '''
 		super(model, "«_this.thinkTime_ClosedWorkload.specification.specificationString()»", "«_this.usageScenario_Workload.
-			getResourceURI()»");
+			getResourceURI()»", resourceTableManager);
 	'''
 
 	def dispatch String factoryConstructor(OpenWorkload _this) '''
