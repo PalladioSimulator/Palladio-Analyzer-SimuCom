@@ -7,6 +7,7 @@ import org.palladiosimulator.probeframework.measurement.RequestContext;
 import org.palladiosimulator.probeframework.probes.Probe;
 import org.palladiosimulator.probeframework.probes.TriggeredProbe;
 
+import de.uka.ipd.sdq.scheduler.resources.active.IResourceTableManager;
 import de.uka.ipd.sdq.simucomframework.Context;
 import de.uka.ipd.sdq.simucomframework.SimuComSimProcess;
 import de.uka.ipd.sdq.simucomframework.exceptions.FailureException;
@@ -44,8 +45,8 @@ public class ClosedWorkloadUser extends SimuComSimProcess implements IUser {
      * @param usageStartStopProbes
      */
     public ClosedWorkloadUser(final SimuComModel owner, final String name, final IScenarioRunner scenarioRunner,
-            final String thinkTimeSpec, final List<Probe> usageStartStopProbes) {
-        super(owner, name);
+            final String thinkTimeSpec, final List<Probe> usageStartStopProbes, IResourceTableManager resourceTableManager) {
+        super(owner, name, resourceTableManager);
         this.scenarioRunner = scenarioRunner;
         this.thinkTime = thinkTimeSpec;
         this.usageStartStopProbes = usageStartStopProbes;

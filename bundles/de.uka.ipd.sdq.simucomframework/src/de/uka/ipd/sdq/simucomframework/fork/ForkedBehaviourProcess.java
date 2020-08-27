@@ -2,6 +2,7 @@ package de.uka.ipd.sdq.simucomframework.fork;
 
 import org.apache.log4j.Logger;
 
+import de.uka.ipd.sdq.scheduler.resources.active.IResourceTableManager;
 import de.uka.ipd.sdq.simucomframework.Context;
 import de.uka.ipd.sdq.simucomframework.SimuComSimProcess;
 import de.uka.ipd.sdq.simulation.abstractsimengine.ISimProcess;
@@ -23,8 +24,8 @@ public abstract class ForkedBehaviourProcess extends SimuComSimProcess {
 
     private static final Logger LOGGER = Logger.getLogger(ForkedBehaviourProcess.class.getName());
 
-    public ForkedBehaviourProcess(final Context myContext, final String assemblyContextID, final boolean isAsync) {
-        super(myContext.getModel(), "Forked Behaviour", myContext.getThread().getRequestContext());
+    public ForkedBehaviourProcess(final Context myContext, final String assemblyContextID, final boolean isAsync, IResourceTableManager resourceTableManager) {
+        super(myContext.getModel(), "Forked Behaviour", myContext.getThread().getRequestContext(), resourceTableManager);
 
         // use the session id from the parent process
         this.currentSessionId = myContext.getThread().getCurrentSessionId();
@@ -47,8 +48,8 @@ public abstract class ForkedBehaviourProcess extends SimuComSimProcess {
     }
 
     public ForkedBehaviourProcess(final Context myContext, final String assemblyContextID, final boolean isAsync,
-            final int priority) {
-        this(myContext, assemblyContextID, isAsync);
+            final int priority, IResourceTableManager resourceTableManager) {
+        this(myContext, assemblyContextID, isAsync, resourceTableManager);
         setPriority(priority);
     }
 

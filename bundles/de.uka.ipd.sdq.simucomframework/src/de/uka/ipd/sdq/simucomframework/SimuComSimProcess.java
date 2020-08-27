@@ -13,6 +13,7 @@ import org.palladiosimulator.probeframework.measurement.RequestContext;
 import de.uka.ipd.sdq.scheduler.IActiveResource;
 import de.uka.ipd.sdq.scheduler.ISchedulableProcess;
 import de.uka.ipd.sdq.scheduler.LoggingWrapper;
+import de.uka.ipd.sdq.scheduler.resources.active.IResourceTableManager;
 import de.uka.ipd.sdq.scheduler.resources.active.SimDelayResource;
 import de.uka.ipd.sdq.simucomframework.exceptions.FailureException;
 import de.uka.ipd.sdq.simucomframework.model.SimuComModel;
@@ -59,14 +60,14 @@ public abstract class SimuComSimProcess extends AbstractSimProcessDelegator impl
         this.priority = priority;
     }
 
-    protected SimuComSimProcess(final SimuComModel model, final String name) {
-        this(model, name, null);
+    protected SimuComSimProcess(final SimuComModel model, final String name, IResourceTableManager resourceTableManager) {
+        this(model, name, null, resourceTableManager);
     }
 
-    protected SimuComSimProcess(final SimuComModel model, final String name, final RequestContext parentRequestContext) {
+    protected SimuComSimProcess(final SimuComModel model, final String name, final RequestContext parentRequestContext, IResourceTableManager resourceTableManager) {
         super(model, name);
         this.isDebug = model.getConfiguration().isDebug();
-        this.delayResource = new SimDelayResource(model, name + "_thinktime", name + "_thinktime");
+        this.delayResource = new SimDelayResource(model, name + "_thinktime", name + "_thinktime", resourceTableManager);
         requestContext = new RequestContext(Long.valueOf(getRawId()).toString(), parentRequestContext);
 
         // add a process listener in order to get notified when this process is about to be
