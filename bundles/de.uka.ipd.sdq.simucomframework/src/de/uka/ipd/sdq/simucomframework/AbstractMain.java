@@ -22,6 +22,8 @@ import org.palladiosimulator.probeframework.probes.EventProbeList;
 import org.palladiosimulator.probeframework.probes.TriggeredProbe;
 
 import de.uka.ipd.sdq.errorhandling.dialogs.issues.DisplayIssuesDialog;
+import de.uka.ipd.sdq.scheduler.resources.active.IResourceTableManager;
+import de.uka.ipd.sdq.scheduler.resources.active.ResourceTableManager;
 import de.uka.ipd.sdq.simucomframework.model.SimuComModel;
 import de.uka.ipd.sdq.simucomframework.probes.TakeCurrentSimulationTimeProbe;
 import de.uka.ipd.sdq.simucomframework.resources.IResourceContainerFactory;
@@ -72,6 +74,7 @@ public abstract class AbstractMain implements ISimulationControl, BundleActivato
 
     /** Default EMF factory for measuring points. */
     private final MeasuringpointFactory measuringpointFactory = MeasuringpointFactory.eINSTANCE;
+    
 
     /*
      * (non-Javadoc)
@@ -196,15 +199,16 @@ public abstract class AbstractMain implements ISimulationControl, BundleActivato
         if (factory == null) {
             throw new RuntimeException("There is no simulation engine available. Install at least one engine.");
         }
-
+        
+        IResourceTableManager resourceTableManager = new ResourceTableManager();
         // create simulation model
-        model = new SimuComModel((SimuComConfig) config, getStatus(), factory, isRemoteRun);
+        model = new SimuComModel((SimuComConfig) config, getStatus(), factory, isRemoteRun, resourceTableManager);
 
         // initialse simulation model
         model.initialiseResourceContainer(getResourceContainerFactory());
 
         // configure workload drivers (usage scenarios)
-        final IWorkloadDriver[] workloadDrivers = getWorkloads((SimuComConfig) config);
+        final IWorkloadDriver[] workloadDrivers = getWorkloads((SimuComConfig) config, resourceTableManager);
         attachUsageResponseTimeCalculators(workloadDrivers);
         model.setUsageScenarios(workloadDrivers);
 
@@ -285,7 +289,7 @@ public abstract class AbstractMain implements ISimulationControl, BundleActivato
      *            the simulation configuration data
      * @return Workload drivers to use in the simulation run
      */
-    protected abstract IWorkloadDriver[] getWorkloads(SimuComConfig config);
+    protected abstract IWorkloadDriver[] getWorkloads(SimuComConfig config, IResourceTableManager resourceTableManager);
 
     /**
      * Template method to return a factory which can be used to instanciate the simulated resource
