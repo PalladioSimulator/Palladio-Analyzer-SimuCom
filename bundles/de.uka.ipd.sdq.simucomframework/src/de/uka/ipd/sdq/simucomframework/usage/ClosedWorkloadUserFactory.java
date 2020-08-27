@@ -3,6 +3,8 @@ package de.uka.ipd.sdq.simucomframework.usage;
 import org.palladiosimulator.commons.emfutils.EMFLoadHelper;
 
 import org.palladiosimulator.pcm.usagemodel.UsageScenario;
+
+import de.uka.ipd.sdq.scheduler.resources.active.IResourceTableManager;
 import de.uka.ipd.sdq.simucomframework.model.SimuComModel;
 
 /**
@@ -12,16 +14,17 @@ import de.uka.ipd.sdq.simucomframework.model.SimuComModel;
  */
 public abstract class ClosedWorkloadUserFactory extends AbstractWorkloadUserFactory implements IClosedWorkloadUserFactory {
 
+    private final IResourceTableManager resourceTableManager;
     private String thinkTime;
 
-    public ClosedWorkloadUserFactory(final SimuComModel model, final String thinkTimeSpec, final String usageScenarioURI) {
-        this(model, thinkTimeSpec, (UsageScenario) EMFLoadHelper.loadAndResolveEObject(usageScenarioURI));
+    public ClosedWorkloadUserFactory(final SimuComModel model, final String thinkTimeSpec, final String usageScenarioURI, IResourceTableManager resourceTableManager) {
+        this(model, thinkTimeSpec, (UsageScenario) EMFLoadHelper.loadAndResolveEObject(usageScenarioURI), resourceTableManager);
     }
 
     public ClosedWorkloadUserFactory(final SimuComModel model, final String thinkTimeSpec,
-            final UsageScenario usageScenario) {
+            final UsageScenario usageScenario, IResourceTableManager resourceTableManager) {
         super(model, usageScenario);
-
+        this.resourceTableManager = resourceTableManager;
         this.thinkTime = thinkTimeSpec;
     }
 
@@ -33,7 +36,7 @@ public abstract class ClosedWorkloadUserFactory extends AbstractWorkloadUserFact
     @Override
     public ClosedWorkloadUser createUser() {
         final IScenarioRunner scenarioRunner = this.createScenarioRunner();
-        return new ClosedWorkloadUser(model, "ClosedUser", scenarioRunner, thinkTime, usageStartStopProbes);
+        return new ClosedWorkloadUser(model, "ClosedUser", scenarioRunner, thinkTime, usageStartStopProbes, resourceTableManager);
     }
     
     @Override

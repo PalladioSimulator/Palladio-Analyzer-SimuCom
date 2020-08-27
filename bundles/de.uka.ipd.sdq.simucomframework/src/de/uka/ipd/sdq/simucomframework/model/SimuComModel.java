@@ -22,6 +22,7 @@ import de.uka.ipd.sdq.scheduler.ISchedulingFactory;
 import de.uka.ipd.sdq.scheduler.SchedulerModel;
 import de.uka.ipd.sdq.scheduler.factory.SchedulingFactory;
 import de.uka.ipd.sdq.scheduler.resources.active.AbstractActiveResource;
+import de.uka.ipd.sdq.scheduler.resources.active.IResourceTableManager;
 import de.uka.ipd.sdq.simucomframework.ResourceRegistry;
 import de.uka.ipd.sdq.simucomframework.SimuComConfig;
 import de.uka.ipd.sdq.simucomframework.calculator.RecorderAttachingCalculatorFactoryDecorator;
@@ -66,12 +67,12 @@ public class SimuComModel extends SchedulerModel {
     private final FailureStatistics failureStatistics = new FailureStatistics();
 
     public SimuComModel(final SimuComConfig config, final SimuComStatus status, final ISimEngineFactory factory,
-            final boolean isRemoteRun) {
-        this(config, status, factory, isRemoteRun, null);
+            final boolean isRemoteRun, IResourceTableManager resourceTableManager) {
+        this(config, status, factory, isRemoteRun, null, resourceTableManager);
     }
 
     public SimuComModel(final SimuComConfig config, final SimuComStatus status, final ISimEngineFactory factory,
-            final boolean isRemoteRun, final ProbeFrameworkContext probeFrameworkContext) {
+            final boolean isRemoteRun, final ProbeFrameworkContext probeFrameworkContext, IResourceTableManager resourceTableManager) {
         this.config = config;
         this.simulationEngineFactory = factory;
         factory.setModel(this);
@@ -93,7 +94,7 @@ public class SimuComModel extends SchedulerModel {
         StoExCache.initialiseStoExCache(probFunctionFactory);
 
         // set up the resource scheduler
-        schedulingFactory = new SchedulingFactory(this);
+        schedulingFactory = new SchedulingFactory(this, resourceTableManager);
 
         // set up the measurement framework
         this.probeFrameworkContext = probeFrameworkContext == null ? initialiseProbeFramework() : probeFrameworkContext;
@@ -324,7 +325,7 @@ public class SimuComModel extends SchedulerModel {
                     + " simulated time units");
         }
 
-        AbstractActiveResource.cleanProcesses();
+        schedulingFactory.cleanActiveResources();
 
         // Print failure statistics:
         if (getConfiguration().getSimulateFailures()) {

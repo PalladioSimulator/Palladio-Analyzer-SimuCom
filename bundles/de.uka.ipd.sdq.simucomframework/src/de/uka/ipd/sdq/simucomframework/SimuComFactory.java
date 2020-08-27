@@ -6,6 +6,7 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.Platform;
 
+import de.uka.ipd.sdq.scheduler.resources.active.IResourceTableManager;
 import de.uka.ipd.sdq.simucomframework.model.SimuComModel;
 import de.uka.ipd.sdq.simucomframework.simucomstatus.SimuComStatus;
 import de.uka.ipd.sdq.simulation.abstractsimengine.ISimEngineFactory;
@@ -20,6 +21,7 @@ import de.uka.ipd.sdq.simulation.abstractsimengine.ISimEngineFactory;
 public class SimuComFactory {
     /** Logger for this class. */
     private static final Logger LOGGER = Logger.getLogger(SimuComFactory.class);
+    
 
     /**
      * Create a new simulation model as needed by desmo-j
@@ -32,7 +34,8 @@ public class SimuComFactory {
      *            Should desmoj trace our experiment
      * @return The created simulation model
      */
-    public static SimuComModel getSimuComModel(SimuComConfig config, SimuComStatus simuComStatus, boolean isRemote) {
+    public static SimuComModel getSimuComModel(SimuComConfig config, SimuComStatus simuComStatus, boolean isRemote
+            , IResourceTableManager resourceTableManager) {
         ISimEngineFactory factory = null;
 
         for (IConfigurationElement configurationElement : Platform.getExtensionRegistry().getConfigurationElementsFor(
@@ -52,7 +55,7 @@ public class SimuComFactory {
         if (factory == null) {
             throw new RuntimeException("No Simulation Engine available. Please install at least one engine.");
         } else {
-            SimuComModel model = new SimuComModel(config, simuComStatus, factory, isRemote);
+            SimuComModel model = new SimuComModel(config, simuComStatus, factory, isRemote, resourceTableManager);
 
             return model;
         }
