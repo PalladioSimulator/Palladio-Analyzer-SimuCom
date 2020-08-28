@@ -5,6 +5,7 @@ import java.util.List;
 import org.palladiosimulator.probeframework.probes.Probe;
 import org.palladiosimulator.probeframework.probes.TriggeredProbe;
 
+import de.uka.ipd.sdq.scheduler.resources.active.IResourceTableManager;
 import de.uka.ipd.sdq.simucomframework.SimuComSimProcess;
 import de.uka.ipd.sdq.simucomframework.exceptions.FailureException;
 import de.uka.ipd.sdq.simucomframework.model.SimuComModel;
@@ -22,8 +23,8 @@ public class OpenWorkloadUser extends SimuComSimProcess implements IUser {
     private final List<Probe> usageStartStopProbes;
 
     public OpenWorkloadUser(final SimuComModel owner, final String name, final IScenarioRunner scenarioRunner,
-            final List<Probe> usageStartStopProbes) {
-        super(owner, name);
+            final List<Probe> usageStartStopProbes, IResourceTableManager resourceTableManager) {
+        super(owner, name, resourceTableManager);
         this.scenarioRunner = scenarioRunner;
         this.usageStartStopProbes = usageStartStopProbes;
     }
