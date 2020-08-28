@@ -3,6 +3,7 @@ package de.uka.ipd.sdq.simucomframework.usage;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
+import de.uka.ipd.sdq.scheduler.resources.active.IResourceTableManager;
 import de.uka.ipd.sdq.simucomframework.Context;
 import de.uka.ipd.sdq.simucomframework.SimuComSimProcess;
 import de.uka.ipd.sdq.simucomframework.model.SimuComModel;
@@ -35,8 +36,8 @@ public class OpenWorkload extends SimuComSimProcess implements ICancellableWorkl
      * @param interArrivalTime
      *            The time to wait between leaving a new user to its fate
      */
-    public OpenWorkload(final SimuComModel model, final IUserFactory userFactory, final String interArrivalTime) {
-        super(model, "OpenWorkloadUserMaturationChamber");
+    public OpenWorkload(final SimuComModel model, final IUserFactory userFactory, final String interArrivalTime, IResourceTableManager resourceTableManager) {
+        super(model, "OpenWorkloadUserMaturationChamber", resourceTableManager);
         this.interArrivalTime = interArrivalTime;
         this.userFactory = userFactory;
     }

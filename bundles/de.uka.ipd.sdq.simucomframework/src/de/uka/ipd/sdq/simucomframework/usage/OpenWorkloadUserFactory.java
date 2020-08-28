@@ -3,6 +3,8 @@ package de.uka.ipd.sdq.simucomframework.usage;
 import org.palladiosimulator.commons.emfutils.EMFLoadHelper;
 
 import org.palladiosimulator.pcm.usagemodel.UsageScenario;
+
+import de.uka.ipd.sdq.scheduler.resources.active.IResourceTableManager;
 import de.uka.ipd.sdq.simucomframework.model.SimuComModel;
 
 /**
@@ -12,13 +14,16 @@ import de.uka.ipd.sdq.simucomframework.model.SimuComModel;
  * 
  */
 public abstract class OpenWorkloadUserFactory extends AbstractWorkloadUserFactory implements IUserFactory {
+    
+    private final IResourceTableManager resourceTableManager;
 
-    public OpenWorkloadUserFactory(final SimuComModel model, final String usageScenarioURI) {
-        this(model, (UsageScenario) EMFLoadHelper.loadAndResolveEObject(usageScenarioURI));
+    public OpenWorkloadUserFactory(final SimuComModel model, final String usageScenarioURI, IResourceTableManager resourceTableManager) {
+        this(model, (UsageScenario) EMFLoadHelper.loadAndResolveEObject(usageScenarioURI), resourceTableManager);
     }
 
-    public OpenWorkloadUserFactory(final SimuComModel model, UsageScenario usageScenario) {
+    public OpenWorkloadUserFactory(final SimuComModel model, UsageScenario usageScenario, IResourceTableManager resourceTableManager) {
         super(model, usageScenario);
+        this.resourceTableManager = resourceTableManager;
     }
 
     /*
@@ -29,7 +34,7 @@ public abstract class OpenWorkloadUserFactory extends AbstractWorkloadUserFactor
     @Override
     public IUser createUser() {
         final IScenarioRunner scenarioRunner = this.createScenarioRunner();
-        return new OpenWorkloadUser(model, "OpenUser", scenarioRunner, usageStartStopProbes);
+        return new OpenWorkloadUser(model, "OpenUser", scenarioRunner, usageStartStopProbes, resourceTableManager);
     }
 
     /**
