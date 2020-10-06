@@ -21,7 +21,6 @@ import de.uka.ipd.sdq.simulation.abstractsimengine.ISimEngineFactory;
 public class SimuComFactory {
     /** Logger for this class. */
     private static final Logger LOGGER = Logger.getLogger(SimuComFactory.class);
-    
 
     /**
      * Create a new simulation model as needed by desmo-j
@@ -34,15 +33,16 @@ public class SimuComFactory {
      *            Should desmoj trace our experiment
      * @return The created simulation model
      */
-    public static SimuComModel getSimuComModel(SimuComConfig config, SimuComStatus simuComStatus, boolean isRemote
-            , IResourceTableManager resourceTableManager) {
+    public static SimuComModel getSimuComModel(SimuComConfig config, SimuComStatus simuComStatus, boolean isRemote,
+            IResourceTableManager resourceTableManager) {
         ISimEngineFactory factory = null;
 
-        for (IConfigurationElement configurationElement : Platform.getExtensionRegistry().getConfigurationElementsFor(
-                "de.uka.ipd.sdq.simulation.abstractsimengine.engine")) {
+        for (IConfigurationElement configurationElement : Platform.getExtensionRegistry()
+            .getConfigurationElementsFor("de.uka.ipd.sdq.simulation.abstractsimengine.engine")) {
 
             try {
-                if (configurationElement.getAttribute("id").equals(config.getEngine())) {
+                if (configurationElement.getAttribute("id")
+                    .equals(config.getEngine())) {
                     factory = (ISimEngineFactory) configurationElement.createExecutableExtension("class");
                 }
             } catch (CoreException e) {
