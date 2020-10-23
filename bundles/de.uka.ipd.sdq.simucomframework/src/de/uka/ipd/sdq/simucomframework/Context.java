@@ -2,6 +2,7 @@ package de.uka.ipd.sdq.simucomframework;
 
 import org.palladiosimulator.pcm.resourceenvironment.ResourceContainer;
 
+import de.uka.ipd.sdq.scheduler.resources.active.IResourceTableManager;
 import de.uka.ipd.sdq.simucomframework.exceptions.ResourceContainerNotFound;
 import de.uka.ipd.sdq.simucomframework.model.SimuComModel;
 import de.uka.ipd.sdq.simucomframework.resources.AbstractSimulatedResourceContainer;
@@ -18,9 +19,6 @@ import de.uka.ipd.sdq.simucomframework.variables.StackContext;
  */
 public abstract class Context extends StackContext {
 
-    /**
-	 * 
-	 */
     private static final long serialVersionUID = -1869414754329617190L;
 
     /**
@@ -36,22 +34,29 @@ public abstract class Context extends StackContext {
     /**
      * Simulation model
      */
-    private SimuComModel myModel = null;
-
+    private final SimuComModel myModel;
+    
+    private final IResourceTableManager resourceTableManager;
+    
     /**
      * Initialise a new context for the given simulation model
      * 
      * @param myModel
      *            The simulation model used in this context
      */
-    public Context(SimuComModel myModel) {
+    public Context(SimuComModel myModel, IResourceTableManager resourceTableManager) {
+        this.myModel = myModel;
         if (myModel != null) { // This is for the prototype mapping, where we
             // don't need resources
             this.registry = myModel.getResourceRegistry();
-            this.myModel = myModel;
         } else {
             stack.createAndPushNewStackFrame();
         }
+        this.resourceTableManager = resourceTableManager;
+    }
+    
+    public IResourceTableManager getResourceTableManager() {
+        return resourceTableManager;
     }
 
     public long getSessionId() {

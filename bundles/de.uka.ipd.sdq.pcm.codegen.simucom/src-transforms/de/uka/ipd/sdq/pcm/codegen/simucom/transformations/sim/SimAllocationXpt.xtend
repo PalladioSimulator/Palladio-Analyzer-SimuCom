@@ -35,11 +35,15 @@ class SimAllocationXpt extends AllocationXpt {
 		val fileName = a.fqnAllocationContext.fqnToDirectoryPath+".java"
 		val fileContent = '''
 			package «a.fqnAllocationContextPackage()»;
+			
+			import de.uka.ipd.sdq.scheduler.resources.active.IResourceTableManager;
+			import de.uka.ipd.sdq.simucomframework.model.SimuComModel;
+			import de.uka.ipd.sdq.simucomframework.SimuComContext;
 			 
-			public class «a.fqnAllocationContextClass()» 
-			extends de.uka.ipd.sdq.simucomframework.SimuComContext {
-				public «a.fqnAllocationContextClass()»(de.uka.ipd.sdq.simucomframework.model.SimuComModel myModel) {
-					super(myModel);
+			public class «a.fqnAllocationContextClass()» extends SimuComContext {
+				
+				public «a.fqnAllocationContextClass()»(SimuComModel myModel, IResourceTableManager resourceTableManager) {
+					super(myModel, resourceTableManager);
 				}
 				
 				protected void initialiseAssemblyContextLookup() {

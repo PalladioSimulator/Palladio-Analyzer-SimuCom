@@ -8,6 +8,7 @@ import org.palladiosimulator.pcm.core.composition.AssemblyContext;
 import org.palladiosimulator.pcm.repository.PassiveResource;
 
 import de.uka.ipd.sdq.scheduler.IPassiveResource;
+import de.uka.ipd.sdq.scheduler.resources.active.IResourceTableManager;
 import de.uka.ipd.sdq.simucomframework.model.SimuComModel;
 import de.uka.ipd.sdq.simucomframework.resources.AbstractSimulatedResourceContainer;
 import de.uka.ipd.sdq.simucomframework.resources.HashMapAssemblyAllocationLookup;
@@ -46,11 +47,13 @@ public abstract class SimuComContext extends Context {
     private IAssemblyAllocationLookup<AbstractSimulatedResourceContainer> assemblyLinkLookup = 
             new HashMapAssemblyAllocationLookup<AbstractSimulatedResourceContainer>(assemblyLinkMap);
 
-    public SimuComContext(SimuComModel myModel) {
-        super(myModel);
+    
+    public SimuComContext(SimuComModel myModel, IResourceTableManager resourceTableManager) {
+        super(myModel, resourceTableManager);
         initialiseAssemblyContextLookup();
     }
 
+    
     /**
      * Create a deployment relationship between the given assembly context and the
      * given resource container
