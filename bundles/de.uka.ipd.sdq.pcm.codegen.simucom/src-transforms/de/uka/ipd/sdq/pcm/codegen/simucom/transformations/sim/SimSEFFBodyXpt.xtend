@@ -201,7 +201,7 @@ class SimSEFFBodyXpt extends SEFFBodyXpt {
 		de.uka.ipd.sdq.simucomframework.fork.ForkedBehaviourProcess[] forks =
 			new de.uka.ipd.sdq.simucomframework.fork.ForkedBehaviourProcess[]{
 			«FOR f : fa.asynchronousForkedBehaviours_ForkAction SEPARATOR ","»
-				new de.uka.ipd.sdq.simucomframework.fork.ForkedBehaviourProcess(ctx, this.assemblyContext.getId(), true, ctx.getThread().getPriority()){
+				new de.uka.ipd.sdq.simucomframework.fork.ForkedBehaviourProcess(ctx, this.assemblyContext.getId(), true, ctx.getThread().getPriority(), ctx.getResourceTableManager()){
 					public void executeBehaviour() {
 						try {
 							«f.steps_Behaviour.findStart().actionsAsCalls("this.myContext")»
@@ -218,7 +218,7 @@ class SimSEFFBodyXpt extends SEFFBodyXpt {
 			«ENDIF»
 			«IF (fa.synchronisingBehaviours_ForkAction != null)»
 				«FOR f: fa.synchronisingBehaviours_ForkAction.synchronousForkedBehaviours_SynchronisationPoint SEPARATOR ","»
-					new de.uka.ipd.sdq.simucomframework.fork.ForkedBehaviourProcess(ctx, this.assemblyContext.getId(), false){
+					new de.uka.ipd.sdq.simucomframework.fork.ForkedBehaviourProcess(ctx, this.assemblyContext.getId(), false, ctx.getResourceTableManager()){
 						public void executeBehaviour() {
 							try {
 								«f.steps_Behaviour.findStart().actionsAsCalls("this.myContext")»
