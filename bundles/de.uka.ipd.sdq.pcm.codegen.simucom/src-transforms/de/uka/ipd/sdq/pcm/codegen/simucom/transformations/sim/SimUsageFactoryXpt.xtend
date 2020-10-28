@@ -89,6 +89,6 @@ class SimUsageFactoryXpt {
 	'''
 
 	def dispatch String factoryConstructor(OpenWorkload _this) '''
-		super(model, "«_this.usageScenario_Workload.getResourceURI()»");
+		super(model, "«_this.usageScenario_Workload.getResourceURI()»", resourceTableManager);
 	'''
 }
