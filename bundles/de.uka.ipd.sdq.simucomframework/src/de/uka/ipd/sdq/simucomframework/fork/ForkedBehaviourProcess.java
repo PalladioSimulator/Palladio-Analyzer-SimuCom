@@ -24,15 +24,17 @@ public abstract class ForkedBehaviourProcess extends SimuComSimProcess {
 
     private static final Logger LOGGER = Logger.getLogger(ForkedBehaviourProcess.class.getName());
 
-    public ForkedBehaviourProcess(final Context myContext, final String assemblyContextID, final boolean isAsync, IResourceTableManager resourceTableManager) {
-        super(myContext.getModel(), "Forked Behaviour", myContext.getThread().getRequestContext(), resourceTableManager);
+    public ForkedBehaviourProcess(Context context, String assemblyContextID, boolean isAsync, IResourceTableManager resourceTableManager) {
+        super(context.getModel(), "Forked Behaviour", context.getThread()
+            .getRequestContext(), resourceTableManager);
 
         // use the session id from the parent process
-        this.currentSessionId = myContext.getThread().getCurrentSessionId();
+        this.currentSessionId = context.getThread()
+            .getCurrentSessionId();
 
-        this.myContext = createForkContext(myContext);
+        this.myContext = createForkContext(context);
 
-        this.parentProcess = myContext.getThread();
+        this.parentProcess = context.getThread();
         this.assemblyContextID = assemblyContextID;
         this.isAsync = isAsync;
     }
@@ -40,16 +42,16 @@ public abstract class ForkedBehaviourProcess extends SimuComSimProcess {
     /**
      * Factory method for the fork context used in the forked behaviour
      * 
-     * @param myContext
+     * @param context
      * @return
      */
-    protected Context createForkContext(final Context myContext) {
-        return new ForkContext(myContext, this);
+    protected Context createForkContext(Context context) {
+        return new ForkContext(context, this);
     }
 
-    public ForkedBehaviourProcess(final Context myContext, final String assemblyContextID, final boolean isAsync,
+    public ForkedBehaviourProcess(final Context context, final String assemblyContextID, final boolean isAsync,
             final int priority, IResourceTableManager resourceTableManager) {
-        this(myContext, assemblyContextID, isAsync, resourceTableManager);
+        this(context, assemblyContextID, isAsync, resourceTableManager);
         setPriority(priority);
     }
 
@@ -66,14 +68,16 @@ public abstract class ForkedBehaviourProcess extends SimuComSimProcess {
             parentProcess.scheduleAt(0);
         } else {
             if (LOGGER.isDebugEnabled()) {
-                LOGGER.debug("Asynch behaviour finished at simtime "
-                        + getModel().getSimulationControl().getCurrentSimulationTime());
+                LOGGER.debug("Asynch behaviour finished at simtime " + getModel().getSimulationControl()
+                    .getCurrentSimulationTime());
             }
         }
     }
 
     private boolean simulationIsRunning() {
-        return this.myContext.getModel().getSimulationControl().isRunning();
+        return this.myContext.getModel()
+            .getSimulationControl()
+            .isRunning();
     }
 
     /**

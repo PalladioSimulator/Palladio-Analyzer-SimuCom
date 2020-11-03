@@ -38,7 +38,7 @@ class SimUsageFactoryXpt {
 				
 				public de.uka.ipd.sdq.simucomframework.usage.IScenarioRunner createScenarioRunner() {
 					return new «_this.implementationPackage() + "." + _this.javaName()»(model,«FOR system : systemList SEPARATOR ","»«system.
-				systemVariableParameter»«ENDFOR»);
+				systemVariableParameter»«ENDFOR», resourceTableManager);
 				}
 			}
 		'''
@@ -63,6 +63,7 @@ class SimUsageFactoryXpt {
 		«val systemList = _this.querySystemCalls.map[providedRole_EntryLevelSystemCall.providingEntity_ProvidedRole].map[
 			it as System].uniqueSystemList»
 		private final de.uka.ipd.sdq.simucomframework.model.SimuComModel model;
+		private final IResourceTableManager resourceTableManager;
 		«FOR system : systemList»
 			private «system.fqn()» my«system.javaName()» = null;
 		«ENDFOR»
@@ -70,6 +71,7 @@ class SimUsageFactoryXpt {
 			systemVariableDecl»«ENDFOR», IResourceTableManager resourceTableManager){
 			«_this.workload_UsageScenario.factoryConstructor»
 			this.model = model;
+			this.resourceTableManager = resourceTableManager;
 			«FOR system : systemList»
 				this.my«system.javaName()» = my«system.javaName()»; 
 			«ENDFOR»

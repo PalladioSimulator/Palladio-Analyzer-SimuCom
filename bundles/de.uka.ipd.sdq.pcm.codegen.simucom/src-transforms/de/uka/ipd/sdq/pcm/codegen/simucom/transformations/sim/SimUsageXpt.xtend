@@ -210,9 +210,9 @@ class SimUsageXpt extends UsageXpt {
 		«val systemList = _this.querySystemCalls.map[providedRole_EntryLevelSystemCall.providingEntity_ProvidedRole].map[
 			it as System].uniqueSystemList»
 		public «_this.javaName()»(de.uka.ipd.sdq.simucomframework.model.SimuComModel model,«FOR system : systemList SEPARATOR ","»«system.
-			systemVariableDecl»«ENDFOR») {
+			systemVariableDecl»«ENDFOR», de.uka.ipd.sdq.scheduler.resources.active.IResourceTableManager resourceTableManager) {
 			this.simuComModel = model;
-			ctx = new «a.fqnAllocationContext()»(model);
+			ctx = new «a.fqnAllocationContext()»(model, resourceTableManager);
 			ctx.getStack().createAndPushNewStackFrame();
 			«_this.usageScenarioConstructorContextInit(a)»
 			if (startStopProbes == null) {

@@ -14,6 +14,8 @@ import de.uka.ipd.sdq.simucomframework.variables.stackframe.SimulatedStack;
  */
 public class ForkContext extends Context {
 
+    private static final long serialVersionUID = 6701742993106975705L;
+
     private final Context parentContext;
 
     /**
@@ -23,8 +25,8 @@ public class ForkContext extends Context {
      *                      evaluate variables in the parallel process
      * @param parent        The parent process
      */
-    public ForkContext(final Context parentContext, final SimuComSimProcess parent) {
-        super(parentContext.getModel());
+    public ForkContext(Context parentContext, SimuComSimProcess parent) {
+        super(parentContext.getModel(), parentContext.getResourceTableManager());
         this.setSimProcess(parent);
         this.parentContext = parentContext;
         this.stack = new SimulatedStack<Object>();
@@ -34,11 +36,7 @@ public class ForkContext extends Context {
         this.stack.pushStackFrame(parentContext.getStack().currentStackFrame().copyFrame());
     }
 
-    /**
-     *
-     */
-    private static final long serialVersionUID = 6701742993106975705L;
-
+    // FIXME: check if called
     public Context getParentContext() {
         return parentContext;
     }
@@ -47,5 +45,4 @@ public class ForkContext extends Context {
     public IAssemblyAllocationLookup<AbstractSimulatedResourceContainer> getAssemblyAllocationLookup() {
         return getParentContext().getAssemblyAllocationLookup();
     }
-
 }
