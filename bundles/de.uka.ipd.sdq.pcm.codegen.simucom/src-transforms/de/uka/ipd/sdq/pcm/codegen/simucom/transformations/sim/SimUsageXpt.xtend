@@ -202,8 +202,8 @@ class SimUsageXpt extends UsageXpt {
 			it as System].uniqueSystemList»
 		de.uka.ipd.sdq.simucomframework.usage.OpenWorkload(getModel(),
 			new «u.implementationPackage() + "." + u.javaName() + "Factory"»(getModel(), "«u.entityName.javaString()»",«FOR system : systemList SEPARATOR ","»«system.
-			systemVariableParameter»«ENDFOR»),
-			"«_this.interArrivalTime_OpenWorkload.specification.specificationString()»")
+			systemVariableParameter»«ENDFOR», resourceTableManager),
+			"«_this.interArrivalTime_OpenWorkload.specification.specificationString()»", resourceTableManager)
 	'''
 
 	def usageScenarioConstructor(UsageScenario _this, Allocation a) '''
