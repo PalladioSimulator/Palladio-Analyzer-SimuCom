@@ -14,6 +14,7 @@ import org.palladiosimulator.pcm.system.System
 import org.palladiosimulator.analyzer.completions.Completion
 import org.palladiosimulator.pcm.core.entity.ComposedProvidingRequiringEntity
 import org.palladiosimulator.pcm.core.composition.ComposedStructure
+import org.palladiosimulator.analyzer.completions.NetworkComponentAllocationContext
 
 class SimAllocationXpt extends AllocationXpt {
 	@Inject extension M2TFileSystemAccess fsa
@@ -72,7 +73,11 @@ class SimAllocationXpt extends AllocationXpt {
 			else
 				context.assemblyContext_AllocationContext.id
 		»
+		«IF (context instanceof NetworkComponentAllocationContext)»
+		linkAssemblyContextAndResourceContainer("«fullAssemblyContextID»","«context.linkingResource.id»");
+		«ELSE»
 		linkAssemblyContextAndResourceContainer("«fullAssemblyContextID»","«context.resourceContainer_AllocationContext.id»");
+		«ENDIF»
 		
 		
 		«IF (context.assemblyContext_AllocationContext.encapsulatedComponent__AssemblyContext instanceof CompositeComponent) 
