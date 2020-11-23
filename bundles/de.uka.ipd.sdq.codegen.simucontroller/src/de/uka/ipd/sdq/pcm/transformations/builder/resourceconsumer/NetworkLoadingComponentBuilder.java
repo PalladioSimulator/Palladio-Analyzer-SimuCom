@@ -2,10 +2,11 @@ package de.uka.ipd.sdq.pcm.transformations.builder.resourceconsumer;
 
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
+import org.palladiosimulator.analyzer.completions.CompletionsFactory;
+import org.palladiosimulator.pcm.allocation.AllocationContext;
+import org.palladiosimulator.pcm.core.composition.AssemblyContext;
 import org.palladiosimulator.pcm.repository.OperationInterface;
 import org.palladiosimulator.pcm.resourceenvironment.LinkingResource;
-import org.palladiosimulator.pcm.resourceenvironment.ResourceContainer;
-import org.palladiosimulator.pcm.resourceenvironment.ResourceenvironmentFactory;
 import org.palladiosimulator.pcm.resourcetype.CommunicationLinkResourceType;
 
 import de.uka.ipd.sdq.pcm.transformations.builder.abstractbuilder.BasicComponentBuilder;
@@ -25,6 +26,7 @@ public class NetworkLoadingComponentBuilder extends BasicComponentBuilder {
 
     private final Logger logger = Logger.getLogger(NetworkLoadingComponentBuilder.class);
     private final CommunicationLinkResourceType typeOfLink;
+    private final LinkingResource link;
 
     /**
      * Constructor of the network load simulator component
@@ -40,12 +42,17 @@ public class NetworkLoadingComponentBuilder extends BasicComponentBuilder {
             final LinkingResource linkingRes) {
         super(models, interf, null, "NetworkLoadingComponent");
 
+        link = linkingRes;
         typeOfLink = linkingRes.getCommunicationLinkResourceSpecifications_LinkingResource()
                 .getCommunicationLinkResourceType_CommunicationLinkResourceSpecification();
-        final ResourceContainer dummyContainer = ResourceenvironmentFactory.eINSTANCE.createResourceContainer();
-        dummyContainer.setId(linkingRes.getId());
-
-        this.container = dummyContainer;
+    }
+    
+    @Override
+    protected AllocationContext createAllocationContext(AssemblyContext assembly) {
+        var allocationCtx = CompletionsFactory.eINSTANCE.createNetworkComponentAllocationContext();
+        allocationCtx.setAssemblyContext_AllocationContext(assembly);
+        allocationCtx.setLinkingResource(link);
+        return allocationCtx;
     }
 
     /**

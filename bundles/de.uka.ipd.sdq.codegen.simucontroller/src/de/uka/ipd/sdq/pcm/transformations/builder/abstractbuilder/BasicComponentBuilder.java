@@ -2,6 +2,7 @@ package de.uka.ipd.sdq.pcm.transformations.builder.abstractbuilder;
 
 import org.palladiosimulator.pcm.allocation.AllocationContext;
 import org.palladiosimulator.pcm.allocation.AllocationFactory;
+import org.palladiosimulator.pcm.core.composition.AssemblyContext;
 import org.palladiosimulator.pcm.core.composition.CompositionFactory;
 import org.palladiosimulator.pcm.repository.BasicComponent;
 import org.palladiosimulator.pcm.repository.OperationInterface;
@@ -57,11 +58,15 @@ public abstract class BasicComponentBuilder extends AbstractComponentBuilder {
         this.myAssemblyContext.setEntityName("BCAssembly " + myComponent.getEntityName());
         this.myAssemblyContext.setEncapsulatedComponent__AssemblyContext(myComponent);
 
-        this.myAllocationContext = AllocationFactory.eINSTANCE.createAllocationContext();
-        myAllocationContext.setAssemblyContext_AllocationContext(myAssemblyContext);
-        myAllocationContext.setResourceContainer_AllocationContext(this.container);
-
+        this.myAllocationContext = createAllocationContext(myAssemblyContext);
         myModels.getAllocation().getAllocationContexts_Allocation().add(myAllocationContext);
+    }
+    
+    protected AllocationContext createAllocationContext(AssemblyContext assembly) {
+        var result = AllocationFactory.eINSTANCE.createAllocationContext();
+        result.setAssemblyContext_AllocationContext(assembly);
+        result.setResourceContainer_AllocationContext(this.container);
+        return result;
     }
 
     protected BasicComponent getBasicComponent() {
