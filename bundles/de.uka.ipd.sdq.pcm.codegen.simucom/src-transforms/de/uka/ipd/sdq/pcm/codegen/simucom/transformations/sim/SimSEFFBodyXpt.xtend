@@ -204,7 +204,8 @@ class SimSEFFBodyXpt extends SEFFBodyXpt {
 				new de.uka.ipd.sdq.simucomframework.fork.ForkedBehaviourProcess(ctx, this.assemblyContext.getId(), true, ctx.getThread().getPriority(), ctx.getResourceTableManager()){
 					public void executeBehaviour() {
 						try {
-							«f.steps_Behaviour.findStart().actionsAsCalls("ctx")»
+							// this.forkContext refers to the member variable ForkedBehaviorProcess.forkContext
+							«f.steps_Behaviour.findStart().actionsAsCalls("this.forkContext")»
 						} catch (de.uka.ipd.sdq.simucomframework.exceptions.FailureException exception) {
 							if (ctx.getModel().getConfig().getSimulateFailures()) {
 								ctx.getModel().getFailureStatistics().increaseUnhandledFailureCounter(exception.getFailureType(), ctx.getSessionId());
@@ -221,7 +222,8 @@ class SimSEFFBodyXpt extends SEFFBodyXpt {
 					new de.uka.ipd.sdq.simucomframework.fork.ForkedBehaviourProcess(ctx, this.assemblyContext.getId(), false, ctx.getResourceTableManager()){
 						public void executeBehaviour() {
 							try {
-								«f.steps_Behaviour.findStart().actionsAsCalls("ctx")»
+								// this.forkContext refers to the member variable ForkedBehaviorProcess.forkContext
+								«f.steps_Behaviour.findStart().actionsAsCalls("this.forkContext")»
 							} catch (de.uka.ipd.sdq.simucomframework.exceptions.FailureException exception) {
 								if (ctx.getModel().getConfig().getSimulateFailures()) {
 									ctx.getModel().getFailureStatistics().increaseUnhandledFailureCounter(exception.getFailureType(), ctx.getSessionId());
