@@ -16,25 +16,25 @@ import de.uka.ipd.sdq.simulation.abstractsimengine.ISimProcess;
  */
 public abstract class ForkedBehaviourProcess extends SimuComSimProcess {
 
-    protected final Context myContext;
-    private final ISimProcess parentProcess;
+    private static final Logger LOGGER = Logger.getLogger(ForkedBehaviourProcess.class.getName());
+
+    protected final Context forkContext;
     protected final String assemblyContextID;
+    
+    private final ISimProcess parentProcess;
     private final boolean isAsync;
     private boolean isTerminated = false;
 
-    private static final Logger LOGGER = Logger.getLogger(ForkedBehaviourProcess.class.getName());
 
     public ForkedBehaviourProcess(Context context, String assemblyContextID, boolean isAsync, IResourceTableManager resourceTableManager) {
-        super(context.getModel(), "Forked Behaviour", context.getThread()
-            .getRequestContext(), resourceTableManager);
+        super(context.getModel(), "Forked Behaviour", context.getThread().getRequestContext(), resourceTableManager);
 
         // use the session id from the parent process
-        this.currentSessionId = context.getThread()
-            .getCurrentSessionId();
+        this.currentSessionId = context.getThread().getCurrentSessionId();
 
-        this.myContext = createForkContext(context);
+        forkContext = createForkContext(context);
 
-        this.parentProcess = context.getThread();
+        parentProcess = context.getThread();
         this.assemblyContextID = assemblyContextID;
         this.isAsync = isAsync;
     }
@@ -58,7 +58,7 @@ public abstract class ForkedBehaviourProcess extends SimuComSimProcess {
     @Override
     protected void internalLifeCycle() {
         executeBehaviour();
-        this.isTerminated = true;
+        isTerminated = true;
 
         // if this has been synchronous call of the behaviour and the parent has
         // not yet terminated (which may happen under some wired conditions) and
@@ -75,9 +75,7 @@ public abstract class ForkedBehaviourProcess extends SimuComSimProcess {
     }
 
     private boolean simulationIsRunning() {
-        return this.myContext.getModel()
-            .getSimulationControl()
-            .isRunning();
+        return forkContext.getModel().getSimulationControl().isRunning();
     }
 
     /**
@@ -97,7 +95,7 @@ public abstract class ForkedBehaviourProcess extends SimuComSimProcess {
      */
     @Override
     public boolean isTerminated() {
-        return this.isTerminated;
+        return isTerminated;
     }
 
 }
