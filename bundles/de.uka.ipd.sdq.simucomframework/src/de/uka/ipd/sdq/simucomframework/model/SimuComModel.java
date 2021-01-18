@@ -3,7 +3,6 @@ package de.uka.ipd.sdq.simucomframework.model;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 
 import org.apache.log4j.Level;
@@ -11,7 +10,6 @@ import org.apache.log4j.Logger;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.util.EContentAdapter;
 import org.palladiosimulator.probeframework.ProbeFrameworkContext;
-import org.palladiosimulator.probeframework.calculator.DefaultCalculatorFactory;
 import org.palladiosimulator.probeframework.calculator.ExtensibleCalculatorFactoryDelegatingFactory;
 import org.palladiosimulator.reliability.FailureStatistics;
 
@@ -21,7 +19,6 @@ import de.uka.ipd.sdq.probfunction.math.impl.ProbabilityFunctionFactoryImpl;
 import de.uka.ipd.sdq.scheduler.ISchedulingFactory;
 import de.uka.ipd.sdq.scheduler.SchedulerModel;
 import de.uka.ipd.sdq.scheduler.factory.SchedulingFactory;
-import de.uka.ipd.sdq.scheduler.resources.active.AbstractActiveResource;
 import de.uka.ipd.sdq.scheduler.resources.active.IResourceTableManager;
 import de.uka.ipd.sdq.simucomframework.ResourceRegistry;
 import de.uka.ipd.sdq.simucomframework.SimuComConfig;
@@ -70,14 +67,20 @@ public class SimuComModel extends SchedulerModel {
             final boolean isRemoteRun, IResourceTableManager resourceTableManager) {
         this(config, status, factory, isRemoteRun, null, resourceTableManager);
     }
-
+    
     public SimuComModel(final SimuComConfig config, final SimuComStatus status, final ISimEngineFactory factory,
             final boolean isRemoteRun, final ProbeFrameworkContext probeFrameworkContext, IResourceTableManager resourceTableManager) {
+        this(config, status, factory, isRemoteRun, probeFrameworkContext, resourceTableManager, null);
+    }
+
+    public SimuComModel(final SimuComConfig config, final SimuComStatus status, final ISimEngineFactory factory,
+            final boolean isRemoteRun, final ProbeFrameworkContext probeFrameworkContext, IResourceTableManager resourceTableManager,
+            ResourceRegistry resourceRegistry) {
         this.config = config;
         this.simulationEngineFactory = factory;
         factory.setModel(this);
         this.simControl = factory.createSimulationControl();
-        resourceRegistry = new ResourceRegistry(this);
+        this.resourceRegistry = resourceRegistry == null ? new ResourceRegistry(this) : resourceRegistry;
         this.simulationStatus = status;
         issues = new ArrayList<SeverityAndIssue>();
         this.workloadDrivers = new ArrayList<IWorkloadDriver>();
@@ -106,7 +109,7 @@ public class SimuComModel extends SchedulerModel {
     private ProbeFrameworkContext initialiseProbeFramework() {
         // create ProbeFramework context
         final ProbeFrameworkContext result = new ProbeFrameworkContext(new RecorderAttachingCalculatorFactoryDecorator(
-                new ExtensibleCalculatorFactoryDelegatingFactory(), this.config));
+                new ExtensibleCalculatorFactoryDelegatingFactory(), this.config.getRecorderName()));
 
         return result;
     }
