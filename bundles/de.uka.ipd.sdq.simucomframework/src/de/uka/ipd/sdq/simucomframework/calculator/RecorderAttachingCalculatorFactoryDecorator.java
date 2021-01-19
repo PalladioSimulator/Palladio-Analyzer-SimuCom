@@ -11,6 +11,7 @@ import org.palladiosimulator.probeframework.calculator.IGenericCalculatorFactory
 import org.palladiosimulator.recorderframework.IRecorder;
 import org.palladiosimulator.recorderframework.config.AbstractRecorderConfiguration;
 import org.palladiosimulator.recorderframework.config.IRecorderConfiguration;
+import org.palladiosimulator.recorderframework.config.IRecorderConfigurationFactory;
 import org.palladiosimulator.recorderframework.utils.RecorderExtensionHelper;
 
 /**
@@ -24,13 +25,19 @@ public class RecorderAttachingCalculatorFactoryDecorator implements IGenericCalc
      */
     private final IGenericCalculatorFactory decoratedCalculatorFactory;
     private final String recorderName;
+    private final IRecorderConfigurationFactory configurationFactory;
 
     public RecorderAttachingCalculatorFactoryDecorator(final IGenericCalculatorFactory decoratedCalculatorFactory,
             final String recorderName) {
-        super();
-
+        this(decoratedCalculatorFactory, recorderName,
+                RecorderExtensionHelper.getRecorderConfigurationFactoryForName(recorderName));
+    }
+    
+    public RecorderAttachingCalculatorFactoryDecorator(final IGenericCalculatorFactory decoratedCalculatorFactory,
+            final String recorderName, IRecorderConfigurationFactory configurationFactory) {
         this.decoratedCalculatorFactory = decoratedCalculatorFactory;
         this.recorderName = recorderName;
+        this.configurationFactory = configurationFactory;        
     }
 
     @Override
@@ -46,8 +53,7 @@ public class RecorderAttachingCalculatorFactoryDecorator implements IGenericCalc
         recorderConfigurationMap.put(AbstractRecorderConfiguration.MEASURING_POINT, calculator.getMeasuringPoint());
 
         final IRecorder recorder = RecorderExtensionHelper.instantiateRecorderImplementationForRecorder(recorderName);
-        final IRecorderConfiguration recorderConfiguration = RecorderExtensionHelper
-            .getRecorderConfigurationFactoryForName(recorderName)
+        final IRecorderConfiguration recorderConfiguration = configurationFactory
             .createRecorderConfiguration(recorderConfigurationMap);
         recorder.initialize(recorderConfiguration);
         // register recorder at calculator
