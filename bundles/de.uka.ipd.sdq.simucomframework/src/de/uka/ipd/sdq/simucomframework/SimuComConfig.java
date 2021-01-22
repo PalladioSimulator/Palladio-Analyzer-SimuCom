@@ -8,6 +8,7 @@ import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
 import org.palladiosimulator.analyzer.workflow.runconfig.ExperimentRunDescriptor;
+import org.palladiosimulator.recorderframework.config.IRecorderConfigurationFactory;
 
 import de.uka.ipd.sdq.probfunction.math.IRandomGenerator;
 import de.uka.ipd.sdq.simulation.AbstractSimulationConfig;
@@ -62,7 +63,7 @@ public class SimuComConfig extends AbstractSimulationConfig implements Serializa
 
     // SimuCom extensions can also provide extension to the SimuCom configuration.
     // This map stores the extension configurations.
-    private final HashMap<String, SimuComConfigExtension> simuComConfigExtensions;
+    private HashMap<String, SimuComConfigExtension> simuComConfigExtensions;
 
     private boolean simulateFailures = false;
     private boolean simulateLinkingResources = false;
@@ -91,8 +92,17 @@ public class SimuComConfig extends AbstractSimulationConfig implements Serializa
      *            SimuComConfig.CONFIDENCE_MODELELEMENT_URI
      *
      */
+    public SimuComConfig(final Map<String, Object> configuration, final boolean debug, IRecorderConfigurationFactory configurationFactory) {
+        super(configuration, debug, configurationFactory);
+        doInit(configuration, debug);
+    }
+    
     public SimuComConfig(final Map<String, Object> configuration, final boolean debug) {
         super(configuration, debug);
+        doInit(configuration, debug);
+    }
+    
+    private void doInit(final Map<String, Object> configuration, final boolean debug) {
         simuComConfigExtensions = new HashMap<String, SimuComConfigExtension>();
         try {
             if (configuration.containsKey(SIMULATE_FAILURES)) {
