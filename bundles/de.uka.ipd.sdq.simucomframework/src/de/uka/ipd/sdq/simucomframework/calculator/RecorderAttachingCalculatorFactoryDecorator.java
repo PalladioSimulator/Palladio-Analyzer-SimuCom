@@ -26,12 +26,6 @@ public class RecorderAttachingCalculatorFactoryDecorator implements IGenericCalc
     private final IGenericCalculatorFactory decoratedCalculatorFactory;
     private final String recorderName;
     private final IRecorderConfigurationFactory configurationFactory;
-
-    public RecorderAttachingCalculatorFactoryDecorator(final IGenericCalculatorFactory decoratedCalculatorFactory,
-            final String recorderName) {
-        this(decoratedCalculatorFactory, recorderName,
-                RecorderExtensionHelper.getRecorderConfigurationFactoryForName(recorderName));
-    }
     
     public RecorderAttachingCalculatorFactoryDecorator(final IGenericCalculatorFactory decoratedCalculatorFactory,
             final String recorderName, IRecorderConfigurationFactory configurationFactory) {

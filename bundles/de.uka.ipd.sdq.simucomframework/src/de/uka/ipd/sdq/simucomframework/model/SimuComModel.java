@@ -109,7 +109,7 @@ public class SimuComModel extends SchedulerModel {
     private ProbeFrameworkContext initialiseProbeFramework() {
         // create ProbeFramework context
         final ProbeFrameworkContext result = new ProbeFrameworkContext(new RecorderAttachingCalculatorFactoryDecorator(
-                new ExtensibleCalculatorFactoryDelegatingFactory(), this.config.getRecorderName()));
+                new ExtensibleCalculatorFactoryDelegatingFactory(), this.config.getRecorderName(), this.config.getRecorderConfigurationFactory()));
 
         return result;
     }
