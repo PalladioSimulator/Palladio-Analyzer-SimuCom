@@ -6,14 +6,13 @@ import java.util.Map;
 import org.palladiosimulator.edp2.models.measuringpoint.MeasuringPoint;
 import org.palladiosimulator.metricspec.MetricDescription;
 import org.palladiosimulator.probeframework.calculator.Calculator;
-import org.palladiosimulator.probeframework.calculator.IGenericCalculatorFactory;
 import org.palladiosimulator.probeframework.calculator.CalculatorProbeSet;
+import org.palladiosimulator.probeframework.calculator.IGenericCalculatorFactory;
 import org.palladiosimulator.recorderframework.IRecorder;
 import org.palladiosimulator.recorderframework.config.AbstractRecorderConfiguration;
 import org.palladiosimulator.recorderframework.config.IRecorderConfiguration;
+import org.palladiosimulator.recorderframework.config.IRecorderConfigurationFactory;
 import org.palladiosimulator.recorderframework.utils.RecorderExtensionHelper;
-
-import de.uka.ipd.sdq.simucomframework.SimuComConfig;
 
 /**
  * Factory class to create @see {@link Calculator}s used in a SimuCom simulation run.
@@ -24,16 +23,15 @@ public class RecorderAttachingCalculatorFactoryDecorator implements IGenericCalc
     /**
      * SimuCom model which is simulated
      */
-    private final SimuComConfig configuration;
-
     private final IGenericCalculatorFactory decoratedCalculatorFactory;
-
+    private final String recorderName;
+    private final IRecorderConfigurationFactory configurationFactory;
+    
     public RecorderAttachingCalculatorFactoryDecorator(final IGenericCalculatorFactory decoratedCalculatorFactory,
-            final SimuComConfig configuration) {
-        super();
-
+            final String recorderName, IRecorderConfigurationFactory configurationFactory) {
         this.decoratedCalculatorFactory = decoratedCalculatorFactory;
-        this.configuration = configuration;
+        this.recorderName = recorderName;
+        this.configurationFactory = configurationFactory;        
     }
 
     @Override
@@ -48,10 +46,9 @@ public class RecorderAttachingCalculatorFactoryDecorator implements IGenericCalc
                 calculator.getMetricDesciption());
         recorderConfigurationMap.put(AbstractRecorderConfiguration.MEASURING_POINT, calculator.getMeasuringPoint());
 
-        final IRecorder recorder = RecorderExtensionHelper
-                .instantiateRecorderImplementationForRecorder(this.configuration.getRecorderName());
-        final IRecorderConfiguration recorderConfiguration = this.configuration.getRecorderConfigurationFactory()
-                .createRecorderConfiguration(recorderConfigurationMap);
+        final IRecorder recorder = RecorderExtensionHelper.instantiateRecorderImplementationForRecorder(recorderName);
+        final IRecorderConfiguration recorderConfiguration = configurationFactory
+            .createRecorderConfiguration(recorderConfigurationMap);
         recorder.initialize(recorderConfiguration);
         // register recorder at calculator
         calculator.addObserver(recorder);
