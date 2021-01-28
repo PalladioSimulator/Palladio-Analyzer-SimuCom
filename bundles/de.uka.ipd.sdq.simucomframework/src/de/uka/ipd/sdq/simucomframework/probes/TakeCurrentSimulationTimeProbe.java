@@ -9,7 +9,7 @@ import org.palladiosimulator.metricspec.constants.MetricDescriptionConstants;
 import org.palladiosimulator.probeframework.measurement.RequestContext;
 import org.palladiosimulator.probeframework.probes.BasicObjectStateProbe;
 
-import de.uka.ipd.sdq.simulation.abstractsimengine.ISimulationControl;
+import de.uka.ipd.sdq.simulation.abstractsimengine.ISimulationTimeProvider;
 
 /**
  * Measures a point in time metric (in seconds) by requesting the current simulation time from the
@@ -17,7 +17,7 @@ import de.uka.ipd.sdq.simulation.abstractsimengine.ISimulationControl;
  *
  * @author Sebastian Lehrig, Steffen Becker
  */
-public class TakeCurrentSimulationTimeProbe extends BasicObjectStateProbe<ISimulationControl, Double, Duration> {
+public class TakeCurrentSimulationTimeProbe extends BasicObjectStateProbe<ISimulationTimeProvider, Double, Duration> {
 
     /**
      * Default constructor.
@@ -26,8 +26,8 @@ public class TakeCurrentSimulationTimeProbe extends BasicObjectStateProbe<ISimul
      *            The observer object is a simulation control, thus, allowing to request the current
      *            simulation time.
      */
-    public TakeCurrentSimulationTimeProbe(final ISimulationControl simulationControl) {
-        super(simulationControl, MetricDescriptionConstants.POINT_IN_TIME_METRIC);
+    public TakeCurrentSimulationTimeProbe(final ISimulationTimeProvider timeProvider) {
+        super(timeProvider, MetricDescriptionConstants.POINT_IN_TIME_METRIC);
     }
 
     /**
