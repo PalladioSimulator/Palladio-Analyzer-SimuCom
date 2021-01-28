@@ -63,7 +63,7 @@ public class SimuComConfig extends AbstractSimulationConfig implements Serializa
 
     // SimuCom extensions can also provide extension to the SimuCom configuration.
     // This map stores the extension configurations.
-    private HashMap<String, SimuComConfigExtension> simuComConfigExtensions;
+    private final HashMap<String, SimuComConfigExtension> simuComConfigExtensions = new HashMap<String, SimuComConfigExtension>();
 
     private boolean simulateFailures = false;
     private boolean simulateLinkingResources = false;
@@ -103,7 +103,6 @@ public class SimuComConfig extends AbstractSimulationConfig implements Serializa
     }
     
     private void doInit(final Map<String, Object> configuration, final boolean debug) {
-        simuComConfigExtensions = new HashMap<String, SimuComConfigExtension>();
         try {
             if (configuration.containsKey(SIMULATE_FAILURES)) {
                 this.simulateFailures = (Boolean) configuration.get(SIMULATE_FAILURES);

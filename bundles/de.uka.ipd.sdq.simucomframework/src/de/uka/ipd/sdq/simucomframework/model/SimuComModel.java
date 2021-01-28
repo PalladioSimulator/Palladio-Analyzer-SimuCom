@@ -63,16 +63,29 @@ public class SimuComModel extends SchedulerModel {
     private final ISchedulingFactory schedulingFactory;
     private final FailureStatistics failureStatistics = new FailureStatistics();
 
+    /**
+     * Creates a new SimuComModel. ProbeFrameworkContext and ResourceRegistry are created as part of this constructor.
+     * 
+     * Legacy behavior of SimuCom. 
+     */
+    @Deprecated
     public SimuComModel(final SimuComConfig config, final SimuComStatus status, final ISimEngineFactory factory,
             final boolean isRemoteRun, IResourceTableManager resourceTableManager) {
         this(config, status, factory, isRemoteRun, null, resourceTableManager);
     }
-    
+
+    /**
+     * Creates a new SimuComModel. The ResourceRegistry is created as part of this constructor.
+     */
+    @Deprecated
     public SimuComModel(final SimuComConfig config, final SimuComStatus status, final ISimEngineFactory factory,
             final boolean isRemoteRun, final ProbeFrameworkContext probeFrameworkContext, IResourceTableManager resourceTableManager) {
         this(config, status, factory, isRemoteRun, probeFrameworkContext, resourceTableManager, null);
     }
 
+    /**
+     * Creates a new SimuComModel. Please use this constructor for future work.
+     */
     public SimuComModel(final SimuComConfig config, final SimuComStatus status, final ISimEngineFactory factory,
             final boolean isRemoteRun, final ProbeFrameworkContext probeFrameworkContext, IResourceTableManager resourceTableManager,
             ResourceRegistry resourceRegistry) {
@@ -80,6 +93,7 @@ public class SimuComModel extends SchedulerModel {
         this.simulationEngineFactory = factory;
         factory.setModel(this);
         this.simControl = factory.createSimulationControl();
+        // Initializing the ResourceRegistry in case it was not provided (legacy behavior of SimuCom)
         this.resourceRegistry = resourceRegistry == null ? new ResourceRegistry(this) : resourceRegistry;
         this.simulationStatus = status;
         issues = new ArrayList<SeverityAndIssue>();
@@ -99,7 +113,7 @@ public class SimuComModel extends SchedulerModel {
         // set up the resource scheduler
         schedulingFactory = new SchedulingFactory(this, resourceTableManager);
 
-        // set up the measurement framework
+        // Initializing the ProbeFrameworkContext in case it was not provided (legacy behavior of SimuCom)
         this.probeFrameworkContext = probeFrameworkContext == null ? initialiseProbeFramework() : probeFrameworkContext;
 
         // setup debug log for console
