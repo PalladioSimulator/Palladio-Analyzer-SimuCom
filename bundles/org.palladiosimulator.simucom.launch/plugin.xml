@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+	<extension point="org.eclipse.debug.core.launchConfigurationTypes">
+	    <launchConfigurationType
+           delegate="de.uka.ipd.sdq.codegen.simucontroller.runconfig.SimuComWorkflowLauncher"
+           id="de.uka.ipd.sdq.simucontroller.SimuLaunching"
+           modes="run, debug"
+           name="SimuBench"
+           public="true">        
+	    </launchConfigurationType>
+	</extension>
+	<extension point="org.eclipse.debug.ui.launchConfigurationTypeImages">
+	    <launchConfigurationTypeImage
+	        icon="icons/app_simucim.gif"
+	        configTypeID="de.uka.ipd.sdq.simucontroller.SimuLaunching"
+	        id="de.uka.ipd.sdq.simucontroller.launchConfigurationTypeImage">
+	    </launchConfigurationTypeImage>
+	</extension>
+	<extension point="org.eclipse.debug.ui.launchConfigurationTabGroups">
+	    <launchConfigurationTabGroup
+	        type="de.uka.ipd.sdq.simucontroller.SimuLaunching"
+	        class="de.uka.ipd.sdq.codegen.simucontroller.runconfig.SimuTabGroup"
+	        id="de.uka.ipd.sdq.simucontroller.launchConfigurationTabGroup">
+	    </launchConfigurationTabGroup>
+	</extension>
+	<extension
+       point="de.uka.ipd.sdq.codegen.simucontroller.simulator">
+    <simulator
+          id="de.uka.ipd.sdq.codegen.simucontroller.simucom"
+          launchDelegate="de.uka.ipd.sdq.codegen.simucontroller.runconfig.SimuComWorkflowLauncher"
+          name="SimuCom (Process-Driven Simulation)">
+    </simulator>
+ </extension>
+ <extension
+       id="de.uka.ipd.sdq.codegen.simucontroller.runconfig.simucomnature"
+       point="org.eclipse.core.resources.natures">
+    <runtime>
+       <run
+             class="de.uka.ipd.sdq.codegen.simucontroller.runconfig.SimuComNature">
+       </run>
+    </runtime>
+ </extension>
+ <extension
+       point="org.eclipse.ui.ide.projectNatureImages">
+    <image
+          icon="icons/app_simucim.gif"
+          id="de.uka.ipd.sdq.codegen.simucontroller.runconfig.SimuComNature"
+          natureId="de.uka.ipd.sdq.codegen.simucontroller.runconfig.simucomnature">
+    </image>
+ </extension>
+ 
+    <extension
+         point="org.eclipse.debug.core.launchConfigurationTypes">
+      <launchConfigurationType
+            delegate="de.uka.ipd.sdq.simucom.rerunsimulation.runconfig.RerunSimuComWorkflowLauncher"
+            id="de.uka.ipd.sdq.simucom.rerunsimulation.RerunSimulation"
+            modes="run, debug"
+            name="Rerun Simulation"
+            public="true">
+      </launchConfigurationType>
+   </extension>
+   <extension
+         point="org.eclipse.debug.ui.launchConfigurationTypeImages">
+      <launchConfigurationTypeImage
+            configTypeID="de.uka.ipd.sdq.simucom.rerunsimulation.RerunSimulation"
+            icon="icons/app_simucim.gif"
+            id="de.uka.ipd.sdq.simucom.rerunsimulation.launchConfigurationTypeImage">
+      </launchConfigurationTypeImage>
+   </extension>
+   <extension
+         point="org.eclipse.debug.ui.launchConfigurationTabGroups">
+      <launchConfigurationTabGroup
+            class="de.uka.ipd.sdq.simucom.rerunsimulation.runconfig.RerunSimulationTabGroup"
+            id="de.uka.ipd.sdq.simucom.rerunsimulation.launchConfigurationTabGroup"
+            type="de.uka.ipd.sdq.simucom.rerunsimulation.RerunSimulation">
+      </launchConfigurationTabGroup>
+   </extension>
+ 
+
+</plugin>
