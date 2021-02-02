@@ -259,7 +259,7 @@ class SimJavaCoreXpt extends JavaCoreXpt {
 	override parameterListTM(Signature signature)      '''de.uka.ipd.sdq.simucomframework.SimuComContext ctx'''
 	override parameterUsageListTM(Signature signature) '''ctx'''
 	override returnTypeTM(Signature signature)         '''de.uka.ipd.sdq.simucomframework.variables.stackframe.SimulatedStackframe<Object>'''
-	override contextTypeTM(AbstractAction action)      '''de.uka.ipd.sdq.simucomframework.Context'''
+	override contextTypeTM(AbstractAction action)      '''de.uka.ipd.sdq.simucomframework.SimuComContext'''
 	
 	override componentServiceTM(Signature signature, RepositoryComponent component) {
 		componentService(signature, component)
