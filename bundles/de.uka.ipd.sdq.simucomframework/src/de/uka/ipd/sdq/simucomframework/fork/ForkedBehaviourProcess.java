@@ -4,6 +4,7 @@ import org.apache.log4j.Logger;
 
 import de.uka.ipd.sdq.scheduler.resources.active.IResourceTableManager;
 import de.uka.ipd.sdq.simucomframework.Context;
+import de.uka.ipd.sdq.simucomframework.SimuComContext;
 import de.uka.ipd.sdq.simucomframework.SimuComSimProcess;
 import de.uka.ipd.sdq.simulation.abstractsimengine.ISimProcess;
 
@@ -18,7 +19,7 @@ public abstract class ForkedBehaviourProcess extends SimuComSimProcess {
 
     private static final Logger LOGGER = Logger.getLogger(ForkedBehaviourProcess.class.getName());
 
-    protected final Context forkContext;
+    protected final SimuComContext forkContext;
     protected final String assemblyContextID;
     
     private final ISimProcess parentProcess;
@@ -45,7 +46,7 @@ public abstract class ForkedBehaviourProcess extends SimuComSimProcess {
      * @param context
      * @return
      */
-    protected Context createForkContext(Context context) {
+    protected SimuComContext createForkContext(Context context) {
         return new ForkContext(context, this);
     }
 

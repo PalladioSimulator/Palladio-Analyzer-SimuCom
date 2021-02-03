@@ -1,6 +1,7 @@
 package de.uka.ipd.sdq.simucomframework.fork;
 
 import de.uka.ipd.sdq.simucomframework.Context;
+import de.uka.ipd.sdq.simucomframework.SimuComContext;
 import de.uka.ipd.sdq.simucomframework.SimuComSimProcess;
 import de.uka.ipd.sdq.simucomframework.resources.AbstractSimulatedResourceContainer;
 import de.uka.ipd.sdq.simucomframework.resources.IAssemblyAllocationLookup;
@@ -12,7 +13,7 @@ import de.uka.ipd.sdq.simucomframework.variables.stackframe.SimulatedStack;
  * @author Steffen Becker
  *
  */
-public class ForkContext extends Context {
+public class ForkContext extends SimuComContext {
 
     private static final long serialVersionUID = 6701742993106975705L;
 
@@ -44,5 +45,10 @@ public class ForkContext extends Context {
     @Override
     public IAssemblyAllocationLookup<AbstractSimulatedResourceContainer> getAssemblyAllocationLookup() {
         return getParentContext().getAssemblyAllocationLookup();
+    }
+
+    @Override
+    protected void initialiseAssemblyContextLookup() {
+        // not required; as assemblyContextLookup is delegated to parent context
     }
 }
