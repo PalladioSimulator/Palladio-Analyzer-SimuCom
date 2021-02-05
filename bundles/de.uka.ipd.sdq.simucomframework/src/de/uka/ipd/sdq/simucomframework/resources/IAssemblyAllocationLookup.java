@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 
 import org.palladiosimulator.pcm.core.composition.AssemblyContext;
 import org.palladiosimulator.pcm.repository.BasicComponent;
+import org.palladiosimulator.pcm.repository.RepositoryComponent;
 
 import de.uka.ipd.sdq.identifier.Identifier;
 
@@ -39,7 +40,7 @@ public interface IAssemblyAllocationLookup<AllocationType> {
      * @return the entity
      */
     default AllocationType getAllocatedEntity(AssemblyContext context) {
-        if (context.getParentStructure__AssemblyContext() instanceof BasicComponent) {
+        if (context.getParentStructure__AssemblyContext() instanceof RepositoryComponent) {
             throw new IllegalArgumentException("Only root assembly contexts can be allocated directly. "
                     + "Please use getAllocatedEntity(Stack<AssemblyContext>).");
         }
