@@ -3,8 +3,8 @@ package de.uka.ipd.sdq.simucomframework.variables.cache;
 import java.util.Iterator;
 
 import org.eclipse.emf.ecore.EObject;
-import org.palladiosimulator.commons.stoex.api.StoExParser;
-import org.palladiosimulator.commons.stoex.api.StoExParser.SyntaxErrorException;
+import org.palladiosimulator.pcm.stoex.api.StoExParser;
+import org.palladiosimulator.pcm.stoex.api.StoExParser.SyntaxErrorException;
 
 import de.uka.ipd.sdq.probfunction.math.IProbabilityFunction;
 import de.uka.ipd.sdq.stoex.Expression;
