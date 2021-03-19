@@ -26,7 +26,7 @@ import de.uka.ipd.sdq.simucomframework.simucomstatus.SimucomstatusFactory;
  * 
  * @author Steffen Becker, Sebastian Lehrig
  */
-public abstract class AbstractScheduledResource extends SimuComEntity implements IActiveResourceStateSensor {
+public abstract class AbstractScheduledResource extends SimuComEntity implements IActiveResourceStateSensor, IResourceDemandModifiable {
     private static final Logger LOGGER = Logger.getLogger(AbstractScheduledResource.class.getName());
 
     // each instance maintains its own list of state listeners
@@ -46,6 +46,8 @@ public abstract class AbstractScheduledResource extends SimuComEntity implements
     private final int numberOfInstances;
     private final String schedulingStrategyID;
     private final AbstractSimulatedResourceContainer resourceContainer;
+    
+    private final List<DemandModifyingBehavior> demandModifyingBehaviors;
 
     // non-final members
     // //////////////////
@@ -69,6 +71,8 @@ public abstract class AbstractScheduledResource extends SimuComEntity implements
         this.resourceTypeID = resourceTypeID;
         this.resourceContainerID = resourceContainerID;
         this.requiredByContainer = requiredByContainer;
+        
+        this.demandModifyingBehaviors = new ArrayList<DemandModifyingBehavior>();
 
         if (LOGGER.isEnabledFor(Level.DEBUG)) {
             LOGGER.debug("Creating Simulated Active Resource: " + this.getName());
@@ -123,11 +127,48 @@ public abstract class AbstractScheduledResource extends SimuComEntity implements
      *            The id of the resource service to be called for resource consumption
      * @param parameterMap
      *            Additional parameters which can be used by the resource. Map can be empty.
-     * @param demand
+     * @param abstractDemand
      *            The resource demand the client wishes to be processed by the resource
      */
-    public abstract void consumeResource(SimuComSimProcess thread, int resourceServiceID,
-            Map<String, Serializable> parameterMap, double demand);
+    public void consumeResource(SimuComSimProcess thread, int resourceServiceID,
+            Map<String, Serializable> parameterMap, double abstractDemand) {
+    	// Check first if the resource is currently available.
+        assertAvailability();
+
+    	//TODO next line was only in scheduled resource but not in linking resource ??? critical?
+        getUnderlyingResource().registerProcess(thread);
+        // registerProcessWindows(process, aResource);
+        // LOGGER.info("Demanding " + abstractDemand);
+        
+        double concreteDemand = calculateDemand(abstractDemand);
+        
+        // for every demand modifying behavior a value is added to the demand.
+        // TODO latency of linking resource must not already be included in the concrete demand!!! --> latency = behavior?
+        double additiveValue = 0.0;
+        for (DemandModifyingBehavior b : this.demandModifyingBehaviors) {
+        	additiveValue += b.getAdditiveDemandValue(concreteDemand);
+        }
+        concreteDemand += additiveValue;
+        
+        // abstractDemand may be zero, in that case only the latency is considered.
+        if (concreteDemand <= 0) {
+            // Do nothing.
+            // TODO throw an exception or add a warning?
+            return;
+        }
+
+        // LOGGER.info("Recording " + concreteDemand);
+        fireDemand(concreteDemand);
+        getUnderlyingResource().process(thread, resourceServiceID, parameterMap, concreteDemand);
+    }
+    
+    public void addDemandModifyingBehavior(final DemandModifyingBehavior behavior) {
+    	this.demandModifyingBehaviors.add(behavior);
+    }
+
+    public void removeDemandModifyingBehavior(final DemandModifyingBehavior behavior) {
+    	this.demandModifyingBehaviors.remove(behavior);
+    }
 
     public abstract double getRemainingDemandForProcess(SimuComSimProcess thread);
 
