@@ -26,9 +26,7 @@ public class SimulatedLinkingResource extends AbstractScheduledResource {
 
     private final LinkingResource linkingResource;
     private String throughput;
-    private String latencySpec;
-    //TODO use latency through DMBehavior, remove latencySpec Field
-    //private DemandModifyingBehavior latency;
+    private DemandModifyingBehavior latency;
 
     // For resources that can fail (SimulatedLinkingResources):
     private final boolean canFail;
@@ -54,12 +52,11 @@ public class SimulatedLinkingResource extends AbstractScheduledResource {
                 SchedulingStrategy.FCFS, 1, false);
 
         this.linkingResource = linkingResource;
-        //TODO remove latencySpec field
-        this.latencySpec = this.linkingResource.getCommunicationLinkResourceSpecifications_LinkingResource()
+        String latencySpec = this.linkingResource.getCommunicationLinkResourceSpecifications_LinkingResource()
                 .getLatency_CommunicationLinkResourceSpecification().getSpecification();
-        //TODO latency as a demandModifyingBehavior:
-        //this.latency = new DemandModifyingBehavior("1.0", latencySpec);
-        //super.addDemandModifyingBehavior(this.latency);
+        // latency as a demandModifyingBehavior in the superclass:
+        this.latency = new DemandModifyingBehavior("1.0", latencySpec);
+        super.addDemandModifyingBehavior(this.latency);
         this.throughput = this.linkingResource.getCommunicationLinkResourceSpecifications_LinkingResource()
                 .getThroughput_CommunicationLinkResourceSpecification().getSpecification();
 
@@ -92,9 +89,8 @@ public class SimulatedLinkingResource extends AbstractScheduledResource {
                     + " was less or equal zero");
         }
 
-        //TODO remove adding latency if it is added as DemandModifyingBehavior
-        final double result = NumberConverter.toDouble(StackContext.evaluateStatic(latencySpec)) + demand
-                / calculatedThroughput;
+        //latency is added as DemandModifyingBehavior in superclass
+        final double result = demand / calculatedThroughput;
         if (LOGGER.isDebugEnabled()) {
             LOGGER.debug("A network load of " + result + " has been determined.");
         }
@@ -172,11 +168,9 @@ public class SimulatedLinkingResource extends AbstractScheduledResource {
      * @param latency the new latency specification
      */
     public void setLatency(String latency) {
-    	//TODO latency change through new DemandModifyingBehavior
-    	//TODO remove this.latencySpec
-//    	super.removeDemandModifyingBehavior(this.latency);
-//    	this.latency = new DemandModifyingBehavior("1.0", latency);
-//        super.addDemandModifyingBehavior(this.latency);
-        this.latencySpec = latency;
+    	//latency change through new DemandModifyingBehavior
+    	super.removeDemandModifyingBehavior(this.latency);
+    	this.latency = new DemandModifyingBehavior("1.0", latency);
+        super.addDemandModifyingBehavior(this.latency);
     }
 }
