@@ -135,15 +135,13 @@ public abstract class AbstractScheduledResource extends SimuComEntity implements
     	// Check first if the resource is currently available.
         assertAvailability();
 
-    	//TODO next line was only in scheduled resource but not in linking resource ??? critical?
-        getUnderlyingResource().registerProcess(thread);
+    	getUnderlyingResource().registerProcess(thread);
         // registerProcessWindows(process, aResource);
         // LOGGER.info("Demanding " + abstractDemand);
         
         double concreteDemand = calculateDemand(abstractDemand);
         
         // for every demand modifying behavior a value is added to the demand.
-        // TODO latency of linking resource must not already be included in the concrete demand!!! --> latency = behavior?
         double additiveValue = 0.0;
         for (DemandModifyingBehavior b : this.demandModifyingBehaviors) {
         	additiveValue += b.getAdditiveDemandValue(concreteDemand);

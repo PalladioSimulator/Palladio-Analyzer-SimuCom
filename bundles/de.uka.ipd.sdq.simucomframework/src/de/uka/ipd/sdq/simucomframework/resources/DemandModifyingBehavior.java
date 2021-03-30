@@ -3,11 +3,24 @@ package de.uka.ipd.sdq.simucomframework.resources;
 import de.uka.ipd.sdq.simucomframework.variables.StackContext;
 import de.uka.ipd.sdq.simucomframework.variables.converter.NumberConverter;
 
+/**
+ * A DemandModifyingBehavior has a scalingFactor for the throughput or processingrate of the resource and a value for the delay or latency.
+ * AbstractScheduledResources use this behavior to modify the demand of time units for a computation.
+ * 
+ * 
+ * @author Jonas Lehmann
+ *
+ */
 public class DemandModifyingBehavior {
 	
 	private final String scalingFactor; 	//of throughput or processingrate
     private final String delay; 			//or latency of resource
     
+    /**
+     * Creates a new {@link DemandModifyingBehavior}.
+     * @param scalingFactor 	value for scaling throughput or processingrate
+     * @param delay 			value for delay or latency of the resource
+     */
     public DemandModifyingBehavior(final String scalingFactor, final String delay) {
     	this.scalingFactor = scalingFactor;
     	this.delay = delay;
