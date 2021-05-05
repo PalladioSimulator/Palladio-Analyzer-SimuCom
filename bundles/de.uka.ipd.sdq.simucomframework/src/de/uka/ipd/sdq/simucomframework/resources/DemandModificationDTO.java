@@ -1,5 +1,9 @@
 package de.uka.ipd.sdq.simucomframework.resources;
 
+/**
+ * @author Jonas Lehmann
+ *
+ */
 public class DemandModificationDTO {
 
 	private final double scaledDemand;
