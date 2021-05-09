@@ -4,9 +4,10 @@ import java.util.ArrayList;
 import java.util.Map.Entry;
 
 import org.apache.log4j.Logger;
-
 import org.palladiosimulator.pcm.parameter.CharacterisedVariable;
-import de.uka.ipd.sdq.pcm.stochasticexpressions.PCMStoExPrettyPrintVisitor;
+import org.palladiosimulator.pcm.stoex.api.StoExSerialiser;
+import org.palladiosimulator.pcm.stoex.api.StoExSerialiser.SerialisationErrorException;
+
 import de.uka.ipd.sdq.pcm.stochasticexpressions.PCMStoExSwitch;
 import de.uka.ipd.sdq.probfunction.math.IProbabilityFunctionFactory;
 import de.uka.ipd.sdq.simucomframework.variables.EvaluationProxy;
@@ -46,6 +47,8 @@ import de.uka.ipd.sdq.stoex.analyser.visitors.TypeEnum;
  */
 public class PCMStoExEvaluationVisitor extends PCMStoExSwitch {
 
+    protected static final StoExSerialiser STOEX_SERIALISER = StoExSerialiser.createInstance();
+    
     /**
      * This class' LOGGER
      */
@@ -96,7 +99,13 @@ public class PCMStoExEvaluationVisitor extends PCMStoExSwitch {
 
     @Override
     public Object caseCharacterisedVariable(CharacterisedVariable object) {
-        String variableID = new PCMStoExPrettyPrintVisitor().prettyPrint(object);
+        String variableID;
+        try {
+            variableID = STOEX_SERIALISER.serialise(object);
+        } catch (SerialisationErrorException e1) {
+            LOGGER.error("Could not serialise variable.", e1);
+            throw new RuntimeException("Given variable is not serialisable.", e1);
+        }
         try {
             Object value = this.myStackFrame.getValue(variableID);
             if (value instanceof EvaluationProxy) {
