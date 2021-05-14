@@ -1,12 +1,12 @@
 package de.uka.ipd.sdq.simucomframework.variables.stoexvisitor;
 
+import java.io.NotSerializableException;
 import java.util.ArrayList;
 import java.util.Map.Entry;
 
 import org.apache.log4j.Logger;
 import org.palladiosimulator.pcm.parameter.CharacterisedVariable;
 import org.palladiosimulator.pcm.stoex.api.StoExSerialiser;
-import org.palladiosimulator.pcm.stoex.api.StoExSerialiser.SerialisationErrorException;
 
 import de.uka.ipd.sdq.pcm.stochasticexpressions.PCMStoExSwitch;
 import de.uka.ipd.sdq.probfunction.math.IProbabilityFunctionFactory;
@@ -102,7 +102,7 @@ public class PCMStoExEvaluationVisitor extends PCMStoExSwitch {
         String variableID;
         try {
             variableID = STOEX_SERIALISER.serialise(object);
-        } catch (SerialisationErrorException e1) {
+        } catch (NotSerializableException e1) {
             LOGGER.error("Could not serialise variable.", e1);
             throw new RuntimeException("Given variable is not serialisable.", e1);
         }
