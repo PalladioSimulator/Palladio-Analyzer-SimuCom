@@ -1,8 +1,5 @@
 package de.uka.ipd.sdq.simucomframework.resources;
 
-import java.io.Serializable;
-import java.util.Map;
-
 import org.apache.log4j.Logger;
 
 import org.palladiosimulator.pcm.resourceenvironment.ProcessingResourceSpecification;
@@ -128,20 +125,6 @@ public class ScheduledResource extends AbstractScheduledResource {
             final double t = getFailureTime();
             failedEvent.schedule(this, t);
         }
-    }
-
-    @Override
-    public void consumeResource(final SimuComSimProcess process, final int resourceServiceID,
-            final Map<String, Serializable> parameterMap, final double abstractDemand) {
-        // Check first if the resource is currently available.
-        // This works for the standard resource types (CPU, HDD, DELAY).
-        assertAvailability();
-
-        getUnderlyingResource().registerProcess(process);
-        // registerProcessWindows(process, aResource);
-        final double concreteDemand = calculateDemand(abstractDemand);
-        fireDemand(concreteDemand);
-        getUnderlyingResource().process(process, resourceServiceID, parameterMap, concreteDemand);
     }
 
     @Override
