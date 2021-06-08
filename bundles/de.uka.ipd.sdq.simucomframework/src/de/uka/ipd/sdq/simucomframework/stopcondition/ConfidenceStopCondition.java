@@ -10,7 +10,6 @@ import org.palladiosimulator.measurementframework.MeasuringValue;
 import org.palladiosimulator.measurementframework.listener.IMeasurementSourceListener;
 import org.palladiosimulator.metricspec.constants.MetricDescriptionConstants;
 
-import de.uka.ipd.sdq.simucomframework.model.SimuComModel;
 import de.uka.ipd.sdq.simulation.abstractsimengine.SimCondition;
 import de.uka.ipd.sdq.statistics.IBatchAlgorithm;
 import de.uka.ipd.sdq.statistics.estimation.ConfidenceInterval;
@@ -26,10 +25,6 @@ import de.uka.ipd.sdq.statistics.estimation.IConfidenceEstimator;
 public class ConfidenceStopCondition implements SimCondition, IMeasurementSourceListener {
 
     private static final Logger LOGGER = Logger.getLogger(ConfidenceStopCondition.class);
-
-    private final SimuComModel model;
-
-    private final String usageScenarioName;
 
     /** mean of the observations and the corresponding confidence interval */
     private ConfidenceInterval confidence;
@@ -48,7 +43,6 @@ public class ConfidenceStopCondition implements SimCondition, IMeasurementSource
 
     /**
      *
-     * @param model
      * @param batchAlgorithm
      * @param confidenceLevel
      *            the confidence level. Use values between 0 and 1.
@@ -56,19 +50,12 @@ public class ConfidenceStopCondition implements SimCondition, IMeasurementSource
      *            the relative half width of the target confidence interval. Use values between 0
      *            and 1.
      */
-    public ConfidenceStopCondition(final SimuComModel model, final IBatchAlgorithm batchAlgorithm,
+    public ConfidenceStopCondition(final IBatchAlgorithm batchAlgorithm,
             final IConfidenceEstimator estimator, final double confidenceLevel, final double halfWidth) {
-        this.model = model;
         this.batchAlgorithm = batchAlgorithm;
         this.estimator = estimator;
         this.confidenceLevel = confidenceLevel;
         this.halfWidth = halfWidth;
-
-        if (model.getConfiguration().getConfidenceModelElementName() == null) {
-            throw new RuntimeException(
-                    "SimuCom tried to set up a ConfidenceStopCondition, but no usage scenario name was given to measure the confidence for.");
-        }
-        this.usageScenarioName = model.getConfiguration().getConfidenceModelElementName();
         this.minBatches = 0;
     }
 

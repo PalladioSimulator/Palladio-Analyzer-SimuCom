@@ -91,7 +91,7 @@ public class ExperimentRunner {
                 batchAlgorithm = new StaticBatchAlgorithm(batchSize, minNumberOfBatches);
             }
 
-            confidenceStopCondition = new ConfidenceStopCondition(model, batchAlgorithm, new SampleMeanEstimator(),
+            confidenceStopCondition = new ConfidenceStopCondition(batchAlgorithm, new SampleMeanEstimator(),
                     level, halfWidth);
             model.getSimulationControl().addStopCondition(confidenceStopCondition);
             return true;
