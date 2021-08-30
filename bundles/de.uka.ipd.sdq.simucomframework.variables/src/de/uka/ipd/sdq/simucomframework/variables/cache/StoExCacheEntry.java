@@ -1,10 +1,10 @@
 package de.uka.ipd.sdq.simucomframework.variables.cache;
 
+import java.text.ParseException;
 import java.util.Iterator;
 
 import org.eclipse.emf.ecore.EObject;
 import org.palladiosimulator.pcm.stoex.api.StoExParser;
-import org.palladiosimulator.pcm.stoex.api.StoExParser.SyntaxErrorException;
 
 import de.uka.ipd.sdq.probfunction.math.IProbabilityFunction;
 import de.uka.ipd.sdq.stoex.Expression;
@@ -41,7 +41,7 @@ public class StoExCacheEntry {
         Expression formula = null;
         try {
             formula = STOEX_PARSER.parse(spec);
-        } catch (SyntaxErrorException e) {
+        } catch (ParseException e) {
             throw new RuntimeException("Expression not parsable \"" + spec + "\"", e);
         }
         try {
