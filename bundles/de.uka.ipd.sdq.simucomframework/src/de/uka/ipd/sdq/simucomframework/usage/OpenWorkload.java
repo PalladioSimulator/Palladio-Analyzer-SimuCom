@@ -15,12 +15,14 @@ import de.uka.ipd.sdq.simucomframework.model.SimuComModel;
  *
  */
 public class OpenWorkload extends SimuComSimProcess implements ICancellableWorkloadDriver {
+    private static final Logger LOGGER = Logger.getLogger(OpenWorkload.class.getName());
+
+    private final IUserFactory userFactory;
+    private final UserProcessCountMonitor userProcessCountMonitor;
 
     private String interArrivalTime;
-    private final IUserFactory userFactory;
     private boolean cancelled = false;
-
-    private static final Logger LOGGER = Logger.getLogger(OpenWorkload.class.getName());
+    
 
     /**
      * Counter for usage scenario runs.
@@ -37,9 +39,10 @@ public class OpenWorkload extends SimuComSimProcess implements ICancellableWorkl
      *            The time to wait between leaving a new user to its fate
      */
     public OpenWorkload(final SimuComModel model, final IUserFactory userFactory, final String interArrivalTime, IResourceTableManager resourceTableManager) {
-        super(model, "OpenWorkloadUserMaturationChamber", resourceTableManager);
+        super(model, "OpenWorkloadUserMaturationChamber", resourceTableManager, false);
         this.interArrivalTime = interArrivalTime;
         this.userFactory = userFactory;
+        this.userProcessCountMonitor = new UserProcessCountMonitor(model.getSimulationControl(), 100);
     }
 
     @Override
@@ -55,7 +58,7 @@ public class OpenWorkload extends SimuComSimProcess implements ICancellableWorkl
 
     @Override
     protected void internalLifeCycle() {
-
+        
         // As long as the simulation is running, new OpenWorkloadUsers are
         // generated and started:
         while (getModel().getSimulationControl().isRunning() && !this.cancelled) {
@@ -103,7 +106,7 @@ public class OpenWorkload extends SimuComSimProcess implements ICancellableWorkl
         if (LOGGER.isDebugEnabled()) {
             LOGGER.debug("Spawning New User...");
         }
-        final IUser user = userFactory.createUser();
+        final IUser user = userFactory.createUser(userProcessCountMonitor);
         user.startUserLife();
         return user;
     }

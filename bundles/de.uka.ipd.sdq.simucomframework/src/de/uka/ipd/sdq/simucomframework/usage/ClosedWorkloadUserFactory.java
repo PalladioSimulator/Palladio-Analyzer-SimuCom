@@ -34,7 +34,7 @@ public abstract class ClosedWorkloadUserFactory extends AbstractWorkloadUserFact
      * @see de.uka.ipd.sdq.simucomframework.usage.IUserFactory#createUser()
      */
     @Override
-    public ClosedWorkloadUser createUser() {
+    public ClosedWorkloadUser createUser(IUserProcessMonitor processMonitor) {
         final IScenarioRunner scenarioRunner = this.createScenarioRunner();
         return new ClosedWorkloadUser(model, "ClosedUser", scenarioRunner, thinkTime, usageStartStopProbes, resourceTableManager);
     }

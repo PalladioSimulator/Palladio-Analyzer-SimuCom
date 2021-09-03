@@ -46,7 +46,7 @@ public class ClosedWorkloadUser extends SimuComSimProcess implements IUser {
      */
     public ClosedWorkloadUser(final SimuComModel owner, final String name, final IScenarioRunner scenarioRunner,
             final String thinkTimeSpec, final List<Probe> usageStartStopProbes, IResourceTableManager resourceTableManager) {
-        super(owner, name, resourceTableManager);
+        super(owner, name, resourceTableManager, true);
         this.scenarioRunner = scenarioRunner;
         this.thinkTime = thinkTimeSpec;
         this.usageStartStopProbes = usageStartStopProbes;

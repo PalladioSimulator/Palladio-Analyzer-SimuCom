@@ -24,7 +24,7 @@ public class OpenWorkloadUser extends SimuComSimProcess implements IUser {
 
     public OpenWorkloadUser(final SimuComModel owner, final String name, final IScenarioRunner scenarioRunner,
             final List<Probe> usageStartStopProbes, IResourceTableManager resourceTableManager) {
-        super(owner, name, resourceTableManager);
+        super(owner, name, resourceTableManager, false);
         this.scenarioRunner = scenarioRunner;
         this.usageStartStopProbes = usageStartStopProbes;
     }
