@@ -5,6 +5,7 @@ import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.jface.preference.ComboFieldEditor;
 import org.eclipse.jface.preference.FieldEditorPreferencePage;
+import org.eclipse.jface.preference.IntegerFieldEditor;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
 
@@ -23,6 +24,8 @@ public class SimulationPreferencePage extends FieldEditorPreferencePage implemen
 
     /** the id for the simulation engine preference **/
     public static final String PREFERENCE_SIMULATION_ENGINE_ID = "simulationEngineField";
+
+    public static final String PREFERENCE_MAX_NUMBER_OF_USER_PROCESSES_ID = "maxNumberUserProcessesField";
 
     /**
      * Default constructor.
@@ -54,6 +57,14 @@ public class SimulationPreferencePage extends FieldEditorPreferencePage implemen
                 "Simulation Engine", engineNamesAndIds, getFieldEditorParent());
         addField(simulationEngineEditor);
 
+        
+        IntegerFieldEditor maxUserProcessesEditor = new IntegerFieldEditor(PREFERENCE_MAX_NUMBER_OF_USER_PROCESSES_ID,
+                "Simulation stop condition: maximum number of user processes", getFieldEditorParent());
+        maxUserProcessesEditor.setValidRange(-1, Integer.MAX_VALUE);
+        maxUserProcessesEditor.setValidateStrategy(IntegerFieldEditor.VALIDATE_ON_KEY_STROKE);
+        maxUserProcessesEditor.setEmptyStringAllowed(false);
+        addField(maxUserProcessesEditor);
+        
     }
 
 }

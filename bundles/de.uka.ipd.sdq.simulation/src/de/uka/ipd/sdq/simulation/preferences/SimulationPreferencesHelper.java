@@ -54,5 +54,11 @@ public class SimulationPreferencesHelper {
         }
         return engineFactory;
     }
+    
+    public static int getMaximumUserProcessesCount() {
+        String maxNumberUserProcessesAsString = Platform.getPreferencesService().getString(Activator.PLUGIN_ID,
+                SimulationPreferencePage.PREFERENCE_MAX_NUMBER_OF_USER_PROCESSES_ID, "", null);
+        return Integer.valueOf(maxNumberUserProcessesAsString);
+    }
 
 }
