@@ -7,6 +7,7 @@ import de.uka.ipd.sdq.scheduler.resources.active.IResourceTableManager;
 import de.uka.ipd.sdq.simucomframework.Context;
 import de.uka.ipd.sdq.simucomframework.SimuComSimProcess;
 import de.uka.ipd.sdq.simucomframework.model.SimuComModel;
+import de.uka.ipd.sdq.simulation.preferences.SimulationPreferencesHelper;
 
 /**
  * Implementation of the workload driver interface for open workloads
@@ -42,7 +43,8 @@ public class OpenWorkload extends SimuComSimProcess implements ICancellableWorkl
         super(model, "OpenWorkloadUserMaturationChamber", resourceTableManager, false);
         this.interArrivalTime = interArrivalTime;
         this.userFactory = userFactory;
-        this.userProcessCountMonitor = new UserProcessCountMonitor(model.getSimulationControl(), 100);
+        int maxProcessCount = SimulationPreferencesHelper.getMaximumUserProcessesCount();
+        this.userProcessCountMonitor = new UserProcessCountMonitor(model.getSimulationControl(), maxProcessCount);
     }
 
     @Override
