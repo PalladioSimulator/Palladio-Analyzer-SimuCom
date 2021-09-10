@@ -7,6 +7,7 @@ package de.uka.ipd.sdq.simucomframework.usage;
  * 
  */
 public interface IClosedWorkloadUserFactory extends IUserFactory {
+    ClosedWorkloadUser createUser();
     ClosedWorkloadUser createUser(IUserProcessMonitor processMonitor);
     
     /**

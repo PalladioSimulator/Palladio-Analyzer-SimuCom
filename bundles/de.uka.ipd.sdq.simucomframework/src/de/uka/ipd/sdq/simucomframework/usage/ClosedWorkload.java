@@ -70,7 +70,7 @@ public class ClosedWorkload implements ICancellableWorkloadDriver {
 
     private void startUsers(final int count) {
         for (int i = 0; i < count; i++) {
-            final ClosedWorkloadUser user = (ClosedWorkloadUser) userFactory.createUser(null);
+            final ClosedWorkloadUser user = (ClosedWorkloadUser) userFactory.createUser();
             user.startUserLife();
             this.users.add(user);
         }
