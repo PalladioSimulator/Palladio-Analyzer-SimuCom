@@ -59,7 +59,7 @@ public class SimulationPreferencePage extends FieldEditorPreferencePage implemen
 
         
         IntegerFieldEditor maxUserProcessesEditor = new IntegerFieldEditor(PREFERENCE_MAX_NUMBER_OF_USER_PROCESSES_ID,
-                "Maximum number of user processes", getFieldEditorParent());
+                "Maximum number of user processes per simulation", getFieldEditorParent());
         maxUserProcessesEditor.setValidRange(-1, Integer.MAX_VALUE);
         maxUserProcessesEditor.setValidateStrategy(IntegerFieldEditor.VALIDATE_ON_KEY_STROKE);
         maxUserProcessesEditor.setEmptyStringAllowed(false);
