@@ -7,7 +7,6 @@ import de.uka.ipd.sdq.scheduler.resources.active.IResourceTableManager;
 import de.uka.ipd.sdq.simucomframework.Context;
 import de.uka.ipd.sdq.simucomframework.SimuComSimProcess;
 import de.uka.ipd.sdq.simucomframework.model.SimuComModel;
-import de.uka.ipd.sdq.simulation.preferences.SimulationPreferencesHelper;
 
 /**
  * Implementation of the workload driver interface for open workloads
@@ -19,11 +18,10 @@ public class OpenWorkload extends SimuComSimProcess implements ICancellableWorkl
     private static final Logger LOGGER = Logger.getLogger(OpenWorkload.class.getName());
 
     private final IUserFactory userFactory;
-    private final UserProcessCountMonitor userProcessCountMonitor;
+    private final IUserProcessMonitor processMonitor;
 
     private String interArrivalTime;
     private boolean cancelled = false;
-    
 
     /**
      * Counter for usage scenario runs.
@@ -39,12 +37,11 @@ public class OpenWorkload extends SimuComSimProcess implements ICancellableWorkl
      * @param interArrivalTime
      *            The time to wait between leaving a new user to its fate
      */
-    public OpenWorkload(final SimuComModel model, final IUserFactory userFactory, final String interArrivalTime, IResourceTableManager resourceTableManager) {
+    public OpenWorkload(final SimuComModel model, final IUserFactory userFactory, final String interArrivalTime, IResourceTableManager resourceTableManager, IUserProcessMonitor processMonitor) {
         super(model, "OpenWorkloadUserMaturationChamber", resourceTableManager, false);
         this.interArrivalTime = interArrivalTime;
         this.userFactory = userFactory;
-        int maxProcessCount = SimulationPreferencesHelper.getMaximumUserProcessesCount();
-        this.userProcessCountMonitor = new UserProcessCountMonitor(model.getSimulationControl(), maxProcessCount);
+        this.processMonitor = processMonitor;
     }
 
     @Override
@@ -108,7 +105,7 @@ public class OpenWorkload extends SimuComSimProcess implements ICancellableWorkl
         if (LOGGER.isDebugEnabled()) {
             LOGGER.debug("Spawning New User...");
         }
-        final IUser user = userFactory.createUser(userProcessCountMonitor);
+        final IUser user = userFactory.createUser(processMonitor);
         user.startUserLife();
         return user;
     }
