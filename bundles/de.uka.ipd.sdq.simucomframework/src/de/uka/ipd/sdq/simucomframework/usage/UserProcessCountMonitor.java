@@ -27,9 +27,13 @@ public class UserProcessCountMonitor implements IUserProcessMonitor, ISimProcess
 
     @Override
     public void notifyStarted(ISimProcess process) {
-        processCounter++;
-        if (processCounter > 0) {
-            if (processCounter >= maxProcessCount) {
+        final int currentCounter;
+        synchronized (this) {
+            currentCounter = ++processCounter;
+        }
+
+        if (maxProcessCount > 0) {
+            if (currentCounter >= maxProcessCount) {
                 LOGGER.info(String.format("Reached max user process count %d -> stop simulation", maxProcessCount));
                 simulation.stop();
             }
@@ -38,7 +42,9 @@ public class UserProcessCountMonitor implements IUserProcessMonitor, ISimProcess
 
     @Override
     public void notifyTerminated(ISimProcess process) {
-        processCounter--;
+        synchronized (this) {
+            processCounter--;
+        }
         process.removeProcessListener(this);
     }
 
