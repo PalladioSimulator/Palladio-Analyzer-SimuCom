@@ -171,6 +171,6 @@ public class SimulatedLinkingResource extends AbstractScheduledResource {
     	//latency change through new DemandModifyingBehavior
     	super.removeDemandModifyingBehavior(this.latency);
     	this.latency = new DemandModifyingBehavior("1.0", latency);
-        super.addDemandModifyingBehavior(this.latency);
+    	super.addDemandModifyingBehavior(this.latency);
     }
 }
