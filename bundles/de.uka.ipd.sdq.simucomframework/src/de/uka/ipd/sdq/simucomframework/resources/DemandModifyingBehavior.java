@@ -38,8 +38,8 @@ public class DemandModifyingBehavior {
 	 * @return A Demand Modification Data Transfer Object which store the two
 	 *         values.
 	 */
-	public DemandModificationDTO modifyDemand(double previousDemand) {
-		return new DemandModificationDTO(this.scaleDemand(previousDemand), this.getAdditiveDemandValue());
+	public DemandModification modifyDemand(double previousDemand) {
+		return new DemandModification(this.scaleDemand(previousDemand), this.getAdditiveDemandValue());
 	}
 
 	private double scaleDemand(double previousDemand) {

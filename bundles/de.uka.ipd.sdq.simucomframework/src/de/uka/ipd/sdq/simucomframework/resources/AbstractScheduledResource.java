@@ -148,7 +148,7 @@ public abstract class AbstractScheduledResource extends SimuComEntity
 		// the demand is scaled and a latency value is added to the demand.
 		double additiveValue = 0.0;
 		for (DemandModifyingBehavior b : this.demandModifyingBehaviors) {
-			DemandModificationDTO demandModification = b.modifyDemand(concreteDemand);
+			DemandModification demandModification = b.modifyDemand(concreteDemand);
 			concreteDemand = demandModification.getScaledDemand();
 			additiveValue += demandModification.getAdditiveDemandValue();
 		}
