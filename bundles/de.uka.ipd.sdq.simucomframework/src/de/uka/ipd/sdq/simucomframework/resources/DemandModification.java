@@ -4,13 +4,13 @@ package de.uka.ipd.sdq.simucomframework.resources;
  * @author Jonas Lehmann
  *
  */
-public class DemandModificationDTO {
+public class DemandModification {
 
 	private final double scaledDemand;
 
 	private final double additiveDemandValue;
 
-	public DemandModificationDTO(double scaledDemand, double additiveDemandValue) {
+	public DemandModification(double scaledDemand, double additiveDemandValue) {
 		this.scaledDemand = scaledDemand;
 		this.additiveDemandValue = additiveDemandValue;
 	}
