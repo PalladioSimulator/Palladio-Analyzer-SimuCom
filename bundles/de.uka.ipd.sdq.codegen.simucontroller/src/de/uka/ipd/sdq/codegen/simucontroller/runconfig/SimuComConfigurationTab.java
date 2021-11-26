@@ -25,6 +25,7 @@ import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
@@ -64,6 +65,7 @@ public class SimuComConfigurationTab extends AbstractLaunchConfigurationTab {
     private Text timeField;
     private Text maxMeasurementsField;
     private Button checkLoggingButton;
+    private Button breakOnInvalidModelsButton;
 
     /** Confidence settings */
     private Button useConfidenceCheckBox;
@@ -130,6 +132,9 @@ public class SimuComConfigurationTab extends AbstractLaunchConfigurationTab {
 
         /** Logging group */
         createLoggingGroup();
+
+        /** Model validation group */
+        createModelValidationGroup();
 
         /** Generator Seeds group */
         createGeneratorSeedsGroup(modifyListener);
@@ -372,6 +377,18 @@ public class SimuComConfigurationTab extends AbstractLaunchConfigurationTab {
         this.checkLoggingButton.setSelection(false);
     }
 
+    protected void createModelValidationGroup() {
+        final Group loggingGroup = new Group(this.container, SWT.NONE);
+        loggingGroup.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false));
+        loggingGroup.setText("Model validation");
+        loggingGroup.setLayout(new GridLayout());
+        this.breakOnInvalidModelsButton = new Button(loggingGroup, SWT.CHECK);
+        this.breakOnInvalidModelsButton.setText("Break on invalid models");
+        this.breakOnInvalidModelsButton.addSelectionListener(SelectionListener
+            .widgetSelectedAdapter(it -> SimuComConfigurationTab.this.updateLaunchConfigurationDialog()));
+        this.breakOnInvalidModelsButton.setSelection(SimuComConfig.DEFAULT_SHOULD_THROW_EXCEPTION);
+    }
+
     /**
      * The generator seeds group, previous in analysis configuration tab, now the last section of
      * the SimuComConfigurationTab
@@ -533,6 +550,13 @@ public class SimuComConfigurationTab extends AbstractLaunchConfigurationTab {
         }
 
         try {
+            this.breakOnInvalidModelsButton.setSelection(configuration
+                .getAttribute(SimuComConfig.SHOULD_THROW_EXCEPTION, SimuComConfig.DEFAULT_SHOULD_THROW_EXCEPTION));
+        } catch (final CoreException e) {
+            this.breakOnInvalidModelsButton.setSelection(SimuComConfig.DEFAULT_SHOULD_THROW_EXCEPTION);
+        }
+
+        try {
             this.levelField.setText(configuration.getAttribute(SimuComConfig.CONFIDENCE_LEVEL, "95"));
         } catch (final CoreException e) {
             this.levelField.setText("" + SimuComConfig.DEFAULT_CONFIDENCE_LEVEL);
@@ -669,6 +693,9 @@ public class SimuComConfigurationTab extends AbstractLaunchConfigurationTab {
         configuration.setAttribute(SimuComConfig.CONFIDENCE_BATCH_SIZE, this.batchSizeField.getText());
         configuration.setAttribute(SimuComConfig.CONFIDENCE_MIN_NUMBER_OF_BATCHES,
                 this.minNumberOfBatchesField.getText());
+
+        configuration.setAttribute(SimuComConfig.SHOULD_THROW_EXCEPTION,
+                this.breakOnInvalidModelsButton.getSelection());
     }
 
     /*
@@ -708,6 +735,7 @@ public class SimuComConfigurationTab extends AbstractLaunchConfigurationTab {
         configuration.setAttribute(SimuComConfig.CONFIDENCE_BATCH_SIZE, SimuComConfig.DEFAULT_CONFIDENCE_BATCH_SIZE);
         configuration.setAttribute(SimuComConfig.CONFIDENCE_MIN_NUMBER_OF_BATCHES,
                 SimuComConfig.DEFAULT_CONFIDENCE_MIN_NUMBER_OF_BATCHES);
+        configuration.setAttribute(SimuComConfig.SHOULD_THROW_EXCEPTION, SimuComConfig.DEFAULT_SHOULD_THROW_EXCEPTION);
 
         // set default value for persistence framework
         final List<String> recorderNames = RecorderExtensionHelper.getRecorderNames();
