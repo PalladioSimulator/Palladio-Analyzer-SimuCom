@@ -26,6 +26,7 @@ public class SimuComConfig extends AbstractSimulationConfig implements Serializa
     private static final long serialVersionUID = -3364130550065874984L;
 
     public static final String SHOULD_THROW_EXCEPTION = "shouldThrowException";
+    public static final Boolean DEFAULT_SHOULD_THROW_EXCEPTION = true;
 
     // Default values
     /** Default name of model element for the stop condition confidence. */
