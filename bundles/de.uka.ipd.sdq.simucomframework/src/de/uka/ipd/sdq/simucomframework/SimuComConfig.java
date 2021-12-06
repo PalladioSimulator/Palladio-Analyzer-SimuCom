@@ -26,6 +26,7 @@ public class SimuComConfig extends AbstractSimulationConfig implements Serializa
     private static final long serialVersionUID = -3364130550065874984L;
 
     public static final String SHOULD_THROW_EXCEPTION = "shouldThrowException";
+    public static final Boolean DEFAULT_SHOULD_THROW_EXCEPTION = true;
 
     // Default values
     /** Default name of model element for the stop condition confidence. */
@@ -47,11 +48,14 @@ public class SimuComConfig extends AbstractSimulationConfig implements Serializa
 
     /** SimuCom configuration tab */
     public static final String SIMULATE_FAILURES = "simulateFailures";
-    /** whether to simulate linking resources in detail, including marshalling/demarshalling, with Steffen's completions. */
+    /**
+     * whether to simulate linking resources in detail, including marshalling/demarshalling, with
+     * Steffen's completions.
+     */
     public static final String SIMULATE_LINKING_RESOURCES = "simulateLinkingResources";
-    /** whether to include throughput in the simulation without marshaling/demarshalling. */ 
+    /** whether to include throughput in the simulation without marshaling/demarshalling. */
     public static final String SIMULATE_THROUGHPUT_OF_LINKING_RESOURCES = "simulateThroughputOfLinkingResources";
-    
+
     public static final String USE_CONFIDENCE = "useConfidenceStopCondition";
     public static final String CONFIDENCE_LEVEL = "confidenceLevel";
     public static final String CONFIDENCE_HALFWIDTH = "confidenceHalfWidth";
@@ -92,16 +96,17 @@ public class SimuComConfig extends AbstractSimulationConfig implements Serializa
      *            SimuComConfig.CONFIDENCE_MODELELEMENT_URI
      *
      */
-    public SimuComConfig(final Map<String, Object> configuration, final boolean debug, IRecorderConfigurationFactory configurationFactory) {
+    public SimuComConfig(final Map<String, Object> configuration, final boolean debug,
+            IRecorderConfigurationFactory configurationFactory) {
         super(configuration, debug, configurationFactory);
         doInit(configuration, debug);
     }
-    
+
     public SimuComConfig(final Map<String, Object> configuration, final boolean debug) {
         super(configuration, debug);
         doInit(configuration, debug);
     }
-    
+
     private void doInit(final Map<String, Object> configuration, final boolean debug) {
         try {
             if (configuration.containsKey(SIMULATE_FAILURES)) {
@@ -111,9 +116,10 @@ public class SimuComConfig extends AbstractSimulationConfig implements Serializa
             if (configuration.containsKey(SIMULATE_LINKING_RESOURCES)) {
                 this.simulateLinkingResources = (Boolean) configuration.get(SIMULATE_LINKING_RESOURCES);
             }
-            
+
             if (configuration.containsKey(SIMULATE_THROUGHPUT_OF_LINKING_RESOURCES)) {
-                this.simulateThroughputOfLinkingResources = (Boolean) configuration.get(SIMULATE_THROUGHPUT_OF_LINKING_RESOURCES);
+                this.simulateThroughputOfLinkingResources = (Boolean) configuration
+                    .get(SIMULATE_THROUGHPUT_OF_LINKING_RESOURCES);
             }
 
             // confidence information is optional in the map. It this.useConfidence defaults to
@@ -129,8 +135,8 @@ public class SimuComConfig extends AbstractSimulationConfig implements Serializa
                 if (!this.automaticBatches) {
                     // only need batch settings if they are manually defined
                     this.batchSize = Integer.valueOf((String) configuration.get(CONFIDENCE_BATCH_SIZE));
-                    this.minNumberOfBatches = Integer.valueOf((String) configuration
-                            .get(CONFIDENCE_MIN_NUMBER_OF_BATCHES));
+                    this.minNumberOfBatches = Integer
+                        .valueOf((String) configuration.get(CONFIDENCE_MIN_NUMBER_OF_BATCHES));
 
                 }
 
@@ -156,7 +162,7 @@ public class SimuComConfig extends AbstractSimulationConfig implements Serializa
     public boolean getSimulateLinkingResources() {
         return simulateLinkingResources;
     }
-    
+
     public boolean getSimulateThroughputOfLinkingResources() {
         return simulateThroughputOfLinkingResources;
     }
