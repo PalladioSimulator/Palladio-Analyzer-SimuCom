@@ -58,6 +58,13 @@ public class SimulatedStackframe<T> implements Serializable {
         }
         contents.put(id, value);
     }
+    
+    /**
+     * Checks whether a value is present on the stack or resolvable via one of its parents.
+     */
+    public boolean hasValue(final String id) {
+    	return contents.containsKey(id) || ((parentFrame != null) && parentFrame.hasValue(id)); 
+    }
 
     /**
      * Retrieve a value from this stackframe. If the value is not part of this stackframe the parent

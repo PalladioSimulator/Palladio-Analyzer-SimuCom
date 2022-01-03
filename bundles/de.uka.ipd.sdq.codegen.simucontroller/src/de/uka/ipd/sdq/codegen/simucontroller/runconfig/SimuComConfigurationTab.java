@@ -25,6 +25,7 @@ import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
@@ -64,6 +65,7 @@ public class SimuComConfigurationTab extends AbstractLaunchConfigurationTab {
     private Text timeField;
     private Text maxMeasurementsField;
     private Button checkLoggingButton;
+    private Button breakOnInvalidModelsButton;
 
     /** Confidence settings */
     private Button useConfidenceCheckBox;
@@ -131,6 +133,9 @@ public class SimuComConfigurationTab extends AbstractLaunchConfigurationTab {
         /** Logging group */
         createLoggingGroup();
 
+        /** Model validation group */
+        createModelValidationGroup();
+
         /** Generator Seeds group */
         createGeneratorSeedsGroup(modifyListener);
     }
@@ -157,10 +162,10 @@ public class SimuComConfigurationTab extends AbstractLaunchConfigurationTab {
         gd_nameField.widthHint = 70;
         this.nameField.setLayoutData(gd_nameField);
         this.nameField.addModifyListener(modifyListener);
-        
+
         final Label variationLabel = new Label(experimentrunGroup, SWT.NONE);
         variationLabel.setText("Variation Name:");
-        
+
         this.variationField = new Text(experimentrunGroup, SWT.BORDER);
         final GridData gd_variationField = new GridData(SWT.FILL, SWT.CENTER, true, false);
         gd_variationField.widthHint = 70;
@@ -372,6 +377,18 @@ public class SimuComConfigurationTab extends AbstractLaunchConfigurationTab {
         this.checkLoggingButton.setSelection(false);
     }
 
+    protected void createModelValidationGroup() {
+        final Group loggingGroup = new Group(this.container, SWT.NONE);
+        loggingGroup.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false));
+        loggingGroup.setText("Model validation");
+        loggingGroup.setLayout(new GridLayout());
+        this.breakOnInvalidModelsButton = new Button(loggingGroup, SWT.CHECK);
+        this.breakOnInvalidModelsButton.setText("Break on invalid models");
+        this.breakOnInvalidModelsButton.addSelectionListener(SelectionListener
+            .widgetSelectedAdapter(it -> SimuComConfigurationTab.this.updateLaunchConfigurationDialog()));
+        this.breakOnInvalidModelsButton.setSelection(SimuComConfig.DEFAULT_SHOULD_THROW_EXCEPTION);
+    }
+
     /**
      * The generator seeds group, previous in analysis configuration tab, now the last section of
      * the SimuComConfigurationTab
@@ -489,7 +506,7 @@ public class SimuComConfigurationTab extends AbstractLaunchConfigurationTab {
         } catch (final CoreException e) {
             this.nameField.setText("MyRun");
         }
-        
+
         try {
             this.variationField.setText(configuration.getAttribute(AbstractSimulationConfig.VARIATION_ID, ""));
         } catch (final CoreException e) {
@@ -504,14 +521,14 @@ public class SimuComConfigurationTab extends AbstractLaunchConfigurationTab {
 
         try {
             this.maxMeasurementsField
-                    .setText(configuration.getAttribute(AbstractSimulationConfig.MAXIMUM_MEASUREMENT_COUNT, ""));
+                .setText(configuration.getAttribute(AbstractSimulationConfig.MAXIMUM_MEASUREMENT_COUNT, ""));
         } catch (final CoreException e) {
             this.maxMeasurementsField.setText("10000");
         }
 
         try {
             final String persistenceFrameworkName = configuration
-                    .getAttribute(AbstractSimulationConfig.PERSISTENCE_RECORDER_NAME, "");
+                .getAttribute(AbstractSimulationConfig.PERSISTENCE_RECORDER_NAME, "");
             final String[] items = this.persistenceCombo.getItems();
             for (int i = 0; i < items.length; i++) {
                 final String str = items[i];
@@ -527,9 +544,16 @@ public class SimuComConfigurationTab extends AbstractLaunchConfigurationTab {
 
         try {
             this.checkLoggingButton
-                    .setSelection(configuration.getAttribute(AbstractSimulationConfig.VERBOSE_LOGGING, false));
+                .setSelection(configuration.getAttribute(AbstractSimulationConfig.VERBOSE_LOGGING, false));
         } catch (final CoreException e) {
             this.checkLoggingButton.setSelection(false);
+        }
+
+        try {
+            this.breakOnInvalidModelsButton.setSelection(configuration
+                .getAttribute(SimuComConfig.SHOULD_THROW_EXCEPTION, SimuComConfig.DEFAULT_SHOULD_THROW_EXCEPTION));
+        } catch (final CoreException e) {
+            this.breakOnInvalidModelsButton.setSelection(SimuComConfig.DEFAULT_SHOULD_THROW_EXCEPTION);
         }
 
         try {
@@ -547,7 +571,7 @@ public class SimuComConfigurationTab extends AbstractLaunchConfigurationTab {
         final String defaultBatchSize = "" + SimuComConfig.DEFAULT_CONFIDENCE_BATCH_SIZE;
         try {
             this.batchSizeField
-                    .setText(configuration.getAttribute(SimuComConfig.CONFIDENCE_BATCH_SIZE, defaultBatchSize));
+                .setText(configuration.getAttribute(SimuComConfig.CONFIDENCE_BATCH_SIZE, defaultBatchSize));
         } catch (final CoreException e) {
             this.batchSizeField.setText(defaultBatchSize);
         }
@@ -555,7 +579,7 @@ public class SimuComConfigurationTab extends AbstractLaunchConfigurationTab {
         final String defaultMinNumberOfBatches = "" + SimuComConfig.DEFAULT_CONFIDENCE_MIN_NUMBER_OF_BATCHES;
         try {
             this.minNumberOfBatchesField.setText(configuration
-                    .getAttribute(SimuComConfig.CONFIDENCE_MIN_NUMBER_OF_BATCHES, defaultMinNumberOfBatches));
+                .getAttribute(SimuComConfig.CONFIDENCE_MIN_NUMBER_OF_BATCHES, defaultMinNumberOfBatches));
         } catch (final CoreException e) {
             this.minNumberOfBatchesField.setText(defaultMinNumberOfBatches);
         }
@@ -571,7 +595,7 @@ public class SimuComConfigurationTab extends AbstractLaunchConfigurationTab {
 
         try {
             this.selectedModelElementURI = URI
-                    .createURI(configuration.getAttribute(SimuComConfig.CONFIDENCE_MODELELEMENT_URI, ""));
+                .createURI(configuration.getAttribute(SimuComConfig.CONFIDENCE_MODELELEMENT_URI, ""));
             final UsageScenario usageScenario = getUsageScenarioFromURI(this.selectedModelElementURI);
             this.selectedModelElementName = usageScenario.getEntityName();
             updateModelElementField(usageScenario);
@@ -584,7 +608,7 @@ public class SimuComConfigurationTab extends AbstractLaunchConfigurationTab {
         // decide how to enable / disable them after initialising the values.
         try {
             final boolean isAutomaticBatches = configuration
-                    .getAttribute(SimuComConfig.CONFIDENCE_USE_AUTOMATIC_BATCHES, false);
+                .getAttribute(SimuComConfig.CONFIDENCE_USE_AUTOMATIC_BATCHES, false);
             this.useAutomatedBatchMeansCheckBox.setSelection(isAutomaticBatches);
 
             final boolean select = configuration.getAttribute(SimuComConfig.USE_CONFIDENCE, false);
@@ -615,7 +639,7 @@ public class SimuComConfigurationTab extends AbstractLaunchConfigurationTab {
         }
         try {
             this.fixedSeedButton
-                    .setSelection(configuration.getAttribute(AbstractSimulationConfig.USE_FIXED_SEED, false));
+                .setSelection(configuration.getAttribute(AbstractSimulationConfig.USE_FIXED_SEED, false));
         } catch (final CoreException e) {
             this.fixedSeedButton.setSelection(false);
         }
@@ -623,7 +647,7 @@ public class SimuComConfigurationTab extends AbstractLaunchConfigurationTab {
         for (int i = 0; i < 6; i++) {
             try {
                 this.seedText[i]
-                        .setText(configuration.getAttribute(AbstractSimulationConfig.FIXED_SEED_PREFIX + i, i + ""));
+                    .setText(configuration.getAttribute(AbstractSimulationConfig.FIXED_SEED_PREFIX + i, i + ""));
             } catch (final CoreException e) {
                 this.seedText[i].setText(i + "");
             }
@@ -669,6 +693,9 @@ public class SimuComConfigurationTab extends AbstractLaunchConfigurationTab {
         configuration.setAttribute(SimuComConfig.CONFIDENCE_BATCH_SIZE, this.batchSizeField.getText());
         configuration.setAttribute(SimuComConfig.CONFIDENCE_MIN_NUMBER_OF_BATCHES,
                 this.minNumberOfBatchesField.getText());
+
+        configuration.setAttribute(SimuComConfig.SHOULD_THROW_EXCEPTION,
+                this.breakOnInvalidModelsButton.getSelection());
     }
 
     /*
@@ -708,6 +735,7 @@ public class SimuComConfigurationTab extends AbstractLaunchConfigurationTab {
         configuration.setAttribute(SimuComConfig.CONFIDENCE_BATCH_SIZE, SimuComConfig.DEFAULT_CONFIDENCE_BATCH_SIZE);
         configuration.setAttribute(SimuComConfig.CONFIDENCE_MIN_NUMBER_OF_BATCHES,
                 SimuComConfig.DEFAULT_CONFIDENCE_MIN_NUMBER_OF_BATCHES);
+        configuration.setAttribute(SimuComConfig.SHOULD_THROW_EXCEPTION, SimuComConfig.DEFAULT_SHOULD_THROW_EXCEPTION);
 
         // set default value for persistence framework
         final List<String> recorderNames = RecorderExtensionHelper.getRecorderNames();
@@ -736,16 +764,19 @@ public class SimuComConfigurationTab extends AbstractLaunchConfigurationTab {
     public boolean isValid(final ILaunchConfiguration launchConfig) {
         setErrorMessage(null);
 
-        if (this.nameField.getText().equals("")) {
+        if (this.nameField.getText()
+            .equals("")) {
             setErrorMessage("ExperimentRun name is missing!");
             return false;
         }
-        /* No requirements for variationField*/
-        if (this.timeField.getText().equals("")) {
+        /* No requirements for variationField */
+        if (this.timeField.getText()
+            .equals("")) {
             setErrorMessage("Simulation time is missing!");
             return false;
         }
-        if (this.maxMeasurementsField.getText().equals("")) {
+        if (this.maxMeasurementsField.getText()
+            .equals("")) {
             setErrorMessage("Maximum Measurement counter is missing!");
             return false;
         }
@@ -785,10 +816,12 @@ public class SimuComConfigurationTab extends AbstractLaunchConfigurationTab {
             }
         }
         // check confidence interval half-width
-        if (this.useConfidenceCheckBox.getSelection() && this.halfWidthField.getText().equals("")) {
+        if (this.useConfidenceCheckBox.getSelection() && this.halfWidthField.getText()
+            .equals("")) {
             setErrorMessage("Confidence interval half-width is missing!");
             return false;
-        } else if (this.useConfidenceCheckBox.getSelection() && this.halfWidthField.getText().length() > 0) {
+        } else if (this.useConfidenceCheckBox.getSelection() && this.halfWidthField.getText()
+            .length() > 0) {
             try {
                 final int halfWidth = Integer.parseInt(this.halfWidthField.getText());
                 if (halfWidth < 0 || halfWidth > 100) {
@@ -847,7 +880,7 @@ public class SimuComConfigurationTab extends AbstractLaunchConfigurationTab {
                     this.modelFiles.add(usageFile);
 
                     this.selectedModelElementURI = URI
-                            .createURI(configuration.getAttribute(SimuComConfig.CONFIDENCE_MODELELEMENT_URI, ""));
+                        .createURI(configuration.getAttribute(SimuComConfig.CONFIDENCE_MODELELEMENT_URI, ""));
                     final UsageScenario usageScenario = getUsageScenarioFromURI(this.selectedModelElementURI);
                     this.selectedModelElementName = usageScenario.getEntityName();
                     updateModelElementField(usageScenario);

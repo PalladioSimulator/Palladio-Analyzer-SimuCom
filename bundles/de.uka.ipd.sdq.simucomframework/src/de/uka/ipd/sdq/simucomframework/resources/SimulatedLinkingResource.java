@@ -1,8 +1,5 @@
 package de.uka.ipd.sdq.simucomframework.resources;
 
-import java.io.Serializable;
-import java.util.Map;
-
 import org.apache.log4j.Logger;
 import org.palladiosimulator.pcm.resourceenvironment.LinkingResource;
 
@@ -29,7 +26,7 @@ public class SimulatedLinkingResource extends AbstractScheduledResource {
 
     private final LinkingResource linkingResource;
     private String throughput;
-    private String latencySpec;
+    private DemandModifyingBehavior latency;
 
     // For resources that can fail (SimulatedLinkingResources):
     private final boolean canFail;
@@ -55,8 +52,11 @@ public class SimulatedLinkingResource extends AbstractScheduledResource {
                 SchedulingStrategy.FCFS, 1, false);
 
         this.linkingResource = linkingResource;
-        this.latencySpec = this.linkingResource.getCommunicationLinkResourceSpecifications_LinkingResource()
+        String latencySpec = this.linkingResource.getCommunicationLinkResourceSpecifications_LinkingResource()
                 .getLatency_CommunicationLinkResourceSpecification().getSpecification();
+        // latency as a demandModifyingBehavior in the superclass:
+        this.latency = new DemandModifyingBehavior("1.0", latencySpec);
+        super.addDemandModifyingBehavior(this.latency);
         this.throughput = this.linkingResource.getCommunicationLinkResourceSpecifications_LinkingResource()
                 .getThroughput_CommunicationLinkResourceSpecification().getSpecification();
 
@@ -89,8 +89,8 @@ public class SimulatedLinkingResource extends AbstractScheduledResource {
                     + " was less or equal zero");
         }
 
-        final double result = NumberConverter.toDouble(StackContext.evaluateStatic(latencySpec)) + demand
-                / calculatedThroughput;
+        //latency is added as DemandModifyingBehavior in superclass
+        final double result = demand / calculatedThroughput;
         if (LOGGER.isDebugEnabled()) {
             LOGGER.debug("A network load of " + result + " has been determined.");
         }
@@ -98,15 +98,9 @@ public class SimulatedLinkingResource extends AbstractScheduledResource {
         return result;
     }
 
-    /**
-     * @param abstractDemand
-     *            : may be zero, in that case only the latency is considered.
-     */
     @Override
-    public void consumeResource(final SimuComSimProcess process, final int resourceServiceID,
-            final Map<String, Serializable> parameterMap, final double abstractDemand) {
-
-        // If the resource can fail, simulate a failure with the given
+    protected void assertAvailability() {
+    	// If the resource can fail, simulate a failure with the given
         // probability.
         // This works for communication link resources (LAN), but only if the
         // "simulate linking resources" option is activated. Otherwise, the
@@ -118,22 +112,6 @@ public class SimulatedLinkingResource extends AbstractScheduledResource {
                         .getInternalNetworkFailureType(this.linkingResource.getId(), getResourceTypeId()));
             }
         }
-
-        // registerProcessWindows(process, aResource);
-        // LOGGER.info("Demanding " + abstractDemand);
-
-        // Consider throughput spec and add latency to the demand.
-        final double concreteDemand = calculateDemand(abstractDemand);
-
-        if (concreteDemand <= 0) {
-            // Do nothing.
-            // TODO throw an exception or add a warning?
-            return;
-        }
-
-        // LOGGER.info("Recording " + concreteDemand);
-        fireDemand(concreteDemand);
-        getUnderlyingResource().process(process, resourceServiceID, parameterMap, concreteDemand);
     }
 
     @Override
@@ -190,6 +168,9 @@ public class SimulatedLinkingResource extends AbstractScheduledResource {
      * @param latency the new latency specification
      */
     public void setLatency(String latency) {
-        this.latencySpec = latency;
+    	//latency change through new DemandModifyingBehavior
+    	super.removeDemandModifyingBehavior(this.latency);
+    	this.latency = new DemandModifyingBehavior("1.0", latency);
+    	super.addDemandModifyingBehavior(this.latency);
     }
 }
