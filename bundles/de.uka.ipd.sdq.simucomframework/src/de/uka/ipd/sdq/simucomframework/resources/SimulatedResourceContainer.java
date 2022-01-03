@@ -143,8 +143,8 @@ public class SimulatedResourceContainer extends AbstractSimulatedResourceContain
     
     /**
      * Demand processing of a resource demand by a given type of active
-     * resources In future versions this has to control schedulers of resource
-     * types which exist in multiple instances, use parent container when resource not found
+     * resources. In future versions this has to control schedulers of resource
+     * types which exist in multiple instances, use parent container when resource not found.
      *
      * @param requestingProcess
      *            The thread requesting the processing of a resource demand
@@ -158,6 +158,7 @@ public class SimulatedResourceContainer extends AbstractSimulatedResourceContain
      *            is responsible itself for converting this demand into time
      *            spans
      */
+    @Override
     public void loadActiveResource(final SimuComSimProcess requestingProcess, final int resourceServiceID,
             final String typeID, final double demand) {
     	  try {
@@ -244,7 +245,7 @@ public class SimulatedResourceContainer extends AbstractSimulatedResourceContain
 
     /**
      * Demand processing of a resource demand by a given type of active resource and a resource
-     * interface operation and additional parameters which can be used in an active resource
+     * interface operation and additional parameters which can be used in an active resource.
      *
      * @param requestingProcess
      *            The thread requesting the processing of a resource demand
