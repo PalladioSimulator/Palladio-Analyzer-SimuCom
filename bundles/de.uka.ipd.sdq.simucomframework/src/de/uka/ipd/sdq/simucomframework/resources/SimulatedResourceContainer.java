@@ -170,7 +170,7 @@ public class SimulatedResourceContainer extends AbstractSimulatedResourceContain
                               + " by a component and has no parent Resource Container to look in. ID of resource type was: "
                               + typeID);
                   }
-                  throw new ResourceContainerIsMissingRequiredResourceType(typeID);
+                  throw e;
               } else {
                   this.parentResourceContainer.loadActiveResource(requestingProcess, resourceServiceID, typeID, demand);
               }
@@ -201,7 +201,7 @@ public class SimulatedResourceContainer extends AbstractSimulatedResourceContain
                             + " by a component and has no parent Resource Container to look in. ID of resource type was: "
                             + typeID);
                 }
-                throw new ResourceContainerIsMissingRequiredResourceType(typeID);
+                throw e;
             } else {
                 this.parentResourceContainer.loadActiveResource(requestingProcess, typeID, demand);
             }
@@ -235,7 +235,7 @@ public class SimulatedResourceContainer extends AbstractSimulatedResourceContain
                             + " by a component and has no parent Resource Container to look in. ID of resource type was: "
                             + e.getTypeID());
                 }
-                throw new ResourceContainerIsMissingRequiredResourceType(e.getTypeID());
+                throw e;
             } else {
                 this.parentResourceContainer.loadActiveResource(requestingProcess, providedInterfaceID, resourceServiceID,
                         demand);
@@ -273,7 +273,7 @@ public class SimulatedResourceContainer extends AbstractSimulatedResourceContain
                             + " by a component and has no parent Resource Container to look in. ID of resource type was: "
                             + e.getTypeID());
                 }
-                throw new ResourceContainerIsMissingRequiredResourceType(e.getTypeID());
+                throw e;
             } else {
                 this.parentResourceContainer.loadActiveResource(requestingProcess, providedInterfaceID, resourceServiceID,
                         parameterMap, demand);
