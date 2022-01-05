@@ -156,6 +156,7 @@ class SimulatedResourceContainerTests {
 		SimulatedResourceContainer container = new SimulatedResourceContainer(mockModel, containerId);
 		resourceRegistry.addResourceContainer(container);
 
+		// we add an active resource
 		var resource = mock(ProcessingResourceSpecification.class);
 		var resourceType = getMockResourceType();
 		var resourceContainer = getMockResourceContainer();
@@ -174,6 +175,9 @@ class SimulatedResourceContainerTests {
 		var mockActiveResource = mock(SimDelayResource.class);
 		when(schedulingFactory.createSimDelayResource(any(), any())).thenReturn(mockActiveResource);
 		container.addActiveResourceWithoutCalculators(resource, null, containerId, SchedulingStrategy.DELAY);
+		
+		assertEquals(1, container.getActiveResources().size(), "we should have one active resource");
+		assertEquals(mockActiveResource, container.getActiveResources().stream().findFirst().get().getScheduledResource(), "the mock resource should be in our container");
 
 	}
 	
