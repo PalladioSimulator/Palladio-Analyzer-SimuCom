@@ -140,6 +140,42 @@ public class SimulatedResourceContainer extends AbstractSimulatedResourceContain
             final AssemblyContext assemblyContext, final SimuComModel simuComModel, final long capacity) {
         return new SimSimpleFairPassiveResource(resource, assemblyContext, simuComModel, capacity);
     }
+    
+    /**
+     * Demand processing of a resource demand by a given type of active
+     * resources. In future versions this has to control schedulers of resource
+     * types which exist in multiple instances, use parent container when resource not found.
+     *
+     * @param requestingProcess
+     *            The thread requesting the processing of a resource demand
+     * @param resourceServiceID
+     *            the id of the resource service to be called.
+     * @param typeID
+     *            ID of the resource type to which the demand is directed. Same
+     *            as the PCM resource type IDs
+     * @param demand
+     *            The demand in units processable by the resource. The resource
+     *            is responsible itself for converting this demand into time
+     *            spans
+     */
+    @Override
+    public void loadActiveResource(final SimuComSimProcess requestingProcess, final int resourceServiceID,
+            final String typeID, final double demand) {
+    	  try {
+              super.loadActiveResource(requestingProcess, resourceServiceID, typeID, demand);
+          } catch (final ResourceContainerIsMissingRequiredResourceType e) {
+              if (this.parentResourceContainer == null) {
+                  if (LOGGER.isEnabledFor(Level.ERROR)) {
+                      LOGGER.error("Resource container is missing a resource which was attempted to be loaded"
+                              + " by a component and has no parent Resource Container to look in. ID of resource type was: "
+                              + typeID);
+                  }
+                  throw e;
+              } else {
+                  this.parentResourceContainer.loadActiveResource(requestingProcess, resourceServiceID, typeID, demand);
+              }
+          }
+    }
 
     /**
      * Demand processing of a resource demand by a given type of active resources. If the resource
@@ -165,7 +201,7 @@ public class SimulatedResourceContainer extends AbstractSimulatedResourceContain
                             + " by a component and has no parent Resource Container to look in. ID of resource type was: "
                             + typeID);
                 }
-                throw new ResourceContainerIsMissingRequiredResourceType(typeID);
+                throw e;
             } else {
                 this.parentResourceContainer.loadActiveResource(requestingProcess, typeID, demand);
             }
@@ -199,7 +235,7 @@ public class SimulatedResourceContainer extends AbstractSimulatedResourceContain
                             + " by a component and has no parent Resource Container to look in. ID of resource type was: "
                             + e.getTypeID());
                 }
-                throw new ResourceContainerIsMissingRequiredResourceType(e.getTypeID());
+                throw e;
             } else {
                 this.parentResourceContainer.loadActiveResource(requestingProcess, providedInterfaceID, resourceServiceID,
                         demand);
@@ -209,7 +245,7 @@ public class SimulatedResourceContainer extends AbstractSimulatedResourceContain
 
     /**
      * Demand processing of a resource demand by a given type of active resource and a resource
-     * interface operation and additional parameters which can be used in an active resource
+     * interface operation and additional parameters which can be used in an active resource.
      *
      * @param requestingProcess
      *            The thread requesting the processing of a resource demand
@@ -237,7 +273,7 @@ public class SimulatedResourceContainer extends AbstractSimulatedResourceContain
                             + " by a component and has no parent Resource Container to look in. ID of resource type was: "
                             + e.getTypeID());
                 }
-                throw new ResourceContainerIsMissingRequiredResourceType(e.getTypeID());
+                throw e;
             } else {
                 this.parentResourceContainer.loadActiveResource(requestingProcess, providedInterfaceID, resourceServiceID,
                         parameterMap, demand);
