@@ -105,16 +105,16 @@ class SimulatedResourceContainerTests {
 
 		// check fallback to parent
 		var simProcess = mock(SimuComSimProcess.class);
-		parentContainer.loadActiveResource(simProcess, "dummy", 100);
+		childContainer.loadActiveResource(simProcess, "dummy", 100);
 		verify(parentContainer).loadActiveResource(simProcess, "dummy", 100);
 
-		parentContainer.loadActiveResource(simProcess, "dummy", 0, 100);
+		childContainer.loadActiveResource(simProcess, "dummy", 0, 100);
 		verify(parentContainer).loadActiveResource(simProcess, "dummy", 0, 100);
 
-		parentContainer.loadActiveResource(simProcess, "dummy", 0, Collections.emptyMap(), 100);
+		childContainer.loadActiveResource(simProcess, "dummy", 0, Collections.emptyMap(), 100);
 		verify(parentContainer).loadActiveResource(simProcess, "dummy", 0, Collections.emptyMap(), 100);
 
-		parentContainer.loadActiveResource(simProcess, 0, "dummy", 100);
+		childContainer.loadActiveResource(simProcess, 0, "dummy", 100);
 		verify(parentContainer).loadActiveResource(simProcess, 0, "dummy", 100);
 
 	}
