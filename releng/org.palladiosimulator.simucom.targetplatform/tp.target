@@ -179,6 +179,13 @@
 			<unit id="net.bytebuddy.byte-buddy" version="0.0.0"/>
 			<unit id="org.objenesis" version="0.0.0"/>
 		</location>
-		
+		<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="false" type="InstallableUnit" filter="nightly">
+			<unit id="tools.mdsd.library.emfeditutils.feature.feature.group" version="0.0.0"/>
+			<repository location="https://updatesite.mdsd.tools/library-emfeditutils/nightly/"/>
+		</location>
+		<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="false" type="InstallableUnit" filter="release">
+			<unit id="tools.mdsd.library.emfeditutils.feature.feature.group" version="0.0.0"/>
+			<repository location="https://updatesite.mdsd.tools/library-emfeditutils/releases/latest/"/>
+		</location>
 	</locations>
 </target>
