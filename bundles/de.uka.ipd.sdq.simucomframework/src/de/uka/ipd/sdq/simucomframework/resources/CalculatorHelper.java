@@ -381,7 +381,9 @@ public final class CalculatorHelper {
         mp.setPassiveResource(resource.getResource());
 
         final ResourceURIMeasuringPoint measuringPoint = MEASURINGPOINT_FACTORY.createResourceURIMeasuringPoint();
-        measuringPoint.setResourceURI(EMFLoadHelper.getResourceURI(resource.getResource()));
+        String compositeURI = EMFLoadHelper.getResourceURI(resource.getAssemblyContext());
+        compositeURI = compositeURI + "/encapsulatedComponent__AssemblyContext/child[id=" + EMFLoadHelper.getResourceURI(resource.getResource()) + "]";
+        measuringPoint.setResourceURI(compositeURI);
         measuringPoint.setMeasuringPoint(mp.getStringRepresentation());
         putIntoRepository(measuringPoint);
         return measuringPoint;
