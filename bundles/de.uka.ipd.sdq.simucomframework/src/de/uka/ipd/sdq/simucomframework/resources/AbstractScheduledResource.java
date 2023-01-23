@@ -160,6 +160,10 @@ public abstract class AbstractScheduledResource extends SimuComEntity
 			// TODO throw an exception or add a warning?
 			return;
 		}
+		
+        if (LOGGER.isDebugEnabled()) {
+            LOGGER.debug(this.getName() + ": About to issue a demand of " + concreteDemand);
+        }
 
 		// LOGGER.info("Recording " + concreteDemand);
 		fireDemand(concreteDemand);

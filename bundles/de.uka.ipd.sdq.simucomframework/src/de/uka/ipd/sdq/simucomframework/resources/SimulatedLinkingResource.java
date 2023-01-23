@@ -92,7 +92,7 @@ public class SimulatedLinkingResource extends AbstractScheduledResource {
         //latency is added as DemandModifyingBehavior in superclass
         final double result = demand / calculatedThroughput;
         if (LOGGER.isDebugEnabled()) {
-            LOGGER.debug("A network load of " + result + " has been determined.");
+            LOGGER.debug("A network load of " + result + " has been determined (before latency and any demand modification).");
         }
 
         return result;
