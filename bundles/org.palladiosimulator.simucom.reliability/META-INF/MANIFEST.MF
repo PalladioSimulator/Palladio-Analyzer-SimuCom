@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Reliability
 Bundle-SymbolicName: org.palladiosimulator.simucom.reliability;singleton:=true
 Bundle-Version: 5.1.0.qualifier
-Bundle-RequiredExecutionEnvironment: JavaSE-11
+Bundle-RequiredExecutionEnvironment: JavaSE-17
 Require-Bundle: org.palladiosimulator.pcm;bundle-version="4.0.0",
  de.uka.ipd.sdq.workflow.launchconfig,
  org.eclipse.core.runtime;bundle-version="3.7.0",

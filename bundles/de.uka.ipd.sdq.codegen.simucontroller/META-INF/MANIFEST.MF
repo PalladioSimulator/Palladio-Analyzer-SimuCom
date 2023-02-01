@@ -53,4 +53,4 @@ Export-Package: de.uka.ipd.sdq.codegen.simucontroller,
  de.uka.ipd.sdq.codegen.simucontroller.workflow.jobs.xtendworkflow,
  de.uka.ipd.sdq.pcm.transformations
 Bundle-Vendor: sdq.ipd.uka.de
-Bundle-RequiredExecutionEnvironment: JavaSE-11
+Bundle-RequiredExecutionEnvironment: JavaSE-17

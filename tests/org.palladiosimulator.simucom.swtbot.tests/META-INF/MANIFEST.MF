@@ -5,6 +5,6 @@ Bundle-SymbolicName: org.palladiosimulator.simucom.swtbot.tests;singleton:=true
 Bundle-Version: 4.1.0.qualifier
 Bundle-ActivationPolicy: lazy
 Bundle-Vendor: palladiosimulator.org
-Bundle-RequiredExecutionEnvironment: JavaSE-11
+Bundle-RequiredExecutionEnvironment: JavaSE-17
 Require-Bundle: org.eclipse.swtbot.go,
  org.eclipse.debug.ui
