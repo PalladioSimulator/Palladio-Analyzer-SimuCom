@@ -14,7 +14,6 @@ loader.
    </description>
 
    <requires>
-      <import plugin="de.uka.ipd.sdq.identifier" version="2.0.0" match="greaterOrEqual"/>
       <import plugin="de.uka.ipd.sdq.probfunction" version="2.1.0" match="greaterOrEqual"/>
       <import plugin="de.uka.ipd.sdq.stoex" version="2.2.0" match="greaterOrEqual"/>
       <import plugin="org.palladiosimulator.pcm" version="4.0.0" match="greaterOrEqual"/>
@@ -45,8 +44,6 @@ loader.
       <import plugin="org.palladiosimulator.recorderframework" version="2.0.1" match="greaterOrEqual"/>
       <import plugin="org.palladiosimulator.measurementframework" version="1.0.0" match="greaterOrEqual"/>
       <import plugin="org.palladiosimulator.pcm.edp2.measuringpoint" version="1.0.0" match="greaterOrEqual"/>
-      <import plugin="de.uka.ipd.sdq.pcm.stochasticexpressions" version="2.0.0" match="greaterOrEqual"/>
-      <import plugin="de.uka.ipd.sdq.probfunction.math" version="2.0.2" match="greaterOrEqual"/>
       <import plugin="de.uka.ipd.sdq.stoex.analyser" version="2.0.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.debug.ui"/>
       <import plugin="org.eclipse.jdt.core"/>
@@ -62,8 +59,6 @@ loader.
       <import plugin="org.eclipse.emf.query.ocl" version="1.2.0" match="greaterOrEqual"/>
       <import plugin="de.uka.ipd.sdq.workflow.mdsd" version="2.0.1" match="greaterOrEqual"/>
       <import plugin="org.eclipse.emf.mwe.core" version="0.7.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.xpand" version="0.7.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.xtend" version="0.7.0" match="greaterOrEqual"/>
       <import plugin="de.uka.ipd.sdq.dialogs" version="2.0.1" match="greaterOrEqual"/>
       <import plugin="org.eclipse.ui.ide" version="3.5.0" match="greaterOrEqual"/>
       <import plugin="org.palladiosimulator.pcm.edit" version="3.6.0" match="greaterOrEqual"/>
@@ -76,13 +71,10 @@ loader.
       <import plugin="de.uka.ipd.sdq.pcm.codegen.simucom" version="1.0.0" match="greaterOrEqual"/>
       <import plugin="com.google.inject" version="3.0.0" match="greaterOrEqual"/>
       <import plugin="de.uka.ipd.sdq.sensorframework.storage" version="1.0.0" match="greaterOrEqual"/>
-      <import plugin="de.uka.ipd.sdq.sensorframework" version="1.1.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.core.runtime" version="3.5.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.emf.ecore"/>
       <import plugin="org.eclipse.equinox.event" version="1.1.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.osgi" version="3.10.2" match="greaterOrEqual"/>
       <import plugin="org.eclipse.ui"/>
-      <import plugin="org.palladiosimulator.probeframework" version="2.0.0" match="greaterOrEqual"/>
       <import plugin="de.uka.ipd.sdq.simucomframework.simucomstatus" version="1.0.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.emf.ecore.xmi"/>
       <import plugin="de.uka.ipd.sdq.identifier" version="2.1.0" match="greaterOrEqual"/>
@@ -93,19 +85,14 @@ loader.
       <import plugin="javax.inject" version="1.0.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.xtend.standalone" version="2.5.3" match="greaterOrEqual"/>
       <import plugin="org.objectweb.asm" version="3.3.1" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.xtend" version="2.0.0" match="greaterOrEqual"/>
       <import plugin="de.uka.ipd.sdq.codegen.simucontroller" version="1.0.0" match="greaterOrEqual"/>
-      <import plugin="org.palladiosimulator.pcm" version="3.6.0" match="greaterOrEqual"/>
       <import plugin="de.uka.ipd.sdq.pcm.codegen.m2m" version="3.1.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.core.runtime" version="3.7.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.swt" version="3.7.1" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.debug.ui" version="3.7.101" match="greaterOrEqual"/>
       <import plugin="de.uka.ipd.sdq.simucomframework" version="1.0.0" match="greaterOrEqual"/>
       <import plugin="de.desmoj"/>
       <import plugin="org.palladiosimulator.probeframework" version="2.0.1" match="greaterOrEqual"/>
       <import plugin="org.palladiosimulator.metricspec" version="1.0.1" match="greaterOrEqual"/>
       <import plugin="org.palladiosimulator.edp2.util" version="1.0.0" match="greaterOrEqual"/>
-      <import plugin="org.apache.log4j" version="1.2.0" match="greaterOrEqual"/>
       <import plugin="org.palladiosimulator.metricspec.resources"/>
       <import feature="org.palladiosimulator.scheduler.feature" version="4.1.1.qualifier"/>
       <import feature="de.uka.ipd.sdq.simulation.abstractsimengine.feature" version="4.1.0.qualifier"/>
