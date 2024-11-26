@@ -9,10 +9,10 @@ import de.uka.ipd.sdq.simucomframework.SimuComConfig;
 import de.uka.ipd.sdq.simucomframework.SimuComConfigExtension;
 import de.uka.ipd.sdq.workflow.extension.ExtensionHelper;
 import de.uka.ipd.sdq.workflow.extension.WorkflowExtension;
-import de.uka.ipd.sdq.workflow.launchconfig.AbstractWorkflowBasedRunConfiguration;
+import de.uka.ipd.sdq.workflow.launchconfig.core.AbstractWorkflowBasedRunConfiguration;
 
-public class SimuComLaunchConfigurationBasedConfigBuilder extends
-        AbstractSimulationLaunchConfigurationBasedConfigBuilder {
+public class SimuComLaunchConfigurationBasedConfigBuilder
+        extends AbstractSimulationLaunchConfigurationBasedConfigBuilder {
 
     public SimuComLaunchConfigurationBasedConfigBuilder(ILaunchConfiguration configuration, String mode)
             throws CoreException {
@@ -38,10 +38,10 @@ public class SimuComLaunchConfigurationBasedConfigBuilder extends
         // Set SimuCom config extensions based on registered extensions
         for (String workflowHookId : WorkflowHooks.getAllWorkflowHookIDs()) {
             for (WorkflowExtension<?> workflowExtension : ExtensionHelper.getWorkflowExtensions(workflowHookId)) {
-                if ((workflowExtension.getExtensionConfigurationBuilder() != null)
-                        && (workflowExtension.getExtensionConfigurationBuilder() instanceof SimuComExtensionConfigurationBuilder)) {
+                if ((workflowExtension.getExtensionConfigurationBuilder() != null) && (workflowExtension
+                    .getExtensionConfigurationBuilder() instanceof SimuComExtensionConfigurationBuilder)) {
                     SimuComConfigExtension simuComConfigExtension = ((SimuComExtensionConfigurationBuilder) workflowExtension
-                            .getExtensionConfigurationBuilder()).deriveSimuComConfigExtension(properties);
+                        .getExtensionConfigurationBuilder()).deriveSimuComConfigExtension(properties);
                     if (simuComConfigExtension != null) {
                         simuComConfig.addSimuComConfigExtension(workflowExtension.getId(), simuComConfigExtension);
                     }
