@@ -7,8 +7,8 @@ import org.palladiosimulator.analyzer.workflow.configurations.AbstractCodeGenera
 import org.palladiosimulator.analyzer.workflow.runconfig.SensitivityAnalysisConfiguration;
 
 import de.uka.ipd.sdq.simucomframework.SimuComConfig;
-import de.uka.ipd.sdq.workflow.launchconfig.AbstractWorkflowConfigurationBuilder;
 import de.uka.ipd.sdq.workflow.launchconfig.core.AbstractWorkflowBasedRunConfiguration;
+import de.uka.ipd.sdq.workflow.launchconfig.core.AbstractWorkflowConfigurationBuilder;
 
 public abstract class AbstractSimulationLaunchConfigurationBasedConfigBuilder
         extends AbstractWorkflowConfigurationBuilder {
