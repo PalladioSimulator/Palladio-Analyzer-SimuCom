@@ -1,6 +1,6 @@
 package de.uka.ipd.sdq.codegen.simucontroller.runconfig;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.log4j.Level;
 import org.eclipse.core.runtime.CoreException;
@@ -32,7 +32,7 @@ public class SimuComWorkflowLauncher extends AbstractPCMLaunchConfigurationDeleg
     @Override
     protected SimuComWorkflowConfiguration deriveConfiguration(ILaunchConfiguration configuration, String mode)
             throws CoreException {
-    	SimuComWorkflowConfiguration config = new SimuComWorkflowConfiguration(configuration.getAttributes());
+        SimuComWorkflowConfiguration config = new SimuComWorkflowConfiguration(configuration.getAttributes());
 
         AbstractWorkflowConfigurationBuilder builder;
         builder = new PCMWorkflowConfigurationBuilder(configuration, mode);
@@ -51,10 +51,10 @@ public class SimuComWorkflowLauncher extends AbstractPCMLaunchConfigurationDeleg
      * setupLogging(org.apache.log4j.Level)
      */
     @Override
-    protected ArrayList<LoggerAppenderStruct> setupLogging(Level logLevel) throws CoreException {
-        ArrayList<LoggerAppenderStruct> loggerList = super.setupLogging(logLevel);
-        loggerList.add(setupLogger("de.uka.ipd.sdq.codegen", logLevel, Level.DEBUG == logLevel ? DETAILED_LOG_PATTERN
-                : SHORT_LOG_PATTERN));
+    protected List<LoggerAppenderStruct> setupLogging(Level logLevel) throws CoreException {
+        List<LoggerAppenderStruct> loggerList = super.setupLogging(logLevel);
+        loggerList.add(setupLogger("de.uka.ipd.sdq.codegen", logLevel,
+                Level.DEBUG == logLevel ? DETAILED_LOG_PATTERN : SHORT_LOG_PATTERN));
         loggerList.add(setupLogger("de.uka.ipd.sdq.simucomframework", logLevel,
                 Level.DEBUG == logLevel ? DETAILED_LOG_PATTERN : SHORT_LOG_PATTERN));
         loggerList.add(setupLogger("de.uka.ipd.sdq.workflow.mdsd.emf.qvtr", logLevel,
@@ -71,8 +71,8 @@ public class SimuComWorkflowLauncher extends AbstractPCMLaunchConfigurationDeleg
                 Level.DEBUG == logLevel ? DETAILED_LOG_PATTERN : SHORT_LOG_PATTERN));
         loggerList.add(setupLogger("edu.kit.ipd.sdq.pcm.simulation.scheduler", logLevel,
                 Level.DEBUG == logLevel ? DETAILED_LOG_PATTERN : SHORT_LOG_PATTERN));
-        loggerList.add(setupLogger("Scheduler", logLevel, Level.DEBUG == logLevel ? DETAILED_LOG_PATTERN
-                : SHORT_LOG_PATTERN));
+        loggerList.add(
+                setupLogger("Scheduler", logLevel, Level.DEBUG == logLevel ? DETAILED_LOG_PATTERN : SHORT_LOG_PATTERN));
 
         return loggerList;
     }
