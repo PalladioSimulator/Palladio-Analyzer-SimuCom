@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
-import org.palladiosimulator.analyzer.workflow.runconfig.AccuracyInfluenceAnalysisState;
+import org.palladiosimulator.analyzer.workflow.core.runconfig.AccuracyInfluenceAnalysisState;
 import org.palladiosimulator.analyzer.workflow.runconfig.ExperimentRunDescriptor;
 import org.palladiosimulator.analyzer.workflow.runconfig.SensitivityAnalysisConfiguration;
 
