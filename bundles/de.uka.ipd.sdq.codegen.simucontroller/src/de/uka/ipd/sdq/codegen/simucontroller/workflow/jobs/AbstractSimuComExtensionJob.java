@@ -1,6 +1,6 @@
 package de.uka.ipd.sdq.codegen.simucontroller.workflow.jobs;
 
-import org.palladiosimulator.analyzer.workflow.core.configurations.AbstractPCMWorkflowRunConfiguration;
+import org.palladiosimulator.analyzer.workflow.configurations.AbstractPCMWorkflowRunConfiguration;
 
 import de.uka.ipd.sdq.codegen.simucontroller.runconfig.AbstractSimulationWorkflowConfiguration;
 import de.uka.ipd.sdq.simucomframework.model.SimuComModel;
