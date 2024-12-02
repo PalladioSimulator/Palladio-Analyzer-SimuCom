@@ -3,8 +3,8 @@ package de.uka.ipd.sdq.simucom.rerunsimulation.runconfig;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.ILaunchConfiguration;
+import org.palladiosimulator.analyzer.workflow.ConstantsContainer;
 import org.palladiosimulator.analyzer.workflow.configurations.PCMWorkflowConfigurationBuilder;
-import org.palladiosimulator.analyzer.workflow.core.ConstantsContainer;
 
 import de.uka.ipd.sdq.codegen.simucontroller.debug.IDebugListener;
 import de.uka.ipd.sdq.codegen.simucontroller.debug.SimulationDebugListener;
@@ -13,7 +13,7 @@ import de.uka.ipd.sdq.codegen.simucontroller.runconfig.SimuComWorkflowConfigurat
 import de.uka.ipd.sdq.codegen.simucontroller.runconfig.SimuComWorkflowLauncher;
 import de.uka.ipd.sdq.simucom.rerunsimulation.jobs.RerunSimulationJob;
 import de.uka.ipd.sdq.workflow.jobs.IJob;
-import de.uka.ipd.sdq.workflow.launchconfig.core.AbstractWorkflowConfigurationBuilder;
+import de.uka.ipd.sdq.workflow.launchconfig.AbstractWorkflowConfigurationBuilder;
 
 /**
  * This class creates the RerunSimulationJob which is needed for rerunning the simulation without

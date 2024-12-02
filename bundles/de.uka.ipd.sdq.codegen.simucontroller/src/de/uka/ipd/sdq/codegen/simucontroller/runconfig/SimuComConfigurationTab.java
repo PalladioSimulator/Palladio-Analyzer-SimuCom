@@ -36,7 +36,7 @@ import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.Text;
-import org.palladiosimulator.analyzer.workflow.core.ConstantsContainer;
+import org.palladiosimulator.analyzer.workflow.ConstantsContainer;
 import org.palladiosimulator.editors.commons.dialogs.selection.PalladioSelectEObjectDialog;
 import org.palladiosimulator.pcm.ui.provider.PalladioItemProviderAdapterFactory;
 import org.palladiosimulator.pcm.usagemodel.UsageModel;

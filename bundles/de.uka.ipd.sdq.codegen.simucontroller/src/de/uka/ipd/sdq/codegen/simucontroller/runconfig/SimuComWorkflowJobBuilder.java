@@ -6,7 +6,7 @@ package de.uka.ipd.sdq.codegen.simucontroller.runconfig;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.CoreException;
-import org.palladiosimulator.analyzer.workflow.core.configurations.AbstractPCMWorkflowRunConfiguration;
+import org.palladiosimulator.analyzer.workflow.configurations.AbstractPCMWorkflowRunConfiguration;
 import org.palladiosimulator.analyzer.workflow.jobs.PCMWorkflowJobBuilder;
 
 import de.uka.ipd.sdq.codegen.simucontroller.debug.IDebugListener;

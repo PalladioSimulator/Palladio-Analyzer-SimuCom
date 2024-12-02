@@ -2,16 +2,16 @@ package de.uka.ipd.sdq.codegen.simucontroller.runconfig;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.ILaunchConfiguration;
+import org.palladiosimulator.analyzer.workflow.ConstantsContainer;
 import org.palladiosimulator.analyzer.workflow.configurations.AbstractCodeGenerationWorkflowRunConfiguration.CodeGenerationAdvice;
-import org.palladiosimulator.analyzer.workflow.core.ConstantsContainer;
 import org.palladiosimulator.analyzer.workflow.runconfig.SensitivityAnalysisConfiguration;
 
 import de.uka.ipd.sdq.simucomframework.SimuComConfig;
-import de.uka.ipd.sdq.workflow.launchconfig.core.AbstractWorkflowBasedRunConfiguration;
-import de.uka.ipd.sdq.workflow.launchconfig.core.AbstractWorkflowConfigurationBuilder;
+import de.uka.ipd.sdq.workflow.launchconfig.AbstractWorkflowBasedRunConfiguration;
+import de.uka.ipd.sdq.workflow.launchconfig.AbstractWorkflowConfigurationBuilder;
 
-public abstract class AbstractSimulationLaunchConfigurationBasedConfigBuilder
-        extends AbstractWorkflowConfigurationBuilder {
+public abstract class AbstractSimulationLaunchConfigurationBasedConfigBuilder extends
+        AbstractWorkflowConfigurationBuilder {
 
     public AbstractSimulationLaunchConfigurationBasedConfigBuilder(ILaunchConfiguration configuration, String mode)
             throws CoreException {
@@ -31,8 +31,7 @@ public abstract class AbstractSimulationLaunchConfigurationBasedConfigBuilder
             config.setInteractive(true);
 
         config.setSimulateLinkingResources(getBooleanAttribute(SimuComConfig.SIMULATE_LINKING_RESOURCES));
-        config.setSimulateThroughputOfLinkingResources(
-                getBooleanAttribute(SimuComConfig.SIMULATE_THROUGHPUT_OF_LINKING_RESOURCES));
+        config.setSimulateThroughputOfLinkingResources(getBooleanAttribute(SimuComConfig.SIMULATE_THROUGHPUT_OF_LINKING_RESOURCES));
 
         // This loads the feature config for Steffen's Connector Completions
         // TODO: Integrate this in CIP process.
@@ -40,7 +39,8 @@ public abstract class AbstractSimulationLaunchConfigurationBasedConfigBuilder
 
         config.setSensitivityAnalysisEnabled(hasValidSensitvityVariableAttribute(ConstantsContainer.VARIABLE_TEXT));
         if (config.isSensitivityAnalysisEnabled()) {
-            SensitivityAnalysisConfiguration sensitivityConfig = new SensitivityAnalysisConfiguration("",
+            SensitivityAnalysisConfiguration sensitivityConfig = new SensitivityAnalysisConfiguration(
+                    "",
                     // TODO: getStringAttribute(ConstantsContainer.VARIABLE_SHORT_NAME),
                     getStringAttribute(ConstantsContainer.VARIABLE_TEXT),
                     getDoubleAttribute(ConstantsContainer.MINIMUM_TEXT),
