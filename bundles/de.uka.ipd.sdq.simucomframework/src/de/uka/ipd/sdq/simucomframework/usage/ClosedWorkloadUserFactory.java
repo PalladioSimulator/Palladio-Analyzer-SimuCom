@@ -6,6 +6,7 @@ import org.palladiosimulator.pcm.usagemodel.UsageScenario;
 
 import de.uka.ipd.sdq.scheduler.resources.active.IResourceTableManager;
 import de.uka.ipd.sdq.simucomframework.model.SimuComModel;
+import de.uka.ipd.sdq.simulation.abstractsimengine.ISimProcess;
 
 /**
  * Factory to create closed workload users
@@ -27,6 +28,16 @@ public abstract class ClosedWorkloadUserFactory extends AbstractWorkloadUserFact
         this.resourceTableManager = resourceTableManager;
         this.thinkTime = thinkTimeSpec;
     }
+    
+    @Override
+    public ClosedWorkloadUser createUser() {
+        return createUser(new IUserProcessMonitor() {
+            
+            @Override
+            public void registerProcess(ISimProcess process) {
+            }
+        });
+    }
 
     /*
      * (non-Javadoc)
@@ -34,7 +45,7 @@ public abstract class ClosedWorkloadUserFactory extends AbstractWorkloadUserFact
      * @see de.uka.ipd.sdq.simucomframework.usage.IUserFactory#createUser()
      */
     @Override
-    public ClosedWorkloadUser createUser() {
+    public ClosedWorkloadUser createUser(IUserProcessMonitor processMonitor) {
         final IScenarioRunner scenarioRunner = this.createScenarioRunner();
         return new ClosedWorkloadUser(model, "ClosedUser", scenarioRunner, thinkTime, usageStartStopProbes, resourceTableManager);
     }
