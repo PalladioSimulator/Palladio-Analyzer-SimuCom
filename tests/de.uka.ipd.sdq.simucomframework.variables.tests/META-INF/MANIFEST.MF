@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: de.uka.ipd.sdq.simucomframework.variables.tests
 Bundle-SymbolicName: de.uka.ipd.sdq.simucomframework.variables.tests
-Bundle-Version: 5.2.0.qualifier
+Bundle-Version: 5.2.1.qualifier
 Fragment-Host: de.uka.ipd.sdq.simucomframework.variables
 Bundle-Vendor: sdq.ipd.uka.de
 Require-Bundle: org.junit,
