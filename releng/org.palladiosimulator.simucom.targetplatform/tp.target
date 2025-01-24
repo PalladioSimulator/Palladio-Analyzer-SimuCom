@@ -4,7 +4,7 @@
 	<locations>
 		<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="false" type="InstallableUnit">
 			<unit id='org.eclipse.xtend.sdk.feature.group' version="0.0.0"/>
-			<repository location="https://download.eclipse.org/releases/2023-03/202303151000/"/>
+			<repository location="https://download.eclipse.org/releases/2023-09/202309131000/"/>
 		</location>
 		<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="false" type="InstallableUnit" filter="release">
 			<unit id="de.uka.ipd.sdq.probfunction.feature.feature.group" version="0.0.0"/>
@@ -174,7 +174,7 @@
 			<repository location="https://updatesite.palladio-simulator.com/palladio-simulation-scheduler/nightly/"/>
 		</location>
 		<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="false" type="InstallableUnit">
-			<repository location="https://download.eclipse.org/tools/orbit/downloads/2023-03/"/>
+			<repository location="https://download.eclipse.org/tools/orbit/simrel/orbit-aggregation/release/4.29.0/"/>
 			<unit id="org.mockito.junit-jupiter" version="0.0.0"/>
 			<unit id="org.mockito.mockito-core" version="0.0.0"/>
 			<unit id="net.bytebuddy.byte-buddy" version="0.0.0"/>
