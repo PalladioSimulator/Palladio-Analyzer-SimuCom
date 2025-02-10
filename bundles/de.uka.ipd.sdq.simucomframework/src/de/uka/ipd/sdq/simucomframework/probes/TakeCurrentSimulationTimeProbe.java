@@ -1,9 +1,9 @@
 package de.uka.ipd.sdq.simucomframework.probes;
 
-import static javax.measure.unit.SI.SECOND;
+import static jakarta.measure.unit.SI.SECOND;
 
-import javax.measure.Measure;
-import javax.measure.quantity.Duration;
+import jakarta.measure.Measure;
+import jakarta.measure.quantity.Duration;
 
 import org.palladiosimulator.metricspec.constants.MetricDescriptionConstants;
 import org.palladiosimulator.probeframework.measurement.RequestContext;

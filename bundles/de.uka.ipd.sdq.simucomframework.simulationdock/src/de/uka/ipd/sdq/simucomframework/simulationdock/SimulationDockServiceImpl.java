@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.util.Hashtable;
 import java.util.Map;
 
-import javax.management.RuntimeErrorException;
+import jakarta.management.RuntimeErrorException;
 
 import org.apache.log4j.ConsoleAppender;
 import org.apache.log4j.Logger;
