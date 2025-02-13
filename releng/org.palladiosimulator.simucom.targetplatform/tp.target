@@ -65,15 +65,6 @@
 		</location>
 		
 		<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="false" type="InstallableUnit" filter="release">
-			<unit id="org.palladiosimulator.editors.commons.feature.feature.group" version="0.0.0"/>
-			<repository location="https://updatesite.palladio-simulator.com/palladio-editors-commons/releases/latest/"/>
-		</location>
-		<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="false" type="InstallableUnit" filter="nightly">
-			<unit id="org.palladiosimulator.editors.commons.feature.feature.group" version="0.0.0"/>
-			<repository location="https://updatesite.palladio-simulator.com/palladio-editors-commons/nightly/"/>
-		</location>
-		
-		<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="false" type="InstallableUnit" filter="release">
 			<unit id="org.palladiosimulator.edp2.feature.feature.group" version="0.0.0"/>
 			<repository location="https://updatesite.palladio-simulator.com/palladio-qual-edp2/releases/latest/"/>
 		</location>
