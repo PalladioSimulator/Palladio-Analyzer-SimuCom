@@ -2,7 +2,7 @@ package de.uka.ipd.sdq.codegen.simucontroller.runconfig;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.ILaunchConfiguration;
-import org.palladiosimulator.analyzer.workflow.ConstantsContainer;
+import org.palladiosimulator.analyzer.workflow.core.ConstantsContainer;
 
 import de.uka.ipd.sdq.codegen.simucontroller.workflow.jobs.WorkflowHooks;
 import de.uka.ipd.sdq.simucomframework.SimuComConfig;
