@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Simu Controller Core Plug-in
+Bundle-SymbolicName: de.uka.ipd.sdq.codegen.simucontroller.core
+Bundle-Version: 5.2.1.qualifier
+Bundle-ActivationPolicy: lazy
+Bundle-Vendor: sdq.ipd.uka.de
+Bundle-RequiredExecutionEnvironment: JavaSE-17
