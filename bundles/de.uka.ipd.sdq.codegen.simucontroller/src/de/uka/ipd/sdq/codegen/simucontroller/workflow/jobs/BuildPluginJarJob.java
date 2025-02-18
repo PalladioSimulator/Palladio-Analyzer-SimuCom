@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.net.URI;
 
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.palladiosimulator.analyzer.workflow.configurations.AbstractCodeGenerationWorkflowRunConfiguration;
+import org.palladiosimulator.analyzer.workflow.core.configurations.AbstractCodeGenerationWorkflowRunConfiguration;
 import org.palladiosimulator.analyzer.workflow.jobs.CreatePluginProjectJob;
 
 import de.uka.ipd.sdq.workflow.jobs.CleanupFailedException;

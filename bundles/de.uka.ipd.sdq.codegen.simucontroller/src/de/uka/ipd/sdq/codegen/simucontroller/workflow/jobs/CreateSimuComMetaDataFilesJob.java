@@ -2,7 +2,7 @@ package de.uka.ipd.sdq.codegen.simucontroller.workflow.jobs;
 
 import java.io.PrintStream;
 
-import org.palladiosimulator.analyzer.workflow.configurations.AbstractCodeGenerationWorkflowRunConfiguration;
+import org.palladiosimulator.analyzer.workflow.core.configurations.AbstractCodeGenerationWorkflowRunConfiguration;
 
 import de.uka.ipd.sdq.workflow.jobs.IJob;
 

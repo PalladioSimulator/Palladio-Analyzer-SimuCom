@@ -2,9 +2,9 @@ package de.uka.ipd.sdq.codegen.simucontroller.runconfig;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.ILaunchConfiguration;
-import org.palladiosimulator.analyzer.workflow.configurations.AbstractCodeGenerationWorkflowRunConfiguration.CodeGenerationAdvice;
 import org.palladiosimulator.analyzer.workflow.core.ConstantsContainer;
-import org.palladiosimulator.analyzer.workflow.runconfig.SensitivityAnalysisConfiguration;
+import org.palladiosimulator.analyzer.workflow.core.configurations.AbstractCodeGenerationWorkflowRunConfiguration.CodeGenerationAdvice;
+import org.palladiosimulator.analyzer.workflow.core.runconfig.SensitivityAnalysisConfiguration;
 
 import de.uka.ipd.sdq.simucomframework.SimuComConfig;
 import de.uka.ipd.sdq.workflow.launchconfig.core.AbstractWorkflowBasedRunConfiguration;

@@ -23,7 +23,7 @@ import de.uka.ipd.sdq.pcm.codegen.simucom.transformations.RepositoryXpt;
 import de.uka.ipd.sdq.pcm.codegen.simucom.transformations.sim.SimAccuracyInfluenceExt;
 
 import org.palladiosimulator.analyzer.workflow.blackboard.PCMResourceSetPartition;
-import org.palladiosimulator.analyzer.workflow.configurations.AbstractCodeGenerationWorkflowRunConfiguration;
+import org.palladiosimulator.analyzer.workflow.core.configurations.AbstractCodeGenerationWorkflowRunConfiguration;
 import org.palladiosimulator.analyzer.workflow.jobs.LoadMiddlewareConfigurationIntoBlackboardJob;
 import org.palladiosimulator.analyzer.workflow.jobs.LoadPCMModelsIntoBlackboardJob;
 import org.palladiosimulator.pcm.repository.Repository;
