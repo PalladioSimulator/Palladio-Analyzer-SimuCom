@@ -12,9 +12,11 @@ import org.palladiosimulator.analyzer.workflow.core.configurations.PCMWorkflowCo
 
 import de.uka.ipd.sdq.codegen.simucontroller.debug.IDebugListener;
 import de.uka.ipd.sdq.codegen.simucontroller.debug.SimulationDebugListener;
+import de.uka.ipd.sdq.workflow.WorkflowExceptionHandler;
 import de.uka.ipd.sdq.workflow.jobs.IJob;
 import de.uka.ipd.sdq.workflow.launchconfig.core.AbstractWorkflowConfigurationBuilder;
 import de.uka.ipd.sdq.workflow.logging.console.LoggerAppenderStruct;
+import de.uka.ipd.sdq.workflow.ui.UIBasedWorkflowExceptionHandler;
 
 /**
  * The class adapts defined functionality in the AbstractMDSDLaunchConfigurationDelegate for SimuCom
@@ -22,6 +24,10 @@ import de.uka.ipd.sdq.workflow.logging.console.LoggerAppenderStruct;
  *
  */
 public class SimuComWorkflowLauncher extends AbstractPCMLaunchConfigurationDelegate<SimuComWorkflowConfiguration> {
+    @Override
+    protected WorkflowExceptionHandler createExceptionHandler(boolean interactive) {
+        return new UIBasedWorkflowExceptionHandler(!interactive);
+    }
 
     /*
      * (non-Javadoc)
@@ -32,7 +38,7 @@ public class SimuComWorkflowLauncher extends AbstractPCMLaunchConfigurationDeleg
     @Override
     protected SimuComWorkflowConfiguration deriveConfiguration(ILaunchConfiguration configuration, String mode)
             throws CoreException {
-    	SimuComWorkflowConfiguration config = new SimuComWorkflowConfiguration(configuration.getAttributes());
+        SimuComWorkflowConfiguration config = new SimuComWorkflowConfiguration(configuration.getAttributes());
 
         AbstractWorkflowConfigurationBuilder builder;
         builder = new PCMWorkflowConfigurationBuilder(configuration, mode);
@@ -53,8 +59,8 @@ public class SimuComWorkflowLauncher extends AbstractPCMLaunchConfigurationDeleg
     @Override
     protected ArrayList<LoggerAppenderStruct> setupLogging(Level logLevel) throws CoreException {
         ArrayList<LoggerAppenderStruct> loggerList = super.setupLogging(logLevel);
-        loggerList.add(setupLogger("de.uka.ipd.sdq.codegen", logLevel, Level.DEBUG == logLevel ? DETAILED_LOG_PATTERN
-                : SHORT_LOG_PATTERN));
+        loggerList.add(setupLogger("de.uka.ipd.sdq.codegen", logLevel,
+                Level.DEBUG == logLevel ? DETAILED_LOG_PATTERN : SHORT_LOG_PATTERN));
         loggerList.add(setupLogger("de.uka.ipd.sdq.simucomframework", logLevel,
                 Level.DEBUG == logLevel ? DETAILED_LOG_PATTERN : SHORT_LOG_PATTERN));
         loggerList.add(setupLogger("de.uka.ipd.sdq.workflow.mdsd.emf.qvtr", logLevel,
@@ -71,8 +77,8 @@ public class SimuComWorkflowLauncher extends AbstractPCMLaunchConfigurationDeleg
                 Level.DEBUG == logLevel ? DETAILED_LOG_PATTERN : SHORT_LOG_PATTERN));
         loggerList.add(setupLogger("edu.kit.ipd.sdq.pcm.simulation.scheduler", logLevel,
                 Level.DEBUG == logLevel ? DETAILED_LOG_PATTERN : SHORT_LOG_PATTERN));
-        loggerList.add(setupLogger("Scheduler", logLevel, Level.DEBUG == logLevel ? DETAILED_LOG_PATTERN
-                : SHORT_LOG_PATTERN));
+        loggerList.add(
+                setupLogger("Scheduler", logLevel, Level.DEBUG == logLevel ? DETAILED_LOG_PATTERN : SHORT_LOG_PATTERN));
 
         return loggerList;
     }
