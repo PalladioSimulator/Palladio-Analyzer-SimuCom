@@ -1,4 +1,4 @@
-package de.uka.ipd.sdq.simucomframework;
+package de.uka.ipd.sdq.simucomframework.core;
 
 import java.io.Serializable;
 import java.util.HashMap;

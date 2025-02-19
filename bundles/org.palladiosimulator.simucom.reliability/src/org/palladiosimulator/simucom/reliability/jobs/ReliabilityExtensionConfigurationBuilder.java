@@ -3,8 +3,8 @@ package org.palladiosimulator.simucom.reliability.jobs;
 import java.util.Map;
 
 import de.uka.ipd.sdq.codegen.simucontroller.runconfig.SimuComExtensionConfigurationBuilder;
-import de.uka.ipd.sdq.simucomframework.SimuComConfig;
-import de.uka.ipd.sdq.simucomframework.SimuComConfigExtension;
+import de.uka.ipd.sdq.simucomframework.core.SimuComConfig;
+import de.uka.ipd.sdq.simucomframework.core.SimuComConfigExtension;
 import de.uka.ipd.sdq.workflow.extension.AbstractExtensionJobConfiguration;
 
 /**

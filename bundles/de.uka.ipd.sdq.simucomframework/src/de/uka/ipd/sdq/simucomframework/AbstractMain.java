@@ -24,6 +24,7 @@ import org.palladiosimulator.probeframework.probes.TriggeredProbe;
 import de.uka.ipd.sdq.errorhandling.dialogs.issues.DisplayIssuesDialog;
 import de.uka.ipd.sdq.scheduler.resources.active.IResourceTableManager;
 import de.uka.ipd.sdq.scheduler.resources.active.ResourceTableManager;
+import de.uka.ipd.sdq.simucomframework.core.SimuComConfig;
 import de.uka.ipd.sdq.simucomframework.model.SimuComModel;
 import de.uka.ipd.sdq.simucomframework.probes.TakeCurrentSimulationTimeProbe;
 import de.uka.ipd.sdq.simucomframework.resources.IResourceContainerFactory;

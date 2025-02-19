@@ -9,7 +9,7 @@ import org.palladiosimulator.analyzer.workflow.core.runconfig.ExperimentRunDescr
 import org.palladiosimulator.analyzer.workflow.core.runconfig.SensitivityAnalysisConfiguration;
 
 import de.uka.ipd.sdq.codegen.simucontroller.core.runconfig.AbstractSimulationWorkflowConfiguration;
-import de.uka.ipd.sdq.simucomframework.SimuComConfig;
+import de.uka.ipd.sdq.simucomframework.core.SimuComConfig;
 import de.uka.ipd.sdq.simulation.core.AbstractSimulationConfig;
 
 public class SimuComWorkflowConfiguration extends AbstractSimulationWorkflowConfiguration {

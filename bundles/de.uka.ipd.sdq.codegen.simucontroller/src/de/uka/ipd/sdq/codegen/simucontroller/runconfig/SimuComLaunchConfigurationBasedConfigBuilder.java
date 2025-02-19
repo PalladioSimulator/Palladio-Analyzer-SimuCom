@@ -5,8 +5,8 @@ import org.eclipse.debug.core.ILaunchConfiguration;
 import org.palladiosimulator.analyzer.workflow.core.ConstantsContainer;
 
 import de.uka.ipd.sdq.codegen.simucontroller.workflow.jobs.WorkflowHooks;
-import de.uka.ipd.sdq.simucomframework.SimuComConfig;
-import de.uka.ipd.sdq.simucomframework.SimuComConfigExtension;
+import de.uka.ipd.sdq.simucomframework.core.SimuComConfig;
+import de.uka.ipd.sdq.simucomframework.core.SimuComConfigExtension;
 import de.uka.ipd.sdq.workflow.extension.ExtensionHelper;
 import de.uka.ipd.sdq.workflow.extension.WorkflowExtension;
 import de.uka.ipd.sdq.workflow.launchconfig.core.AbstractWorkflowBasedRunConfiguration;

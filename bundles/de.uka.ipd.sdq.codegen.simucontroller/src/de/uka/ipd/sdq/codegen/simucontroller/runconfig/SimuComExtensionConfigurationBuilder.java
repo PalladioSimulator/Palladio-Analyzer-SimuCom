@@ -2,7 +2,7 @@ package de.uka.ipd.sdq.codegen.simucontroller.runconfig;
 
 import java.util.Map;
 
-import de.uka.ipd.sdq.simucomframework.SimuComConfigExtension;
+import de.uka.ipd.sdq.simucomframework.core.SimuComConfigExtension;
 import de.uka.ipd.sdq.workflow.extension.AbstractWorkflowExtensionConfigurationBuilder;
 
 /**
