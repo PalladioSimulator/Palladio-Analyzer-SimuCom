@@ -10,8 +10,8 @@ import org.palladiosimulator.analyzer.workflow.jobs.LoadMiddlewareConfigurationI
 import org.palladiosimulator.analyzer.workflow.jobs.StoreAllPCMModelsJob;
 import org.palladiosimulator.analyzer.workflow.jobs.ValidatePCMModelsJob;
 
+import de.uka.ipd.sdq.codegen.simucontroller.core.runconfig.AbstractSimulationWorkflowConfiguration;
 import de.uka.ipd.sdq.codegen.simucontroller.debug.IDebugListener;
-import de.uka.ipd.sdq.codegen.simucontroller.runconfig.AbstractSimulationWorkflowConfiguration;
 import de.uka.ipd.sdq.pcm.transformations.ApplyConnectorCompletionsJob;
 import de.uka.ipd.sdq.workflow.extension.AbstractExtendableJob;
 import de.uka.ipd.sdq.workflow.mdsd.blackboard.MDSDBlackboard;

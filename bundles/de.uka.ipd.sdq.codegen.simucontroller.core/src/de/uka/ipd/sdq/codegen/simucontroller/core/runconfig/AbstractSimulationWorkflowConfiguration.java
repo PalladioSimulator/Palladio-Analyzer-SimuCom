@@ -1,4 +1,4 @@
-package de.uka.ipd.sdq.codegen.simucontroller.runconfig;
+package de.uka.ipd.sdq.codegen.simucontroller.core.runconfig;
 
 import java.util.List;
 import java.util.Map;
