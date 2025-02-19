@@ -32,10 +32,10 @@ import de.uka.ipd.sdq.simucomframework.simucomstatus.SimuComStatus;
 import de.uka.ipd.sdq.simucomframework.simucomstatus.SimucomstatusPackage;
 import de.uka.ipd.sdq.simucomframework.usage.IWorkloadDriver;
 import de.uka.ipd.sdq.simucomframework.variables.cache.StoExCache;
-import de.uka.ipd.sdq.simulation.ISimulationListener;
 import de.uka.ipd.sdq.simulation.SimulationResult;
 import de.uka.ipd.sdq.simulation.abstractsimengine.ISimEngineFactory;
 import de.uka.ipd.sdq.simulation.abstractsimengine.ISimulationControl;
+import de.uka.ipd.sdq.simulation.core.ISimulationListener;
 
 /**
  * Central simulation class needed by desmoj. Keeps the simulation state which is not part of the

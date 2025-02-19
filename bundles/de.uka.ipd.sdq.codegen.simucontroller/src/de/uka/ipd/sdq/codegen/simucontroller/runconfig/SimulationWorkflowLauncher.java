@@ -9,7 +9,7 @@ import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.model.ILaunchConfigurationDelegate;
 import org.palladiosimulator.analyzer.workflow.core.configurations.AbstractPCMLaunchConfigurationDelegate;
 
-import de.uka.ipd.sdq.simulation.AbstractSimulationConfig;
+import de.uka.ipd.sdq.simulation.core.AbstractSimulationConfig;
 
 public class SimulationWorkflowLauncher implements ILaunchConfigurationDelegate {
 

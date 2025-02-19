@@ -11,7 +11,7 @@ import org.palladiosimulator.analyzer.workflow.core.runconfig.ExperimentRunDescr
 import org.palladiosimulator.recorderframework.config.IRecorderConfigurationFactory;
 
 import de.uka.ipd.sdq.probfunction.math.IRandomGenerator;
-import de.uka.ipd.sdq.simulation.AbstractSimulationConfig;
+import de.uka.ipd.sdq.simulation.core.AbstractSimulationConfig;
 
 /**
  * @author roman

@@ -24,7 +24,7 @@ import org.palladiosimulator.analyzer.workflow.core.ConstantsContainer;
 
 import de.uka.ipd.sdq.featureinstance.FeatureConfigWidget;
 import de.uka.ipd.sdq.simucomframework.SimuComConfig;
-import de.uka.ipd.sdq.simulation.AbstractSimulationConfig;
+import de.uka.ipd.sdq.simulation.core.AbstractSimulationConfig;
 import de.uka.ipd.sdq.workflow.launchconfig.ImageRegistryHelper;
 import de.uka.ipd.sdq.workflow.launchconfig.tabs.TabHelper;
 

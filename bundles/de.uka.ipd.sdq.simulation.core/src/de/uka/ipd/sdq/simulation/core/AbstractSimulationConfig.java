@@ -1,4 +1,4 @@
-package de.uka.ipd.sdq.simulation;
+package de.uka.ipd.sdq.simulation.core;
 
 import java.io.Serializable;
 import java.util.ArrayList;

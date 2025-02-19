@@ -47,7 +47,7 @@ import org.palladiosimulator.recorderframework.utils.RecorderExtensionHelper;
 
 import de.uka.ipd.sdq.codegen.simucontroller.SimuControllerImages;
 import de.uka.ipd.sdq.simucomframework.SimuComConfig;
-import de.uka.ipd.sdq.simulation.AbstractSimulationConfig;
+import de.uka.ipd.sdq.simulation.core.AbstractSimulationConfig;
 import de.uka.ipd.sdq.workflow.launchconfig.tabs.TabHelper;
 
 /**

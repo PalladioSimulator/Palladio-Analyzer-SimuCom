@@ -31,12 +31,12 @@ import de.uka.ipd.sdq.simucomframework.simucomstatus.SimuComStatus;
 import de.uka.ipd.sdq.simucomframework.simucomstatus.SimucomstatusFactory;
 import de.uka.ipd.sdq.simucomframework.usage.IUserFactory;
 import de.uka.ipd.sdq.simucomframework.usage.IWorkloadDriver;
-import de.uka.ipd.sdq.simulation.AbstractSimulationConfig;
 import de.uka.ipd.sdq.simulation.ISimulationControl;
-import de.uka.ipd.sdq.simulation.ISimulationListener;
 import de.uka.ipd.sdq.simulation.IStatusObserver;
 import de.uka.ipd.sdq.simulation.SimulationResult;
 import de.uka.ipd.sdq.simulation.abstractsimengine.ISimEngineFactory;
+import de.uka.ipd.sdq.simulation.core.AbstractSimulationConfig;
+import de.uka.ipd.sdq.simulation.core.ISimulationListener;
 import de.uka.ipd.sdq.simulation.preferences.SimulationPreferencesHelper;
 
 /**

@@ -5,7 +5,7 @@ import java.util.Map;
 
 import org.palladiosimulator.analyzer.workflow.core.configurations.AbstractCodeGenerationWorkflowRunConfiguration;
 
-import de.uka.ipd.sdq.simulation.AbstractSimulationConfig;
+import de.uka.ipd.sdq.simulation.core.AbstractSimulationConfig;
 import de.uka.ipd.sdq.workflow.extension.ExtendableJobConfiguration;
 
 public abstract class AbstractSimulationWorkflowConfiguration extends AbstractCodeGenerationWorkflowRunConfiguration
