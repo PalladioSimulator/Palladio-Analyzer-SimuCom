@@ -1,4 +1,4 @@
-package de.uka.ipd.sdq.codegen.simucontroller.runconfig;
+package de.uka.ipd.sdq.codegen.simucontroller.core.runconfig;
 
 import java.util.List;
 import java.util.Map;
@@ -8,7 +8,6 @@ import org.palladiosimulator.analyzer.workflow.core.runconfig.AccuracyInfluenceA
 import org.palladiosimulator.analyzer.workflow.core.runconfig.ExperimentRunDescriptor;
 import org.palladiosimulator.analyzer.workflow.core.runconfig.SensitivityAnalysisConfiguration;
 
-import de.uka.ipd.sdq.codegen.simucontroller.core.runconfig.AbstractSimulationWorkflowConfiguration;
 import de.uka.ipd.sdq.simucomframework.core.SimuComConfig;
 import de.uka.ipd.sdq.simulation.core.AbstractSimulationConfig;
 

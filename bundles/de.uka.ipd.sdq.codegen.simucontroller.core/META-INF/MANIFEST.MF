@@ -7,7 +7,8 @@ Export-Package: de.uka.ipd.sdq.codegen.simucontroller.core.runconfig
 Require-Bundle: de.uka.ipd.sdq.workflow;bundle-version="5.2.1",
  de.uka.ipd.sdq.simulation.core;bundle-version="5.2.1",
  org.palladiosimulator.analyzer.workflow.core;bundle-version="5.2.1",
- de.uka.ipd.sdq.workflow.launchconfig.core;bundle-version="5.2.1"
+ de.uka.ipd.sdq.workflow.launchconfig.core;bundle-version="5.2.1",
+ de.uka.ipd.sdq.simucomframework.core;bundle-version="5.2.1"
 Bundle-ActivationPolicy: lazy
 Bundle-Vendor: sdq.ipd.uka.de
 Bundle-RequiredExecutionEnvironment: JavaSE-17

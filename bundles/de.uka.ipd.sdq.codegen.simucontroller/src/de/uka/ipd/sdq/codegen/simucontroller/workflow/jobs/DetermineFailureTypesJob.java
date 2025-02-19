@@ -8,7 +8,7 @@ import org.palladiosimulator.reliability.FailureStatistics;
 import org.palladiosimulator.reliability.MarkovEvaluationType;
 import org.palladiosimulator.reliability.helper.MarkovFailureTypeHelper;
 
-import de.uka.ipd.sdq.codegen.simucontroller.runconfig.SimuComWorkflowConfiguration;
+import de.uka.ipd.sdq.codegen.simucontroller.core.runconfig.SimuComWorkflowConfiguration;
 import de.uka.ipd.sdq.workflow.jobs.CleanupFailedException;
 import de.uka.ipd.sdq.workflow.jobs.IBlackboardInteractingJob;
 import de.uka.ipd.sdq.workflow.jobs.JobFailedException;
