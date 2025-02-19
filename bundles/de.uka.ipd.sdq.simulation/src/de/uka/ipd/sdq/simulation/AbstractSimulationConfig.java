@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
-import org.palladiosimulator.analyzer.workflow.runconfig.ExperimentRunDescriptor;
+import org.palladiosimulator.analyzer.workflow.core.runconfig.ExperimentRunDescriptor;
 import org.palladiosimulator.recorderframework.config.IRecorderConfigurationFactory;
 import org.palladiosimulator.recorderframework.utils.RecorderExtensionHelper;
 
