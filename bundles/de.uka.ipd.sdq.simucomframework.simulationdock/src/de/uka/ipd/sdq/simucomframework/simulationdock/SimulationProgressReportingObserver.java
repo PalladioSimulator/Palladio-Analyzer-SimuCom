@@ -6,8 +6,8 @@ import java.util.Map;
 import org.osgi.service.event.Event;
 import org.osgi.service.event.EventAdmin;
 
-import de.uka.ipd.sdq.simulation.IStatusObserver;
 import de.uka.ipd.sdq.simulation.core.AbstractSimulationConfig;
+import de.uka.ipd.sdq.simulation.core.IStatusObserver;
 
 public class SimulationProgressReportingObserver implements IStatusObserver {
     private int lastPercent = 0;

@@ -1,7 +1,6 @@
-package de.uka.ipd.sdq.simulation;
+package de.uka.ipd.sdq.simulation.core;
 
 import de.uka.ipd.sdq.simucomframework.simucomstatus.SimuComStatus;
-import de.uka.ipd.sdq.simulation.core.AbstractSimulationConfig;
 
 /**
  * Control interface for simulation frameworks. It defines methods, which are responsible for

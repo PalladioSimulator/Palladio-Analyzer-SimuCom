@@ -1,4 +1,4 @@
-package de.uka.ipd.sdq.simulation;
+package de.uka.ipd.sdq.simulation.core;
 
 /**
  * Status enum signaling simulation success or failure

@@ -31,12 +31,12 @@ import de.uka.ipd.sdq.simucomframework.simucomstatus.SimuComStatus;
 import de.uka.ipd.sdq.simucomframework.simucomstatus.SimucomstatusFactory;
 import de.uka.ipd.sdq.simucomframework.usage.IUserFactory;
 import de.uka.ipd.sdq.simucomframework.usage.IWorkloadDriver;
-import de.uka.ipd.sdq.simulation.ISimulationControl;
-import de.uka.ipd.sdq.simulation.IStatusObserver;
-import de.uka.ipd.sdq.simulation.SimulationResult;
 import de.uka.ipd.sdq.simulation.abstractsimengine.ISimEngineFactory;
 import de.uka.ipd.sdq.simulation.core.AbstractSimulationConfig;
+import de.uka.ipd.sdq.simulation.core.ISimulationControl;
 import de.uka.ipd.sdq.simulation.core.ISimulationListener;
+import de.uka.ipd.sdq.simulation.core.IStatusObserver;
+import de.uka.ipd.sdq.simulation.core.SimulationResult;
 import de.uka.ipd.sdq.simulation.preferences.SimulationPreferencesHelper;
 
 /**
@@ -266,7 +266,7 @@ public abstract class AbstractMain implements ISimulationControl, BundleActivato
      * boolean)
      */
     @Override
-    public de.uka.ipd.sdq.simulation.SimulationResult startSimulation(final AbstractSimulationConfig config,
+    public de.uka.ipd.sdq.simulation.core.SimulationResult startSimulation(final AbstractSimulationConfig config,
             final IStatusObserver observer, final boolean isRemoteRun) {
         return run(observer, (SimuComConfig) config, isRemoteRun);
     }

@@ -7,7 +7,7 @@ import org.apache.log4j.Logger;
 import org.osgi.service.event.Event;
 import org.osgi.service.event.EventAdmin;
 
-import de.uka.ipd.sdq.simulation.IStatusObserver;
+import de.uka.ipd.sdq.simulation.core.IStatusObserver;
 
 public class DebugObserver implements IStatusObserver {
 
