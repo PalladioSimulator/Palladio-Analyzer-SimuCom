@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Palladio Simulation Core
+Bundle-SymbolicName: de.uka.ipd.sdq.simulation.core
+Bundle-Version: 5.2.1.qualifier
+Bundle-Vendor: edu.kit.ipd.sdq
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: JavaSE-17
