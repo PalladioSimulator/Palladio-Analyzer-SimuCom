@@ -1,4 +1,4 @@
-package de.uka.ipd.sdq.simulation;
+package de.uka.ipd.sdq.simulation.core;
 
 /**
  * Interface for observers interested in the progress of the simulation

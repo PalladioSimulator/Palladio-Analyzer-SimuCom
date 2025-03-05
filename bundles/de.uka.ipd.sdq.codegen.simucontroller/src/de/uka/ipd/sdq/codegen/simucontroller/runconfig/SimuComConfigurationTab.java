@@ -36,7 +36,7 @@ import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.Text;
-import org.palladiosimulator.analyzer.workflow.ConstantsContainer;
+import org.palladiosimulator.analyzer.workflow.core.ConstantsContainer;
 import org.palladiosimulator.editors.commons.dialogs.selection.PalladioSelectEObjectDialog;
 import org.palladiosimulator.pcm.ui.provider.PalladioItemProviderAdapterFactory;
 import org.palladiosimulator.pcm.usagemodel.UsageModel;
@@ -46,8 +46,8 @@ import org.palladiosimulator.recorderframework.launch.RecorderTabGroup;
 import org.palladiosimulator.recorderframework.utils.RecorderExtensionHelper;
 
 import de.uka.ipd.sdq.codegen.simucontroller.SimuControllerImages;
-import de.uka.ipd.sdq.simucomframework.SimuComConfig;
-import de.uka.ipd.sdq.simulation.AbstractSimulationConfig;
+import de.uka.ipd.sdq.simucomframework.core.SimuComConfig;
+import de.uka.ipd.sdq.simulation.core.AbstractSimulationConfig;
 import de.uka.ipd.sdq.workflow.launchconfig.tabs.TabHelper;
 
 /**

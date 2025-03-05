@@ -1,0 +1,17 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: SimuCom Framework Core
+Bundle-SymbolicName: de.uka.ipd.sdq.simucomframework.core
+Bundle-Version: 5.2.1.qualifier
+Export-Package: de.uka.ipd.sdq.simucomframework.core
+Require-Bundle: org.apache.log4j;bundle-version="1.2.19",
+ de.uka.ipd.sdq.simulation.abstractsimengine;bundle-version="5.2.1",
+ de.uka.ipd.sdq.simulation.core;bundle-version="5.2.1",
+ org.eclipse.emf.ecore;bundle-version="2.33.0",
+ org.palladiosimulator.analyzer.workflow.core;bundle-version="5.2.1",
+ org.palladiosimulator.recorderframework;bundle-version="5.2.1",
+ de.uka.ipd.sdq.probfunction.math;bundle-version="5.2.1",
+ de.uka.ipd.sdq.simucomframework.variables;bundle-version="5.2.1"
+Bundle-Vendor: palladiosimulator.org
+Bundle-RequiredExecutionEnvironment: JavaSE-17
+Bundle-ActivationPolicy: lazy

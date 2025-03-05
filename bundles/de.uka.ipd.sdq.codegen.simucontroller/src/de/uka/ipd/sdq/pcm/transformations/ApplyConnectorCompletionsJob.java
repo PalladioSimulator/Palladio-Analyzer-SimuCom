@@ -9,10 +9,10 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.palladiosimulator.analyzer.workflow.blackboard.PCMResourceSetPartition;
+import org.palladiosimulator.analyzer.workflow.core.blackboard.PCMResourceSetPartition;
+import org.palladiosimulator.analyzer.workflow.core.jobs.LoadPCMModelsIntoBlackboardJob;
 import org.palladiosimulator.analyzer.workflow.jobs.CreatePluginProjectJob;
 import org.palladiosimulator.analyzer.workflow.jobs.LoadMiddlewareConfigurationIntoBlackboardJob;
-import org.palladiosimulator.analyzer.workflow.jobs.LoadPCMModelsIntoBlackboardJob;
 import org.palladiosimulator.pcm.allocation.AllocationContext;
 import org.palladiosimulator.pcm.allocation.AllocationFactory;
 import org.palladiosimulator.pcm.core.composition.AssemblyConnector;
@@ -27,7 +27,7 @@ import org.palladiosimulator.pcm.resourceenvironment.ResourceenvironmentPackage;
 
 import com.google.common.collect.Streams;
 
-import de.uka.ipd.sdq.codegen.simucontroller.runconfig.AbstractSimulationWorkflowConfiguration;
+import de.uka.ipd.sdq.codegen.simucontroller.core.runconfig.AbstractSimulationWorkflowConfiguration;
 import de.uka.ipd.sdq.featureconfig.Configuration;
 import de.uka.ipd.sdq.pcm.transformations.builder.IBuilder;
 import de.uka.ipd.sdq.pcm.transformations.builder.connectors.ConnectorReplacingBuilder;

@@ -14,12 +14,12 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 
-import de.uka.ipd.sdq.codegen.simucontroller.runconfig.AbstractSimulationWorkflowConfiguration;
+import de.uka.ipd.sdq.codegen.simucontroller.core.runconfig.AbstractSimulationWorkflowConfiguration;
 import de.uka.ipd.sdq.identifier.Identifier;
 
-import org.palladiosimulator.analyzer.workflow.blackboard.PCMResourceSetPartition;
-import org.palladiosimulator.analyzer.workflow.jobs.LoadPCMModelsIntoBlackboardJob;
-import org.palladiosimulator.analyzer.workflow.runconfig.SensitivityAnalysisConfiguration;
+import org.palladiosimulator.analyzer.workflow.core.blackboard.PCMResourceSetPartition;
+import org.palladiosimulator.analyzer.workflow.core.jobs.LoadPCMModelsIntoBlackboardJob;
+import org.palladiosimulator.analyzer.workflow.core.runconfig.SensitivityAnalysisConfiguration;
 import org.palladiosimulator.pcm.core.PCMRandomVariable;
 import org.palladiosimulator.pcm.core.entity.Entity;
 import org.palladiosimulator.pcm.usagemodel.ClosedWorkload;

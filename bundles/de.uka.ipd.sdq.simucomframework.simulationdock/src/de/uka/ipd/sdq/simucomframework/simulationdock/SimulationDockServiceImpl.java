@@ -23,9 +23,9 @@ import org.osgi.util.tracker.ServiceTracker;
 import de.uka.ipd.sdq.simucomframework.AbstractMain;
 import de.uka.ipd.sdq.simucomframework.model.SimuComModel;
 import de.uka.ipd.sdq.simucomframework.simucomstatus.SimuComStatus;
-import de.uka.ipd.sdq.simulation.AbstractSimulationConfig;
-import de.uka.ipd.sdq.simulation.ISimulationControl;
-import de.uka.ipd.sdq.simulation.SimulationResult;
+import de.uka.ipd.sdq.simulation.core.AbstractSimulationConfig;
+import de.uka.ipd.sdq.simulation.core.ISimulationControl;
+import de.uka.ipd.sdq.simulation.core.SimulationResult;
 
 public class SimulationDockServiceImpl implements SimulationDockService {
 

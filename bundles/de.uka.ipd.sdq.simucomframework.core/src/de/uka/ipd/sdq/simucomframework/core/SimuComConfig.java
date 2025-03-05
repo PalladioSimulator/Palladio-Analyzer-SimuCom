@@ -1,4 +1,4 @@
-package de.uka.ipd.sdq.simucomframework;
+package de.uka.ipd.sdq.simucomframework.core;
 
 import java.io.Serializable;
 import java.util.HashMap;
@@ -7,11 +7,11 @@ import java.util.Map;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
-import org.palladiosimulator.analyzer.workflow.runconfig.ExperimentRunDescriptor;
+import org.palladiosimulator.analyzer.workflow.core.runconfig.ExperimentRunDescriptor;
 import org.palladiosimulator.recorderframework.config.IRecorderConfigurationFactory;
 
 import de.uka.ipd.sdq.probfunction.math.IRandomGenerator;
-import de.uka.ipd.sdq.simulation.AbstractSimulationConfig;
+import de.uka.ipd.sdq.simulation.core.AbstractSimulationConfig;
 
 /**
  * @author roman

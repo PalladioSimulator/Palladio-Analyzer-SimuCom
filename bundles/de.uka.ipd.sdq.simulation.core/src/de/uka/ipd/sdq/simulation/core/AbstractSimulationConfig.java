@@ -1,4 +1,4 @@
-package de.uka.ipd.sdq.simulation;
+package de.uka.ipd.sdq.simulation.core;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
-import org.palladiosimulator.analyzer.workflow.runconfig.ExperimentRunDescriptor;
+import org.palladiosimulator.analyzer.workflow.core.runconfig.ExperimentRunDescriptor;
 import org.palladiosimulator.recorderframework.config.IRecorderConfigurationFactory;
 import org.palladiosimulator.recorderframework.utils.RecorderExtensionHelper;
 
