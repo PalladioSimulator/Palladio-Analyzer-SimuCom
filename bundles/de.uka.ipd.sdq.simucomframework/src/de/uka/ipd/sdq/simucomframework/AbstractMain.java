@@ -2,6 +2,7 @@ package de.uka.ipd.sdq.simucomframework;
 
 import java.util.Arrays;
 import java.util.Hashtable;
+import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -21,7 +22,7 @@ import org.palladiosimulator.probeframework.calculator.Calculator;
 import org.palladiosimulator.probeframework.probes.EventProbeList;
 import org.palladiosimulator.probeframework.probes.TriggeredProbe;
 
-import de.uka.ipd.sdq.errorhandling.dialogs.issues.DisplayIssuesDialog;
+import de.uka.ipd.sdq.errorhandling.core.SeverityAndIssue;
 import de.uka.ipd.sdq.scheduler.resources.active.IResourceTableManager;
 import de.uka.ipd.sdq.scheduler.resources.active.ResourceTableManager;
 import de.uka.ipd.sdq.simucomframework.core.SimuComConfig;
@@ -163,8 +164,7 @@ public abstract class AbstractMain implements ISimulationControl, IModelledApp, 
                 LOGGER.info(model.getIssues()
                     .size() + " issues experience during the simulation run.");
             }
-            final DisplayIssuesDialog runner = new DisplayIssuesDialog(model.getIssues());
-            DisplayIssuesDialog.showDialogSync(runner);
+            handleModelIssues(model.getIssues());
         }
 
         if (LOGGER.isEnabledFor(Level.INFO)) {
@@ -175,6 +175,8 @@ public abstract class AbstractMain implements ISimulationControl, IModelledApp, 
             .disposeRandomGenerator();
         return model.getErrorStatus();
     }
+
+    protected abstract void handleModelIssues(List<SeverityAndIssue> list);
 
     /**
      * Request a simulation stop

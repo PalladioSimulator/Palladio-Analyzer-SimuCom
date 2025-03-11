@@ -3,6 +3,11 @@ Bundle-ManifestVersion: 2
 Bundle-Name: de.uka.ipd.sdq.simucomframework.ui
 Bundle-SymbolicName: de.uka.ipd.sdq.simucomframework.ui
 Bundle-Version: 5.2.1.qualifier
+Export-Package: de.uka.ipd.sdq.simucomframework.ui
+Require-Bundle: org.eclipse.osgi;bundle-version="3.18.300",
+ de.uka.ipd.sdq.errorhandling;bundle-version="5.2.1",
+ de.uka.ipd.sdq.simucomframework;bundle-version="5.2.1",
+ de.uka.ipd.sdq.simucomframework.simucomstatus;bundle-version="5.2.1"
 Bundle-Vendor: palladiosimulator.org
 Bundle-RequiredExecutionEnvironment: JavaSE-17
 Bundle-ActivationPolicy: lazy
