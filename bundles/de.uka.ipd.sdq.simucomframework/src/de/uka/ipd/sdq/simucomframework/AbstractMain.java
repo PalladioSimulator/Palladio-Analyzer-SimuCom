@@ -39,7 +39,6 @@ import de.uka.ipd.sdq.simulation.core.ISimulationControl;
 import de.uka.ipd.sdq.simulation.core.ISimulationListener;
 import de.uka.ipd.sdq.simulation.core.IStatusObserver;
 import de.uka.ipd.sdq.simulation.core.SimulationResult;
-import de.uka.ipd.sdq.simulation.preferences.SimulationPreferencesHelper;
 
 /**
  * Base class for simulation instances. It contains a generic simulation start and stop logic as
@@ -213,7 +212,7 @@ public abstract class AbstractMain implements ISimulationControl, IModelledApp, 
     public void prepareSimulation(final AbstractSimulationConfig config, final IStatusObserver observer,
             final boolean isRemoteRun) {
         // load factory for the preferred simulation engine
-        final ISimEngineFactory factory = SimulationPreferencesHelper.getPreferredSimulationEngine();
+        final ISimEngineFactory factory = getSimulationEngine();
         if (factory == null) {
             throw new RuntimeException("There is no simulation engine available. Install at least one engine.");
         }
@@ -261,6 +260,8 @@ public abstract class AbstractMain implements ISimulationControl, IModelledApp, 
                                         this.model.getSimulationControl()))));
         }
     }
+
+    protected abstract ISimEngineFactory getSimulationEngine();
 
     private void attachUsageResponseTimeCalculators(final IWorkloadDriver[] workloadDrivers) {
         for (final IWorkloadDriver driver : workloadDrivers) {
