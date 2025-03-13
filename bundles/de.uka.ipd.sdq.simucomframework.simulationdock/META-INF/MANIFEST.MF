@@ -7,7 +7,7 @@ Bundle-Activator: de.uka.ipd.sdq.simucomframework.simulationdock.Activator
 Bundle-Vendor: sdq.ipd.uka.de
 Bundle-ActivationPolicy: lazy
 Export-Package: de.uka.ipd.sdq.simucomframework.simulationdock
-Require-Bundle: de.uka.ipd.sdq.simucomframework,
+Require-Bundle: de.uka.ipd.sdq.simucomframework.core;bundle-version="5.2.1",
  org.eclipse.osgi.services,
  org.eclipse.emf.ecore,
  org.apache.log4j,
