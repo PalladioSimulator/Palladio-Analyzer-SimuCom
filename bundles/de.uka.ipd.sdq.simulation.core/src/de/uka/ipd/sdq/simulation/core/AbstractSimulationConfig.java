@@ -8,7 +8,7 @@ import java.util.Map;
 import org.apache.log4j.Logger;
 import org.palladiosimulator.analyzer.workflow.core.runconfig.ExperimentRunDescriptor;
 import org.palladiosimulator.recorderframework.core.config.IRecorderConfigurationFactory;
-import org.palladiosimulator.recorderframework.utils.RecorderExtensionUiHelper;
+import org.palladiosimulator.recorderframework.core.utils.RecorderExtensionHelper;
 
 import de.uka.ipd.sdq.probfunction.math.IRandomGenerator;
 import de.uka.ipd.sdq.simulation.abstractsimengine.ISimulationConfig;
@@ -76,15 +76,17 @@ public abstract class AbstractSimulationConfig implements Serializable, ISimulat
      * Constructs a new AbstractSimulationConfig.
      * 
      * This constructor initializes the RecorderFramework (legacy).
+     * 
      * @param configuration
      *            a map which maps configuration option IDs to their values.
      */
     public AbstractSimulationConfig(final Map<String, Object> configuration, final boolean debug) {
         this(configuration, debug, null);
-        this.recorderConfigurationFactory = RecorderExtensionUiHelper.getRecorderConfigurationFactoryForName(this.recorderName);
+        this.recorderConfigurationFactory = RecorderExtensionHelper
+            .getRecorderConfigurationFactoryForName(this.recorderName);
         this.recorderConfigurationFactory.initialize(configuration);
     }
-    
+
     /**
      * Constructs a new AbstractSimulationConfig.
      * 
@@ -93,7 +95,8 @@ public abstract class AbstractSimulationConfig implements Serializable, ISimulat
      * 
      * This constructor does not initialize the RecorderFramework.
      */
-    public AbstractSimulationConfig(final Map<String, Object> configuration, final boolean debug, IRecorderConfigurationFactory configFactory) {
+    public AbstractSimulationConfig(final Map<String, Object> configuration, final boolean debug,
+            IRecorderConfigurationFactory configFactory) {
         this.verboseLogging = (Boolean) configuration.get(VERBOSE_LOGGING);
         this.isDebug = debug;
         this.variationId = (String) configuration.get(VARIATION_ID);
@@ -105,10 +108,10 @@ public abstract class AbstractSimulationConfig implements Serializable, ISimulat
         this.randomSeed = getSeedFromConfig(configuration);
 
         this.recorderName = (String) configuration.get(PERSISTENCE_RECORDER_NAME);
-        
+
         this.recorderConfigurationFactory = configFactory;
 
-        this.listeners = new ArrayList<ISimulationListener>();        
+        this.listeners = new ArrayList<>();
     }
 
     /**
@@ -117,8 +120,6 @@ public abstract class AbstractSimulationConfig implements Serializable, ISimulat
     public final IRecorderConfigurationFactory getRecorderConfigurationFactory() {
         return this.recorderConfigurationFactory;
     }
-    
-    
 
     public boolean getVerboseLogging() {
         return this.verboseLogging || this.isDebug;
