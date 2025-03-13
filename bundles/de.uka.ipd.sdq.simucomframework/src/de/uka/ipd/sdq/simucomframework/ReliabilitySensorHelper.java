@@ -2,8 +2,8 @@ package de.uka.ipd.sdq.simucomframework;
 
 import org.palladiosimulator.probeframework.measurement.RequestContext;
 
-import de.uka.ipd.sdq.simucomframework.exceptions.FailureException;
-import de.uka.ipd.sdq.simucomframework.model.SimuComModel;
+import de.uka.ipd.sdq.simucomframework.core.exceptions.FailureException;
+import de.uka.ipd.sdq.simucomframework.core.model.SimuComModel;
 
 /**
  * This class provides auxiliary functionality for capturing reliability-relevant sensor data during

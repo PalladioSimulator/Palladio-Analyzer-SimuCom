@@ -3,7 +3,14 @@ Bundle-ManifestVersion: 2
 Bundle-Name: SimuCom Framework Core
 Bundle-SymbolicName: de.uka.ipd.sdq.simucomframework.core
 Bundle-Version: 5.2.1.qualifier
-Export-Package: de.uka.ipd.sdq.simucomframework.core
+Export-Package: de.uka.ipd.sdq.simucomframework.core,
+ de.uka.ipd.sdq.simucomframework.core.calculator,
+ de.uka.ipd.sdq.simucomframework.core.entities,
+ de.uka.ipd.sdq.simucomframework.core.exceptions,
+ de.uka.ipd.sdq.simucomframework.core.model,
+ de.uka.ipd.sdq.simucomframework.core.probes,
+ de.uka.ipd.sdq.simucomframework.core.resources,
+ de.uka.ipd.sdq.simucomframework.core.usage
 Require-Bundle: org.apache.log4j;bundle-version="1.2.19",
  de.uka.ipd.sdq.simulation.abstractsimengine;bundle-version="5.2.1",
  de.uka.ipd.sdq.simulation.core;bundle-version="5.2.1",
@@ -11,7 +18,16 @@ Require-Bundle: org.apache.log4j;bundle-version="1.2.19",
  org.palladiosimulator.analyzer.workflow.core;bundle-version="5.2.1",
  org.palladiosimulator.recorderframework;bundle-version="5.2.1",
  de.uka.ipd.sdq.probfunction.math;bundle-version="5.2.1",
- de.uka.ipd.sdq.simucomframework.variables;bundle-version="5.2.1"
+ de.uka.ipd.sdq.simucomframework.variables;bundle-version="5.2.1",
+ de.uka.ipd.sdq.errorhandling.core;bundle-version="5.2.1",
+ org.palladiosimulator.reliability;bundle-version="5.2.1",
+ org.palladiosimulator.probeframework;bundle-version="5.2.1",
+ de.uka.ipd.sdq.scheduler;bundle-version="5.2.1",
+ org.palladiosimulator.metricspec;bundle-version="5.2.1",
+ org.palladiosimulator.edp2;bundle-version="5.2.1",
+ org.palladiosimulator.pcm.edp2.measuringpoint;bundle-version="5.2.1",
+ org.palladiosimulator.measurementframework;bundle-version="5.2.1",
+ de.uka.ipd.sdq.simucomframework.simucomstatus;bundle-version="5.2.1"
 Bundle-Vendor: palladiosimulator.org
 Bundle-RequiredExecutionEnvironment: JavaSE-17
 Bundle-ActivationPolicy: lazy
