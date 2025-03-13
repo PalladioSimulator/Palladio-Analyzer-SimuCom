@@ -8,7 +8,7 @@ import java.util.Map;
 import org.apache.log4j.Logger;
 import org.palladiosimulator.analyzer.workflow.core.runconfig.ExperimentRunDescriptor;
 import org.palladiosimulator.recorderframework.core.config.IRecorderConfigurationFactory;
-import org.palladiosimulator.recorderframework.utils.RecorderExtensionHelper;
+import org.palladiosimulator.recorderframework.utils.RecorderExtensionUiHelper;
 
 import de.uka.ipd.sdq.probfunction.math.IRandomGenerator;
 import de.uka.ipd.sdq.simulation.abstractsimengine.ISimulationConfig;
@@ -81,7 +81,7 @@ public abstract class AbstractSimulationConfig implements Serializable, ISimulat
      */
     public AbstractSimulationConfig(final Map<String, Object> configuration, final boolean debug) {
         this(configuration, debug, null);
-        this.recorderConfigurationFactory = RecorderExtensionHelper.getRecorderConfigurationFactoryForName(this.recorderName);
+        this.recorderConfigurationFactory = RecorderExtensionUiHelper.getRecorderConfigurationFactoryForName(this.recorderName);
         this.recorderConfigurationFactory.initialize(configuration);
     }
     

@@ -12,7 +12,7 @@ import org.palladiosimulator.recorderframework.core.IRecorder;
 import org.palladiosimulator.recorderframework.core.config.AbstractRecorderConfiguration;
 import org.palladiosimulator.recorderframework.core.config.IRecorderConfiguration;
 import org.palladiosimulator.recorderframework.core.config.IRecorderConfigurationFactory;
-import org.palladiosimulator.recorderframework.utils.RecorderExtensionHelper;
+import org.palladiosimulator.recorderframework.utils.RecorderExtensionUiHelper;
 
 /**
  * Factory class to create @see {@link Calculator}s used in a SimuCom simulation run.
@@ -46,7 +46,7 @@ public class RecorderAttachingCalculatorFactoryDecorator implements IGenericCalc
                 calculator.getMetricDesciption());
         recorderConfigurationMap.put(AbstractRecorderConfiguration.MEASURING_POINT, calculator.getMeasuringPoint());
 
-        final IRecorder recorder = RecorderExtensionHelper.instantiateRecorderImplementationForRecorder(recorderName);
+        final IRecorder recorder = RecorderExtensionUiHelper.instantiateRecorderImplementationForRecorder(recorderName);
         final IRecorderConfiguration recorderConfiguration = configurationFactory
             .createRecorderConfiguration(recorderConfigurationMap);
         recorder.initialize(recorderConfiguration);
