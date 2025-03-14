@@ -1,3 +1,4 @@
+/** */
 package de.uka.ipd.sdq.simucomframework.core.calculator;
 
 import java.util.HashMap;
@@ -12,7 +13,7 @@ import org.palladiosimulator.recorderframework.core.IRecorder;
 import org.palladiosimulator.recorderframework.core.config.AbstractRecorderConfiguration;
 import org.palladiosimulator.recorderframework.core.config.IRecorderConfiguration;
 import org.palladiosimulator.recorderframework.core.config.IRecorderConfigurationFactory;
-import org.palladiosimulator.recorderframework.utils.RecorderExtensionUiHelper;
+import org.palladiosimulator.recorderframework.core.utils.RecorderExtensionHelper;
 
 /**
  * Factory class to create @see {@link Calculator}s used in a SimuCom simulation run.
@@ -26,12 +27,12 @@ public class RecorderAttachingCalculatorFactoryDecorator implements IGenericCalc
     private final IGenericCalculatorFactory decoratedCalculatorFactory;
     private final String recorderName;
     private final IRecorderConfigurationFactory configurationFactory;
-    
+
     public RecorderAttachingCalculatorFactoryDecorator(final IGenericCalculatorFactory decoratedCalculatorFactory,
             final String recorderName, IRecorderConfigurationFactory configurationFactory) {
         this.decoratedCalculatorFactory = decoratedCalculatorFactory;
         this.recorderName = recorderName;
-        this.configurationFactory = configurationFactory;        
+        this.configurationFactory = configurationFactory;
     }
 
     @Override
@@ -41,12 +42,12 @@ public class RecorderAttachingCalculatorFactoryDecorator implements IGenericCalc
     }
 
     private Calculator setupRecorder(final Calculator calculator) {
-        final Map<String, Object> recorderConfigurationMap = new HashMap<String, Object>();
+        final Map<String, Object> recorderConfigurationMap = new HashMap<>();
         recorderConfigurationMap.put(AbstractRecorderConfiguration.RECORDER_ACCEPTED_METRIC,
                 calculator.getMetricDesciption());
         recorderConfigurationMap.put(AbstractRecorderConfiguration.MEASURING_POINT, calculator.getMeasuringPoint());
 
-        final IRecorder recorder = RecorderExtensionUiHelper.instantiateRecorderImplementationForRecorder(recorderName);
+        final IRecorder recorder = RecorderExtensionHelper.instantiateRecorderImplementationForRecorder(recorderName);
         final IRecorderConfiguration recorderConfiguration = configurationFactory
             .createRecorderConfiguration(recorderConfigurationMap);
         recorder.initialize(recorderConfiguration);
