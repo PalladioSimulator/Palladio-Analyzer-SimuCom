@@ -12,8 +12,8 @@ import org.palladiosimulator.analyzer.accuracy.ui.jobs.AccuracyInfluenceAnalysis
 import org.palladiosimulator.analyzer.workflow.core.configurations.AbstractPCMLaunchConfigurationDelegate;
 import org.palladiosimulator.analyzer.workflow.core.configurations.PCMWorkflowConfigurationBuilder;
 
+import de.uka.ipd.sdq.codegen.simucontroller.core.debug.IDebugListener;
 import de.uka.ipd.sdq.codegen.simucontroller.core.runconfig.SimuComWorkflowConfiguration;
-import de.uka.ipd.sdq.codegen.simucontroller.debug.IDebugListener;
 import de.uka.ipd.sdq.codegen.simucontroller.debug.SimulationDebugListener;
 import de.uka.ipd.sdq.workflow.BlackboardBasedWorkflow;
 import de.uka.ipd.sdq.workflow.WorkflowExceptionHandler;

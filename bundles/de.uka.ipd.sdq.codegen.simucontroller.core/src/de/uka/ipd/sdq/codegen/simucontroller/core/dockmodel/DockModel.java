@@ -1,17 +1,17 @@
-package de.uka.ipd.sdq.codegen.simucontroller.dockmodel;
+package de.uka.ipd.sdq.codegen.simucontroller.core.dockmodel;
 
 import java.io.Serializable;
 import java.util.Observable;
 
-import de.uka.ipd.sdq.codegen.simucontroller.dockmodel.events.DockBusyEvent;
-import de.uka.ipd.sdq.codegen.simucontroller.dockmodel.events.DockIdleEvent;
-import de.uka.ipd.sdq.codegen.simucontroller.dockmodel.events.DockPerformedDebugStepEvent;
-import de.uka.ipd.sdq.codegen.simucontroller.dockmodel.events.DockResumedEvent;
-import de.uka.ipd.sdq.codegen.simucontroller.dockmodel.events.DockSimTimeChangedEvent;
-import de.uka.ipd.sdq.codegen.simucontroller.dockmodel.events.DockSimulationStartedEvent;
-import de.uka.ipd.sdq.codegen.simucontroller.dockmodel.events.DockSimulationTerminatedEvent;
-import de.uka.ipd.sdq.codegen.simucontroller.dockmodel.events.DockStartedDebugStepEvent;
-import de.uka.ipd.sdq.codegen.simucontroller.dockmodel.events.DockSuspendedEvent;
+import de.uka.ipd.sdq.codegen.simucontroller.core.dockmodel.events.DockBusyEvent;
+import de.uka.ipd.sdq.codegen.simucontroller.core.dockmodel.events.DockIdleEvent;
+import de.uka.ipd.sdq.codegen.simucontroller.core.dockmodel.events.DockPerformedDebugStepEvent;
+import de.uka.ipd.sdq.codegen.simucontroller.core.dockmodel.events.DockResumedEvent;
+import de.uka.ipd.sdq.codegen.simucontroller.core.dockmodel.events.DockSimTimeChangedEvent;
+import de.uka.ipd.sdq.codegen.simucontroller.core.dockmodel.events.DockSimulationStartedEvent;
+import de.uka.ipd.sdq.codegen.simucontroller.core.dockmodel.events.DockSimulationTerminatedEvent;
+import de.uka.ipd.sdq.codegen.simucontroller.core.dockmodel.events.DockStartedDebugStepEvent;
+import de.uka.ipd.sdq.codegen.simucontroller.core.dockmodel.events.DockSuspendedEvent;
 import de.uka.ipd.sdq.simucomframework.simulationdock.SimulationDockService;
 
 /**
@@ -23,8 +23,8 @@ import de.uka.ipd.sdq.simucomframework.simulationdock.SimulationDockService;
  */
 public class DockModel extends Observable implements Serializable {
     /**
-	 * 
-	 */
+     * 
+     */
     private static final long serialVersionUID = -2378222579642029801L;
     private int percentDone = 0;
     private double simTime = 0;

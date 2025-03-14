@@ -3,9 +3,9 @@ package de.uka.ipd.sdq.codegen.simucontroller.workflow.jobs;
 import org.eclipse.core.runtime.IProgressMonitor;
 
 import de.uka.ipd.sdq.codegen.simucontroller.SimuControllerPlugin;
+import de.uka.ipd.sdq.codegen.simucontroller.core.debug.IDebugListener;
+import de.uka.ipd.sdq.codegen.simucontroller.core.dockmodel.DockModel;
 import de.uka.ipd.sdq.codegen.simucontroller.core.runconfig.AbstractSimulationWorkflowConfiguration;
-import de.uka.ipd.sdq.codegen.simucontroller.debug.IDebugListener;
-import de.uka.ipd.sdq.codegen.simucontroller.dockmodel.DockModel;
 import de.uka.ipd.sdq.simucomframework.simulationdock.SimulationDockService;
 import de.uka.ipd.sdq.simucomframework.simulationdock.SimulationDockServiceImpl;
 import de.uka.ipd.sdq.workflow.extension.AbstractExtendableJob;

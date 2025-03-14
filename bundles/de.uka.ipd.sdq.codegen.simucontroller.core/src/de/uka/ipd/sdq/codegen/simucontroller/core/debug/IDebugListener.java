@@ -1,6 +1,6 @@
-package de.uka.ipd.sdq.codegen.simucontroller.debug;
+package de.uka.ipd.sdq.codegen.simucontroller.core.debug;
 
-import de.uka.ipd.sdq.codegen.simucontroller.dockmodel.DockModel;
+import de.uka.ipd.sdq.codegen.simucontroller.core.dockmodel.DockModel;
 
 /**
  * TODO currently, the simucontroller.debug package is exported. Maybe, to hide the implementation,

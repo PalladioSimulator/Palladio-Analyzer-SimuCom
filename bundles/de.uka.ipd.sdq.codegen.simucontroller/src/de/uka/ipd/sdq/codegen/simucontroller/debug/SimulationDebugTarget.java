@@ -18,10 +18,10 @@ import org.eclipse.debug.core.model.IProcess;
 import org.eclipse.debug.core.model.IThread;
 import org.eclipse.emf.common.notify.Notification;
 
-import de.uka.ipd.sdq.codegen.simucontroller.dockmodel.DockModel;
-import de.uka.ipd.sdq.codegen.simucontroller.dockmodel.events.DockEvent;
-import de.uka.ipd.sdq.codegen.simucontroller.dockmodel.events.DockSimulationStartedEvent;
-import de.uka.ipd.sdq.codegen.simucontroller.dockmodel.events.DockSimulationTerminatedEvent;
+import de.uka.ipd.sdq.codegen.simucontroller.core.dockmodel.DockModel;
+import de.uka.ipd.sdq.codegen.simucontroller.core.dockmodel.events.DockEvent;
+import de.uka.ipd.sdq.codegen.simucontroller.core.dockmodel.events.DockSimulationStartedEvent;
+import de.uka.ipd.sdq.codegen.simucontroller.core.dockmodel.events.DockSimulationTerminatedEvent;
 import de.uka.ipd.sdq.simucomframework.simucomstatus.Process;
 import de.uka.ipd.sdq.simucomframework.simucomstatus.SimuComStatus;
 import de.uka.ipd.sdq.simucomframework.simucomstatus.SimucomstatusPackage;

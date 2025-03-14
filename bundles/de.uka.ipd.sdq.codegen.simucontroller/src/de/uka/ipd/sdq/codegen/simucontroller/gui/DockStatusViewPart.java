@@ -11,10 +11,10 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.part.ViewPart;
 
 import de.uka.ipd.sdq.codegen.simucontroller.SimuControllerPlugin;
-import de.uka.ipd.sdq.codegen.simucontroller.dockmodel.DockModel;
+import de.uka.ipd.sdq.codegen.simucontroller.core.dockmodel.DockModel;
+import de.uka.ipd.sdq.codegen.simucontroller.core.dockmodel.events.DockAddedEvent;
+import de.uka.ipd.sdq.codegen.simucontroller.core.dockmodel.events.DockDeletedEvent;
 import de.uka.ipd.sdq.codegen.simucontroller.dockmodel.DocksModel;
-import de.uka.ipd.sdq.codegen.simucontroller.dockmodel.events.DockAddedEvent;
-import de.uka.ipd.sdq.codegen.simucontroller.dockmodel.events.DockDeletedEvent;
 
 public class DockStatusViewPart extends ViewPart implements Observer {
 
