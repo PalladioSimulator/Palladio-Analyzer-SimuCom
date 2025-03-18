@@ -3,9 +3,9 @@ package de.uka.ipd.sdq.simucomframework.fork;
 import org.apache.log4j.Logger;
 
 import de.uka.ipd.sdq.scheduler.resources.active.IResourceTableManager;
-import de.uka.ipd.sdq.simucomframework.Context;
 import de.uka.ipd.sdq.simucomframework.SimuComContext;
-import de.uka.ipd.sdq.simucomframework.SimuComSimProcess;
+import de.uka.ipd.sdq.simucomframework.core.Context;
+import de.uka.ipd.sdq.simucomframework.core.SimuComSimProcess;
 import de.uka.ipd.sdq.simulation.abstractsimengine.ISimProcess;
 
 /**

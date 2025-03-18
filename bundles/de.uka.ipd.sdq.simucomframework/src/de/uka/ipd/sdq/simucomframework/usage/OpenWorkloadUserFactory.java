@@ -5,7 +5,10 @@ import org.palladiosimulator.commons.emfutils.EMFLoadHelper;
 import org.palladiosimulator.pcm.usagemodel.UsageScenario;
 
 import de.uka.ipd.sdq.scheduler.resources.active.IResourceTableManager;
-import de.uka.ipd.sdq.simucomframework.model.SimuComModel;
+import de.uka.ipd.sdq.simucomframework.core.model.SimuComModel;
+import de.uka.ipd.sdq.simucomframework.core.usage.IScenarioRunner;
+import de.uka.ipd.sdq.simucomframework.core.usage.IUser;
+import de.uka.ipd.sdq.simucomframework.core.usage.IUserFactory;
 
 /**
  * A factory for creating open workload users

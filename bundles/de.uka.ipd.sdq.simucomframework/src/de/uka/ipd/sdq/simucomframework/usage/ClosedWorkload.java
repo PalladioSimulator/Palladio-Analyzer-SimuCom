@@ -3,6 +3,8 @@ package de.uka.ipd.sdq.simucomframework.usage;
 import java.util.LinkedList;
 import java.util.Queue;
 
+import de.uka.ipd.sdq.simucomframework.core.usage.IUserFactory;
+
 /**
  * Class used for executing a closed workload. The class creates as many users as specified and
  * executes them simultaniously

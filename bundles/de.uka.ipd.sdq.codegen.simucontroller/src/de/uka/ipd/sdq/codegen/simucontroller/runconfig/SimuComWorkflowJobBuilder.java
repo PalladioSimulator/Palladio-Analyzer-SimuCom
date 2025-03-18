@@ -7,10 +7,10 @@ import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.CoreException;
 import org.palladiosimulator.analyzer.workflow.core.configurations.AbstractPCMWorkflowRunConfiguration;
-import org.palladiosimulator.analyzer.workflow.jobs.PCMWorkflowJobBuilder;
+import org.palladiosimulator.analyzer.workflow.core.jobs.PCMWorkflowJobBuilder;
 
+import de.uka.ipd.sdq.codegen.simucontroller.core.debug.IDebugListener;
 import de.uka.ipd.sdq.codegen.simucontroller.core.runconfig.SimuComWorkflowConfiguration;
-import de.uka.ipd.sdq.codegen.simucontroller.debug.IDebugListener;
 import de.uka.ipd.sdq.codegen.simucontroller.workflow.jobs.SensitivityAnalysisJob;
 import de.uka.ipd.sdq.workflow.jobs.IJob;
 

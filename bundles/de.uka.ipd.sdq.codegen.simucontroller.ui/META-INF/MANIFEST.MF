@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: de.uka.ipd.sdq.codegen.simucontroller.ui
+Bundle-SymbolicName: de.uka.ipd.sdq.codegen.simucontroller.ui
+Bundle-Version: 5.2.1.qualifier
+Bundle-Vendor: palladiosimulator.org
+Bundle-RequiredExecutionEnvironment: JavaSE-17
+Bundle-ActivationPolicy: lazy

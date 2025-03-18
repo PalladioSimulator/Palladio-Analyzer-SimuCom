@@ -9,11 +9,12 @@ import org.palladiosimulator.pcm.repository.PassiveResource;
 
 import de.uka.ipd.sdq.scheduler.IPassiveResource;
 import de.uka.ipd.sdq.scheduler.resources.active.IResourceTableManager;
-import de.uka.ipd.sdq.simucomframework.model.SimuComModel;
-import de.uka.ipd.sdq.simucomframework.resources.AbstractSimulatedResourceContainer;
-import de.uka.ipd.sdq.simucomframework.resources.HashMapAssemblyAllocationLookup;
-import de.uka.ipd.sdq.simucomframework.resources.IAssemblyAllocationLookup;
-import de.uka.ipd.sdq.simucomframework.resources.SimulatedResourceContainer;
+import de.uka.ipd.sdq.simucomframework.core.Context;
+import de.uka.ipd.sdq.simucomframework.core.model.SimuComModel;
+import de.uka.ipd.sdq.simucomframework.core.resources.AbstractSimulatedResourceContainer;
+import de.uka.ipd.sdq.simucomframework.core.resources.HashMapAssemblyAllocationLookup;
+import de.uka.ipd.sdq.simucomframework.core.resources.IAssemblyAllocationLookup;
+import de.uka.ipd.sdq.simucomframework.core.resources.SimulatedResourceContainer;
 
 /**
  * 

@@ -120,6 +120,13 @@ loader.
          unpack="false"/>
 
    <plugin
+         id="de.uka.ipd.sdq.simucomframework.ui"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
          id="de.uka.ipd.sdq.simucomframework.variables"
          download-size="0"
          install-size="0"
@@ -135,6 +142,13 @@ loader.
 
    <plugin
          id="de.uka.ipd.sdq.codegen.simucontroller"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="de.uka.ipd.sdq.codegen.simucontroller.ui"
          download-size="0"
          install-size="0"
          version="0.0.0"

@@ -27,7 +27,7 @@ import org.eclipse.ui.PlatformUI;
 
 import swing2swt.layout.BorderLayout;
 import de.uka.ipd.sdq.codegen.simucontroller.SimuControllerImages;
-import de.uka.ipd.sdq.codegen.simucontroller.dockmodel.DockModel;
+import de.uka.ipd.sdq.codegen.simucontroller.core.dockmodel.DockModel;
 
 public class DockStatusViewer extends Composite implements Observer {
     /** Logger for this class. */

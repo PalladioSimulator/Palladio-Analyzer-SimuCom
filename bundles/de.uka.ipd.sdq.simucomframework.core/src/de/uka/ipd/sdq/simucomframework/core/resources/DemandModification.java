@@ -1,0 +1,32 @@
+package de.uka.ipd.sdq.simucomframework.core.resources;
+
+/**
+ * @author Jonas Lehmann
+ *
+ */
+public class DemandModification {
+
+	private final double scaledDemand;
+
+	private final double additiveDemandValue;
+
+	public DemandModification(double scaledDemand, double additiveDemandValue) {
+		this.scaledDemand = scaledDemand;
+		this.additiveDemandValue = additiveDemandValue;
+	}
+	
+	/**
+	 * @return the scaled demand
+	 */
+	public double getScaledDemand() {
+		return scaledDemand;
+	}
+
+	/**
+	 * @return an additive demand of time units (delay, latency)
+	 */
+	public double getAdditiveDemandValue() {
+		return additiveDemandValue;
+	}
+	
+}
