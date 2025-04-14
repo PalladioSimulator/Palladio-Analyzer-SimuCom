@@ -28,7 +28,7 @@ public abstract class ForkedBehaviourProcess extends SimuComSimProcess {
 
 
     public ForkedBehaviourProcess(Context context, String assemblyContextID, boolean isAsync, IResourceTableManager resourceTableManager) {
-        super(context.getModel(), "Forked Behaviour", context.getThread().getRequestContext(), resourceTableManager);
+        super(context.getModel(), "Forked Behaviour", context.getThread().getRequestContext(), resourceTableManager, true);
 
         // use the session id from the parent process
         this.currentSessionId = context.getThread().getCurrentSessionId();

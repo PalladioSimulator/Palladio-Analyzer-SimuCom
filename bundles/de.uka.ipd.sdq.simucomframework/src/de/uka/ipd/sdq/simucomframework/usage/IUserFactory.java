@@ -14,7 +14,7 @@ public interface IUserFactory {
      * 
      * @return The newly born user
      */
-    public IUser createUser();
+    public IUser createUser(IUserProcessMonitor processMonitor);
 
     public Calculator attachResponseTimeCalculator();
 

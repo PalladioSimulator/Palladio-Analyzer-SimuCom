@@ -22,6 +22,8 @@ public class SimulationPreferenceInitialiser extends AbstractPreferenceInitializ
         // set the default simulation engine
         IEclipsePreferences preferences = DefaultScope.INSTANCE.getNode(Activator.PLUGIN_ID);
         preferences.put(SimulationPreferencePage.PREFERENCE_SIMULATION_ENGINE_ID, firstEngineId);
+
+        preferences.put(SimulationPreferencePage.PREFERENCE_MAX_NUMBER_OF_USER_PROCESSES_ID, "-1");
     }
 
 }

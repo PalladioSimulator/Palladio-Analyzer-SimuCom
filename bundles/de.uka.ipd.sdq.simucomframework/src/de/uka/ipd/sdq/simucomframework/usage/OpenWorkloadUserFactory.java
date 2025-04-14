@@ -1,7 +1,6 @@
 package de.uka.ipd.sdq.simucomframework.usage;
 
 import org.palladiosimulator.commons.emfutils.EMFLoadHelper;
-
 import org.palladiosimulator.pcm.usagemodel.UsageScenario;
 
 import de.uka.ipd.sdq.scheduler.resources.active.IResourceTableManager;
@@ -32,9 +31,14 @@ public abstract class OpenWorkloadUserFactory extends AbstractWorkloadUserFactor
      * @see de.uka.ipd.sdq.simucomframework.usage.IUserFactory#createUser()
      */
     @Override
-    public IUser createUser() {
+    public IUser createUser(IUserProcessMonitor processMonitor) {
         final IScenarioRunner scenarioRunner = this.createScenarioRunner();
-        return new OpenWorkloadUser(model, "OpenUser", scenarioRunner, usageStartStopProbes, resourceTableManager);
+        OpenWorkloadUser openWorkloadUser = new OpenWorkloadUser(model, "OpenUser", scenarioRunner, usageStartStopProbes, resourceTableManager);
+        if (processMonitor != null) {
+            processMonitor.registerProcess(openWorkloadUser);
+        }
+        openWorkloadUser.startProcess();
+        return openWorkloadUser;
     }
 
     /**

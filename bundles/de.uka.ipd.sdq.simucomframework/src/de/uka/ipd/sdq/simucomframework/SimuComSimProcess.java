@@ -60,12 +60,12 @@ public abstract class SimuComSimProcess extends AbstractSimProcessDelegator impl
         this.priority = priority;
     }
 
-    protected SimuComSimProcess(final SimuComModel model, final String name, IResourceTableManager resourceTableManager) {
-        this(model, name, null, resourceTableManager);
+    protected SimuComSimProcess(final SimuComModel model, final String name, IResourceTableManager resourceTableManager, boolean autostart) {
+        this(model, name, null, resourceTableManager, autostart);
     }
 
-    protected SimuComSimProcess(final SimuComModel model, final String name, final RequestContext parentRequestContext, IResourceTableManager resourceTableManager) {
-        super(model, name);
+    protected SimuComSimProcess(final SimuComModel model, final String name, final RequestContext parentRequestContext, IResourceTableManager resourceTableManager, boolean autostart) {
+        super(model, name, autostart);
         this.isDebug = model.getConfiguration().isDebug();
         this.delayResource = new SimDelayResource(model, name + "_thinktime", name + "_thinktime", resourceTableManager);
         requestContext = new RequestContext(Long.valueOf(getRawId()).toString(), parentRequestContext);
@@ -241,6 +241,11 @@ public abstract class SimuComSimProcess extends AbstractSimProcessDelegator impl
 
     @Override
     public void notifyTerminated(final ISimProcess process) {
+        // nothing to do here
+    }
+    
+    @Override
+    public void notifyStarted(ISimProcess process) {
         // nothing to do here
     }
 
