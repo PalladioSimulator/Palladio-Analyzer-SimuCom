@@ -2,7 +2,7 @@ package de.uka.ipd.sdq.simucomframework.fork;
 
 import org.apache.log4j.Logger;
 
-import de.uka.ipd.sdq.simucomframework.SimuComSimProcess;
+import de.uka.ipd.sdq.simucomframework.core.SimuComSimProcess;
 
 /**
  * Helper to execute a fork action in the PCM. Implements the barrier design pattern.

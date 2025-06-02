@@ -6,8 +6,6 @@ import java.io.IOException;
 import java.util.Hashtable;
 import java.util.Map;
 
-import javax.management.RuntimeErrorException;
-
 import org.apache.log4j.ConsoleAppender;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PatternLayout;
@@ -20,8 +18,8 @@ import org.osgi.service.event.Event;
 import org.osgi.service.event.EventAdmin;
 import org.osgi.util.tracker.ServiceTracker;
 
-import de.uka.ipd.sdq.simucomframework.AbstractMain;
-import de.uka.ipd.sdq.simucomframework.model.SimuComModel;
+import de.uka.ipd.sdq.simucomframework.core.IModelledApp;
+import de.uka.ipd.sdq.simucomframework.core.model.SimuComModel;
 import de.uka.ipd.sdq.simucomframework.simucomstatus.SimuComStatus;
 import de.uka.ipd.sdq.simulation.core.AbstractSimulationConfig;
 import de.uka.ipd.sdq.simulation.core.ISimulationControl;
@@ -105,7 +103,8 @@ public class SimulationDockServiceImpl implements SimulationDockService {
             boolean isRemoteRun) {
         String bundleLocation = persistBundleInTempDir(simulationBundle);
         try {
-            simulationBundleRef = context.installBundle(new File(bundleLocation).toURI().toString());
+            simulationBundleRef = context.installBundle(new File(bundleLocation).toURI()
+                .toString());
             simulationBundleRef.start();
 
         } catch (BundleException e) {
@@ -134,7 +133,7 @@ public class SimulationDockServiceImpl implements SimulationDockService {
     }
 
     private static void uninstallBundle(Bundle simulationBundleRef) {
-        if(simulationBundleRef != null) {
+        if (simulationBundleRef != null) {
             try {
                 simulationBundleRef.uninstall();
             } catch (BundleException e) {
@@ -145,7 +144,8 @@ public class SimulationDockServiceImpl implements SimulationDockService {
 
     public SimuComModel getSimuComModel() {
         if (service != null) {
-            return ((AbstractMain) service.getService()).getModel();
+            IModelledApp abstractMain = (IModelledApp) service.getService();
+            return abstractMain.getModel();
         }
         return null;
     }
@@ -186,7 +186,7 @@ public class SimulationDockServiceImpl implements SimulationDockService {
             throw new RuntimeException(ex);
         } finally {
             service.close();
-            Hashtable<String, Object> eventData = new Hashtable<String, Object>();
+            Hashtable<String, Object> eventData = new Hashtable<>();
             eventData.put(SIMTIME_TOTAL, System.nanoTime() - simulationStartTime);
             sendEvent("de/uka/ipd/sdq/simucomframework/simucomdock/SIM_STOPPED", eventData);
         }
@@ -241,7 +241,8 @@ public class SimulationDockServiceImpl implements SimulationDockService {
 
     private void unloadPluginIfExists(BundleContext context, String bundleName) {
         for (Bundle b : context.getBundles()) {
-            if (b.getSymbolicName() != null && b.getSymbolicName().equals(bundleName)) {
+            if (b.getSymbolicName() != null && b.getSymbolicName()
+                .equals(bundleName)) {
                 try {
                     if (b.getState() == Bundle.ACTIVE) {
                         b.stop();
@@ -256,7 +257,8 @@ public class SimulationDockServiceImpl implements SimulationDockService {
 
     private void ensurePluginLoaded(BundleContext context, String bundleName) {
         for (Bundle b : context.getBundles()) {
-            if (b.getSymbolicName() != null && b.getSymbolicName().equals(bundleName)) {
+            if (b.getSymbolicName() != null && b.getSymbolicName()
+                .equals(bundleName)) {
                 if (b.getState() != Bundle.ACTIVE) {
                     try {
                         b.start();

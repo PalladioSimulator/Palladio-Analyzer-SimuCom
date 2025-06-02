@@ -2,6 +2,7 @@ package de.uka.ipd.sdq.simucomframework;
 
 import java.util.Arrays;
 import java.util.Hashtable;
+import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -21,24 +22,24 @@ import org.palladiosimulator.probeframework.calculator.Calculator;
 import org.palladiosimulator.probeframework.probes.EventProbeList;
 import org.palladiosimulator.probeframework.probes.TriggeredProbe;
 
-import de.uka.ipd.sdq.errorhandling.dialogs.issues.DisplayIssuesDialog;
+import de.uka.ipd.sdq.errorhandling.core.SeverityAndIssue;
 import de.uka.ipd.sdq.scheduler.resources.active.IResourceTableManager;
 import de.uka.ipd.sdq.scheduler.resources.active.ResourceTableManager;
+import de.uka.ipd.sdq.simucomframework.core.IModelledApp;
 import de.uka.ipd.sdq.simucomframework.core.SimuComConfig;
-import de.uka.ipd.sdq.simucomframework.model.SimuComModel;
-import de.uka.ipd.sdq.simucomframework.probes.TakeCurrentSimulationTimeProbe;
-import de.uka.ipd.sdq.simucomframework.resources.IResourceContainerFactory;
+import de.uka.ipd.sdq.simucomframework.core.model.SimuComModel;
+import de.uka.ipd.sdq.simucomframework.core.probes.TakeCurrentSimulationTimeProbe;
+import de.uka.ipd.sdq.simucomframework.core.resources.IResourceContainerFactory;
+import de.uka.ipd.sdq.simucomframework.core.usage.IUserFactory;
+import de.uka.ipd.sdq.simucomframework.core.usage.IWorkloadDriver;
 import de.uka.ipd.sdq.simucomframework.simucomstatus.SimuComStatus;
 import de.uka.ipd.sdq.simucomframework.simucomstatus.SimucomstatusFactory;
-import de.uka.ipd.sdq.simucomframework.usage.IUserFactory;
-import de.uka.ipd.sdq.simucomframework.usage.IWorkloadDriver;
 import de.uka.ipd.sdq.simulation.abstractsimengine.ISimEngineFactory;
 import de.uka.ipd.sdq.simulation.core.AbstractSimulationConfig;
 import de.uka.ipd.sdq.simulation.core.ISimulationControl;
 import de.uka.ipd.sdq.simulation.core.ISimulationListener;
 import de.uka.ipd.sdq.simulation.core.IStatusObserver;
 import de.uka.ipd.sdq.simulation.core.SimulationResult;
-import de.uka.ipd.sdq.simulation.preferences.SimulationPreferencesHelper;
 
 /**
  * Base class for simulation instances. It contains a generic simulation start and stop logic as
@@ -56,7 +57,7 @@ import de.uka.ipd.sdq.simulation.preferences.SimulationPreferencesHelper;
  *
  * @author Steffen Becker, Sebastian Lehrig
  */
-public abstract class AbstractMain implements ISimulationControl, BundleActivator {
+public abstract class AbstractMain implements ISimulationControl, IModelledApp, BundleActivator {
 
     /** This class' LOGGER */
     private static final Logger LOGGER = Logger.getLogger(AbstractMain.class.getName());
@@ -75,7 +76,6 @@ public abstract class AbstractMain implements ISimulationControl, BundleActivato
 
     /** Default EMF factory for measuring points. */
     private final MeasuringpointFactory measuringpointFactory = MeasuringpointFactory.eINSTANCE;
-    
 
     /*
      * (non-Javadoc)
@@ -116,63 +116,80 @@ public abstract class AbstractMain implements ISimulationControl, BundleActivato
 
         if (LOGGER.isEnabledFor(Level.INFO)) {
             LOGGER.info("Starting Simulation");
-            LOGGER.info("Simulation engine used: " + model.getSimulationControl().getClass().getSimpleName());
+            LOGGER.info("Simulation engine used: " + model.getSimulationControl()
+                .getClass()
+                .getSimpleName());
         }
 
-        model.getConfiguration().addListener(new ISimulationListener() {
+        model.getConfiguration()
+            .addListener(new ISimulationListener() {
 
-            @Override
-            public void simulationStop() {
-                model.getProbeFrameworkContext().finish();
-                model.getConfiguration().getRecorderConfigurationFactory().finalizeRecorderConfigurationFactory();
-            }
+                @Override
+                public void simulationStop() {
+                    model.getProbeFrameworkContext()
+                        .finish();
+                    model.getConfiguration()
+                        .getRecorderConfigurationFactory()
+                        .finalizeRecorderConfigurationFactory();
+                }
 
-            @Override
-            public void simulationStart() {
-            }
-        });
+                @Override
+                public void simulationStart() {
+                }
+            });
 
-        model.getSimulationControl().addTimeObserver(new Observer() {
+        model.getSimulationControl()
+            .addTimeObserver(new Observer() {
 
-            @Override
-            public void update(final Observable clock, final Object data) {
-                final int timePercent = config.getSimuTime() < 0 ? 0 : (int) (model.getSimulationControl()
-                        .getCurrentSimulationTime() * 100 / config.getSimuTime());
-                final int measurementsPercent = (int) (model.getMainMeasurementsCount() * 100 / model
-                        .getConfiguration().getMaxMeasurementsCount());
-                statusObserver.updateStatus(timePercent < measurementsPercent ? measurementsPercent : timePercent,
-                        model.getSimulationControl().getCurrentSimulationTime(), model.getMainMeasurementsCount());
-            }
+                @Override
+                public void update(final Observable clock, final Object data) {
+                    final int timePercent = config.getSimuTime() < 0 ? 0
+                            : (int) (model.getSimulationControl()
+                                .getCurrentSimulationTime() * 100 / config.getSimuTime());
+                    final int measurementsPercent = (int) (model.getMainMeasurementsCount() * 100
+                            / model.getConfiguration()
+                                .getMaxMeasurementsCount());
+                    statusObserver.updateStatus(timePercent < measurementsPercent ? measurementsPercent : timePercent,
+                            model.getSimulationControl()
+                                .getCurrentSimulationTime(),
+                            model.getMainMeasurementsCount());
+                }
 
-        });
+            });
         getStatus().setCurrentSimulationTime(0);
         final double simRealTime = ExperimentRunner.run(model);
-        if (model.getIssues().size() > 0) {
+        if (model.getIssues()
+            .size() > 0) {
             if (LOGGER.isEnabledFor(Level.INFO)) {
-                LOGGER.info(model.getIssues().size() + " issues experience during the simulation run.");
+                LOGGER.info(model.getIssues()
+                    .size() + " issues experience during the simulation run.");
             }
-            final DisplayIssuesDialog runner = new DisplayIssuesDialog(model.getIssues());
-            DisplayIssuesDialog.showDialogSync(runner);
+            handleModelIssues(model.getIssues());
         }
 
         if (LOGGER.isEnabledFor(Level.INFO)) {
             LOGGER.info("Simulation stopped. It took " + (simRealTime / Math.pow(10, 9))
                     + " seconds real time to terminate");
         }
-        model.getConfiguration().disposeRandomGenerator();
+        model.getConfiguration()
+            .disposeRandomGenerator();
         return model.getErrorStatus();
     }
+
+    protected abstract void handleModelIssues(List<SeverityAndIssue> list);
 
     /**
      * Request a simulation stop
      */
     protected void stop() {
-        model.getSimulationControl().stop();
+        model.getSimulationControl()
+            .stop();
     }
 
     /**
      * @return The simucom model used in this simulation run
      */
+    @Override
     public SimuComModel getModel() {
         return model;
     }
@@ -196,11 +213,11 @@ public abstract class AbstractMain implements ISimulationControl, BundleActivato
     public void prepareSimulation(final AbstractSimulationConfig config, final IStatusObserver observer,
             final boolean isRemoteRun) {
         // load factory for the preferred simulation engine
-        final ISimEngineFactory factory = SimulationPreferencesHelper.getPreferredSimulationEngine();
+        final ISimEngineFactory factory = getSimulationEngine();
         if (factory == null) {
             throw new RuntimeException("There is no simulation engine available. Install at least one engine.");
         }
-        
+
         IResourceTableManager resourceTableManager = new ResourceTableManager();
         // create simulation model
         model = new SimuComModel((SimuComConfig) config, getStatus(), factory, isRemoteRun, resourceTableManager);
@@ -214,38 +231,38 @@ public abstract class AbstractMain implements ISimulationControl, BundleActivato
         model.setUsageScenarios(workloadDrivers);
 
         // Add execution results calculator
-        if (model.getConfiguration().getSimulateFailures()) {
+        if (model.getConfiguration()
+            .getSimulateFailures()) {
             final StringMeasuringPoint mp = this.measuringpointFactory.createStringMeasuringPoint();
             mp.setMeasuringPoint("System execution results");
-            final MeasuringPointRepository myMeasurementPointRepository = MeasuringpointFactory.eINSTANCE.createMeasuringPointRepository();
-            myMeasurementPointRepository.getMeasuringPoints().add(mp);
+            final MeasuringPointRepository myMeasurementPointRepository = MeasuringpointFactory.eINSTANCE
+                .createMeasuringPointRepository();
+            myMeasurementPointRepository.getMeasuringPoints()
+                .add(mp);
             mp.setMeasuringPointRepository(myMeasurementPointRepository);
 
-            final MetricSetDescription metricSetDescription = MetricSetDescriptionBuilder.
-                    newMetricSetDescriptionBuilder().
-                    name("Execution Result Over Time").
-                    textualDescription("This metric records execution results over time, i.e., tuples of (execution result, point in time").
-                    id(EcoreUtil.generateUUID()).
-                    subsumedMetrics(
-                            Arrays.asList(
-                                    model.getFailureStatistics().getExecutionResultProbe().getMetricDesciption(),
-                                    MetricDescriptionConstants.POINT_IN_TIME_METRIC)).
-                                    build();
+            final MetricSetDescription metricSetDescription = MetricSetDescriptionBuilder
+                .newMetricSetDescriptionBuilder()
+                .name("Execution Result Over Time")
+                .textualDescription(
+                        "This metric records execution results over time, i.e., tuples of (execution result, point in time")
+                .id(EcoreUtil.generateUUID())
+                .subsumedMetrics(Arrays.asList(model.getFailureStatistics()
+                    .getExecutionResultProbe()
+                    .getMetricDesciption(), MetricDescriptionConstants.POINT_IN_TIME_METRIC))
+                .build();
 
             model.getProbeFrameworkContext()
-            .getCalculatorFactory()
-            .buildExecutionResultCalculator(
-                    mp,
-                    new EventProbeList(
-                            metricSetDescription,
-                            model.getFailureStatistics().getExecutionResultProbe(),
-                            Arrays.asList(
-                                    (TriggeredProbe) new TakeCurrentSimulationTimeProbe(this.model.getSimulationControl())
-                                    )
-                            )
-                    );
+                .getCalculatorFactory()
+                .buildExecutionResultCalculator(mp,
+                        new EventProbeList(metricSetDescription, model.getFailureStatistics()
+                            .getExecutionResultProbe(),
+                                Arrays.asList((TriggeredProbe) new TakeCurrentSimulationTimeProbe(
+                                        this.model.getSimulationControl()))));
         }
     }
+
+    protected abstract ISimEngineFactory getSimulationEngine();
 
     private void attachUsageResponseTimeCalculators(final IWorkloadDriver[] workloadDrivers) {
         for (final IWorkloadDriver driver : workloadDrivers) {

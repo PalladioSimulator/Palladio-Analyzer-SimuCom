@@ -1,5 +1,7 @@
 package de.uka.ipd.sdq.simucomframework.usage;
 
+import de.uka.ipd.sdq.simucomframework.core.usage.IUserFactory;
+
 /**
  * Interface for factories creating closed workload users.
  * 

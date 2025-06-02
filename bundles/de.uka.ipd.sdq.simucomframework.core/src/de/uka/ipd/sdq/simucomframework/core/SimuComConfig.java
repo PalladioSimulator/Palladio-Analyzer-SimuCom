@@ -8,7 +8,7 @@ import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
 import org.palladiosimulator.analyzer.workflow.core.runconfig.ExperimentRunDescriptor;
-import org.palladiosimulator.recorderframework.config.IRecorderConfigurationFactory;
+import org.palladiosimulator.recorderframework.core.config.IRecorderConfigurationFactory;
 
 import de.uka.ipd.sdq.probfunction.math.IRandomGenerator;
 import de.uka.ipd.sdq.simulation.core.AbstractSimulationConfig;

@@ -1,5 +1,7 @@
 package de.uka.ipd.sdq.simucomframework.usage;
 
+import de.uka.ipd.sdq.simucomframework.core.usage.IWorkloadDriver;
+
 /**
  * Extension of the Workload Driver Interface with capabilities to stop a workload
  * driver from executing a usage scenario.

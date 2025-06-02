@@ -2,7 +2,8 @@ package de.uka.ipd.sdq.codegen.simucontroller.debug;
 
 import org.eclipse.debug.core.ILaunch;
 
-import de.uka.ipd.sdq.codegen.simucontroller.dockmodel.DockModel;
+import de.uka.ipd.sdq.codegen.simucontroller.core.debug.IDebugListener;
+import de.uka.ipd.sdq.codegen.simucontroller.core.dockmodel.DockModel;
 
 /**
  * An implementation of the IDebugListener interface that... TODO (this was the standard debug

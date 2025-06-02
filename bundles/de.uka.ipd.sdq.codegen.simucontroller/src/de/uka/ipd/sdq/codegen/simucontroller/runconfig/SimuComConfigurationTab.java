@@ -43,7 +43,7 @@ import org.palladiosimulator.pcm.usagemodel.UsageModel;
 import org.palladiosimulator.pcm.usagemodel.UsageScenario;
 import org.palladiosimulator.pcm.usagemodel.provider.UsagemodelItemProviderAdapterFactory;
 import org.palladiosimulator.recorderframework.launch.RecorderTabGroup;
-import org.palladiosimulator.recorderframework.utils.RecorderExtensionHelper;
+import org.palladiosimulator.recorderframework.utils.RecorderExtensionUiHelper;
 
 import de.uka.ipd.sdq.codegen.simucontroller.SimuControllerImages;
 import de.uka.ipd.sdq.simucomframework.core.SimuComConfig;
@@ -185,7 +185,7 @@ public class SimuComConfigurationTab extends AbstractLaunchConfigurationTab {
         final Label persistenceLabel = new Label(persistenceGroup, SWT.NONE);
         persistenceLabel.setText("Persistence Framework:");
 
-        final List<String> recorderNames = RecorderExtensionHelper.getRecorderNames();
+        final List<String> recorderNames = RecorderExtensionUiHelper.getRecorderNames();
         this.persistenceCombo = new Combo(persistenceGroup, SWT.READ_ONLY);
         this.persistenceCombo.setItems(recorderNames.toArray(new String[recorderNames.size()]));
         this.persistenceCombo.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
@@ -738,7 +738,7 @@ public class SimuComConfigurationTab extends AbstractLaunchConfigurationTab {
         configuration.setAttribute(SimuComConfig.SHOULD_THROW_EXCEPTION, SimuComConfig.DEFAULT_SHOULD_THROW_EXCEPTION);
 
         // set default value for persistence framework
-        final List<String> recorderNames = RecorderExtensionHelper.getRecorderNames();
+        final List<String> recorderNames = RecorderExtensionUiHelper.getRecorderNames();
         if (recorderNames.size() > 0) {
             configuration.setAttribute(AbstractSimulationConfig.PERSISTENCE_RECORDER_NAME, recorderNames.get(0));
         }

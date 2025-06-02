@@ -26,8 +26,9 @@ import ch.ethz.iks.r_osgi.RemoteOSGiService;
 import ch.ethz.iks.r_osgi.RemoteServiceReference;
 import ch.ethz.iks.r_osgi.URI;
 import ch.ethz.iks.r_osgi.service_discovery.ServiceDiscoveryListener;
-import de.uka.ipd.sdq.codegen.simucontroller.dockmodel.events.DockAddedEvent;
-import de.uka.ipd.sdq.codegen.simucontroller.dockmodel.events.DockDeletedEvent;
+import de.uka.ipd.sdq.codegen.simucontroller.core.dockmodel.DockModel;
+import de.uka.ipd.sdq.codegen.simucontroller.core.dockmodel.events.DockAddedEvent;
+import de.uka.ipd.sdq.codegen.simucontroller.core.dockmodel.events.DockDeletedEvent;
 import de.uka.ipd.sdq.simucomframework.simulationdock.SimulationDockService;
 
 /**

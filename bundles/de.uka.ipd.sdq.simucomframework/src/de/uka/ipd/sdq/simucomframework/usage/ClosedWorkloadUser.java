@@ -8,10 +8,12 @@ import org.palladiosimulator.probeframework.probes.Probe;
 import org.palladiosimulator.probeframework.probes.TriggeredProbe;
 
 import de.uka.ipd.sdq.scheduler.resources.active.IResourceTableManager;
-import de.uka.ipd.sdq.simucomframework.Context;
-import de.uka.ipd.sdq.simucomframework.SimuComSimProcess;
-import de.uka.ipd.sdq.simucomframework.exceptions.FailureException;
-import de.uka.ipd.sdq.simucomframework.model.SimuComModel;
+import de.uka.ipd.sdq.simucomframework.core.Context;
+import de.uka.ipd.sdq.simucomframework.core.SimuComSimProcess;
+import de.uka.ipd.sdq.simucomframework.core.exceptions.FailureException;
+import de.uka.ipd.sdq.simucomframework.core.model.SimuComModel;
+import de.uka.ipd.sdq.simucomframework.core.usage.IScenarioRunner;
+import de.uka.ipd.sdq.simucomframework.core.usage.IUser;
 
 /**
  * A closed workload user is a user which performs the typical closed workload cycle: execute,

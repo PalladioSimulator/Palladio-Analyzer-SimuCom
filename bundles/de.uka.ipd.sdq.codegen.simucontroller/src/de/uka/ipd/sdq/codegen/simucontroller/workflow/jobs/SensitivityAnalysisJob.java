@@ -6,8 +6,8 @@ import java.util.List;
 import org.eclipse.core.runtime.CoreException;
 import org.palladiosimulator.analyzer.workflow.core.runconfig.SensitivityAnalysisConfiguration;
 
+import de.uka.ipd.sdq.codegen.simucontroller.core.debug.IDebugListener;
 import de.uka.ipd.sdq.codegen.simucontroller.core.runconfig.SimuComWorkflowConfiguration;
-import de.uka.ipd.sdq.codegen.simucontroller.debug.IDebugListener;
 import de.uka.ipd.sdq.workflow.jobs.IBlackboardInteractingJob;
 import de.uka.ipd.sdq.workflow.jobs.SequentialBlackboardInteractingJob;
 import de.uka.ipd.sdq.workflow.mdsd.blackboard.MDSDBlackboard;
