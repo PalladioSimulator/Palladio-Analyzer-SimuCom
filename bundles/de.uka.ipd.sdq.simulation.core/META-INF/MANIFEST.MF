@@ -2,14 +2,14 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Palladio Simulation Core
 Bundle-SymbolicName: de.uka.ipd.sdq.simulation.core
-Bundle-Version: 5.2.1.qualifier
+Bundle-Version: 5.2.2
 Export-Package: de.uka.ipd.sdq.simulation.core
 Require-Bundle: org.apache.log4j;bundle-version="1.2.19",
- org.palladiosimulator.analyzer.workflow.core;bundle-version="5.2.1",
- org.palladiosimulator.recorderframework.core;bundle-version="5.2.1",
- de.uka.ipd.sdq.probfunction.math;bundle-version="5.2.1",
- de.uka.ipd.sdq.simulation.abstractsimengine;bundle-version="5.2.1",
- de.uka.ipd.sdq.simucomframework.simucomstatus;bundle-version="5.2.1"
+ org.palladiosimulator.analyzer.workflow.core;bundle-version="5.2.2",
+ org.palladiosimulator.recorderframework.core;bundle-version="5.2.2",
+ de.uka.ipd.sdq.probfunction.math;bundle-version="5.2.2",
+ de.uka.ipd.sdq.simulation.abstractsimengine;bundle-version="5.2.2",
+ de.uka.ipd.sdq.simucomframework.simucomstatus;bundle-version="5.2.2"
 Bundle-Vendor: edu.kit.ipd.sdq
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-17

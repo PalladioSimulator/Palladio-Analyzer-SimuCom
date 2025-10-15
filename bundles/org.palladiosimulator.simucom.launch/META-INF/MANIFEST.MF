@@ -2,9 +2,9 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: SimuCom Launcher
 Bundle-SymbolicName: org.palladiosimulator.simucom.launch;singleton:=true
-Bundle-Version: 5.2.1.qualifier
+Bundle-Version: 5.2.2
 Automatic-Module-Name: org.palladiosimulator.simucom.launch
 Bundle-RequiredExecutionEnvironment: JavaSE-17
-Require-Bundle: de.uka.ipd.sdq.codegen.simucontroller;bundle-version="5.2.1",
+Require-Bundle: de.uka.ipd.sdq.codegen.simucontroller;bundle-version="5.2.2",
  org.eclipse.debug.core,
- de.uka.ipd.sdq.simucom.rerunsimulation;bundle-version="5.2.1"
+ de.uka.ipd.sdq.simucom.rerunsimulation;bundle-version="5.2.2"

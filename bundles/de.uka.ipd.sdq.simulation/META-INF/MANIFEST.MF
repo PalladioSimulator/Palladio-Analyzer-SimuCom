@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Palladio Simulation
 Bundle-SymbolicName: de.uka.ipd.sdq.simulation;singleton:=true
-Bundle-Version: 5.2.1.qualifier
+Bundle-Version: 5.2.2
 Bundle-Activator: de.uka.ipd.sdq.simulation.Activator
 Bundle-Vendor: edu.kit.ipd.sdq
 Require-Bundle: org.eclipse.ui,
@@ -14,7 +14,7 @@ Require-Bundle: org.eclipse.ui,
  de.uka.ipd.sdq.simulation.abstractsimengine;bundle-version="1.0.0",
  org.palladiosimulator.analyzer.workflow.core;bundle-version="1.0.0",
  de.uka.ipd.sdq.simucomframework.simucomstatus;bundle-version="1.0.0",
- de.uka.ipd.sdq.simulation.core;bundle-version="5.2.1";visibility:=reexport
+ de.uka.ipd.sdq.simulation.core;bundle-version="5.2.2";visibility:=reexport
 Bundle-ActivationPolicy: lazy
 Export-Package: de.uka.ipd.sdq.simulation,
  de.uka.ipd.sdq.simulation.preferences

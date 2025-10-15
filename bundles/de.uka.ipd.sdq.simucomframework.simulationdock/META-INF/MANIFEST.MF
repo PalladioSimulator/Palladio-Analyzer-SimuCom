@@ -2,12 +2,12 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Simulationdock Plug-in
 Bundle-SymbolicName: de.uka.ipd.sdq.simucomframework.simulationdock
-Bundle-Version: 5.2.1.qualifier
+Bundle-Version: 5.2.2
 Bundle-Activator: de.uka.ipd.sdq.simucomframework.simulationdock.Activator
 Bundle-Vendor: sdq.ipd.uka.de
 Bundle-ActivationPolicy: lazy
 Export-Package: de.uka.ipd.sdq.simucomframework.simulationdock
-Require-Bundle: de.uka.ipd.sdq.simucomframework.core;bundle-version="5.2.1",
+Require-Bundle: de.uka.ipd.sdq.simucomframework.core;bundle-version="5.2.2",
  org.eclipse.osgi.services,
  org.eclipse.emf.ecore,
  org.apache.log4j,

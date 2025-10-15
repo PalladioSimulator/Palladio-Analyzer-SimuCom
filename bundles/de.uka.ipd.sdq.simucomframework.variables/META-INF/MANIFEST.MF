@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Simulation Variables
 Bundle-SymbolicName: de.uka.ipd.sdq.simucomframework.variables
-Bundle-Version: 5.2.1.qualifier
+Bundle-Version: 5.2.2
 JavaFlow-Enabled: true
 Export-Package: de.uka.ipd.sdq.simucomframework.variables,
  de.uka.ipd.sdq.simucomframework.variables.cache,
@@ -17,7 +17,7 @@ Require-Bundle: org.palladiosimulator.pcm;bundle-version="4.0.0",
  de.uka.ipd.sdq.probfunction.math;bundle-version="2.0.2",
  de.uka.ipd.sdq.stoex.analyser;bundle-version="2.0.0",
  org.apache.log4j,
- org.palladiosimulator.commons.stoex;bundle-version="5.2.1"
+ org.palladiosimulator.commons.stoex;bundle-version="5.2.2"
 Bundle-Vendor: sdq.ipd.uka.de
 Bundle-ActivationPolicy: lazy
 Bundle-ClassPath: .
