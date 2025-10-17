@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: SimuCom Framework Core
 Bundle-SymbolicName: de.uka.ipd.sdq.simucomframework.core
-Bundle-Version: 5.2.2
+Bundle-Version: 6.0.0.qualifier
 Export-Package: de.uka.ipd.sdq.simucomframework.core,
  de.uka.ipd.sdq.simucomframework.core.calculator,
  de.uka.ipd.sdq.simucomframework.core.entities,

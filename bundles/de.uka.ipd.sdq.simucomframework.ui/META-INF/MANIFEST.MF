@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: de.uka.ipd.sdq.simucomframework.ui
 Bundle-SymbolicName: de.uka.ipd.sdq.simucomframework.ui
-Bundle-Version: 5.2.2
+Bundle-Version: 6.0.0.qualifier
 Export-Package: de.uka.ipd.sdq.simucomframework.ui
 Require-Bundle: org.eclipse.osgi;bundle-version="3.18.300",
  de.uka.ipd.sdq.errorhandling;bundle-version="5.2.2",
