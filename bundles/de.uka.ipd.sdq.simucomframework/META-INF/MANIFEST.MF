@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: SimuCom Framework
 Bundle-SymbolicName: de.uka.ipd.sdq.simucomframework;singleton:=true
-Bundle-Version: 5.2.2
+Bundle-Version: 6.0.0.qualifier
 Bundle-Vendor: palladiosimulator.org
 Export-Package: de.uka.ipd.sdq.simucomframework,
  de.uka.ipd.sdq.simucomframework.accuracy,
@@ -16,26 +16,26 @@ Require-Bundle: de.uka.ipd.sdq.simucomframework.variables,
  de.uka.ipd.sdq.scheduler,
  de.uka.ipd.sdq.simucomframework.simucomstatus,
  org.eclipse.emf.ecore.change,
- de.uka.ipd.sdq.statistics;bundle-version="1.0.0",
- de.uka.ipd.sdq.probfunction.math;bundle-version="2.0.0",
- de.uka.ipd.sdq.scheduler;bundle-version="1.0.0";visibility:=reexport,
- org.palladiosimulator.analyzer.workflow.core;bundle-version="5.2.2",
+ de.uka.ipd.sdq.statistics,
+ de.uka.ipd.sdq.probfunction.math,
+ de.uka.ipd.sdq.scheduler;visibility:=reexport,
+ org.palladiosimulator.analyzer.workflow.core,
  org.jscience;bundle-version="4.1.3",
- de.uka.ipd.sdq.simulation.abstractsimengine;bundle-version="1.0.0",
- de.uka.ipd.sdq.errorhandling.core;bundle-version="5.2.2",
- org.palladiosimulator.analyzer.accuracy;bundle-version="1.0.0",
- org.palladiosimulator.reliability;bundle-version="3.1.0",
- de.uka.ipd.sdq.featureconfig;bundle-version="2.1.0",
- de.uka.ipd.sdq.featuremodel;bundle-version="2.1.0",
- de.uka.ipd.sdq.simulation.core;bundle-version="1.0.0";visibility:=reexport,
- org.palladiosimulator.edp2;bundle-version="2.0.0",
- org.palladiosimulator.probeframework;bundle-version="2.0.1",
- org.palladiosimulator.recorderframework;bundle-version="2.0.1",
- org.palladiosimulator.metricspec;bundle-version="1.0.1",
- org.palladiosimulator.measurementframework;bundle-version="1.0.0",
- org.palladiosimulator.pcm.edp2.measuringpoint;bundle-version="1.0.0",
- org.palladiosimulator.edp2.util;bundle-version="1.0.0",
- org.palladiosimulator.pcm;bundle-version="4.1.0",
- de.uka.ipd.sdq.simucomframework.core;bundle-version="5.2.2";visibility:=reexport
+ de.uka.ipd.sdq.simulation.abstractsimengine,
+ de.uka.ipd.sdq.errorhandling.core,
+ org.palladiosimulator.analyzer.accuracy,
+ org.palladiosimulator.reliability,
+ de.uka.ipd.sdq.featureconfig,
+ de.uka.ipd.sdq.featuremodel,
+ de.uka.ipd.sdq.simulation.core;visibility:=reexport,
+ org.palladiosimulator.edp2,
+ org.palladiosimulator.probeframework,
+ org.palladiosimulator.recorderframework,
+ org.palladiosimulator.metricspec,
+ org.palladiosimulator.measurementframework,
+ org.palladiosimulator.pcm.edp2.measuringpoint,
+ org.palladiosimulator.edp2.util,
+ org.palladiosimulator.pcm,
+ de.uka.ipd.sdq.simucomframework.core;visibility:=reexport
 Bundle-RequiredExecutionEnvironment: JavaSE-17
 Bundle-ActivationPolicy: lazy

@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Simucom Framework Tests
 Bundle-SymbolicName: de.uka.ipd.sdq.simucomframework.tests
 Bundle-Version: 1.0.0.qualifier
-Fragment-Host: de.uka.ipd.sdq.simucomframework;bundle-version="5.0.0"
+Fragment-Host: de.uka.ipd.sdq.simucomframework
 Automatic-Module-Name: de.uka.ipd.sdq.simucomframework.tests
 Bundle-RequiredExecutionEnvironment: JavaSE-17
 Require-Bundle: org.junit,

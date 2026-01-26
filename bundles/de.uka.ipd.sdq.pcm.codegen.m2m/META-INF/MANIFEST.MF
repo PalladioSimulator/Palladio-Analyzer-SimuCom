@@ -2,16 +2,16 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: de.uka.ipd.sdq.pcm.codegen.m2m
 Bundle-SymbolicName: de.uka.ipd.sdq.pcm.codegen.m2m;singleton:=true
-Bundle-Version: 5.2.2
-Require-Bundle: de.uka.ipd.sdq.identifier;bundle-version="2.0.0",
- de.uka.ipd.sdq.probfunction;bundle-version="2.1.0",
- de.uka.ipd.sdq.stoex;bundle-version="2.2.0",
- org.palladiosimulator.pcm;bundle-version="4.0.0",
- org.palladiosimulator.analyzer.completions;bundle-version="1.0.0",
- de.uka.ipd.sdq.featureconfig;bundle-version="2.1.0",
- de.uka.ipd.sdq.featuremodel;bundle-version="2.1.0",
- org.palladiosimulator.analyzer.completions;bundle-version="1.0.0",
- org.palladiosimulator.pcm.resources;bundle-version="3.6.0",
+Bundle-Version: 6.0.0.qualifier
+Require-Bundle: de.uka.ipd.sdq.identifier,
+ de.uka.ipd.sdq.probfunction,
+ de.uka.ipd.sdq.stoex,
+ org.palladiosimulator.pcm,
+ org.palladiosimulator.analyzer.completions,
+ de.uka.ipd.sdq.featureconfig,
+ de.uka.ipd.sdq.featuremodel,
+ org.palladiosimulator.analyzer.completions,
+ org.palladiosimulator.pcm.resources,
  de.uka.ipd.sdq.pcm.stochasticexpressions,
  org.eclipse.ocl,
  org.eclipse.ocl.ecore;bundle-version="1.2.1",
@@ -19,7 +19,7 @@ Require-Bundle: de.uka.ipd.sdq.identifier;bundle-version="2.0.0",
  org.eclipse.xpand,
  org.eclipse.xtend,
  org.eclipse.uml2.uml.ecore.importer,
- de.uka.ipd.sdq.scheduler;bundle-version="1.0.0",
- org.palladiosimulator.analyzer.quality;bundle-version="1.0.0"
+ de.uka.ipd.sdq.scheduler,
+ org.palladiosimulator.analyzer.quality
 Bundle-Vendor: sdq.ipd.uka.de
 Bundle-RequiredExecutionEnvironment: JavaSE-17
