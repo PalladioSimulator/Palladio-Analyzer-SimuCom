@@ -17,4 +17,4 @@ Require-Bundle: de.uka.ipd.sdq.simucomframework.core,
  de.uka.ipd.sdq.simulation.abstractsimengine,
  de.uka.ipd.sdq.simulation.core,
  org.eclipse.osgi;bundle-version="3.10.2"
-Bundle-RequiredExecutionEnvironment: JavaSE-17
+Bundle-RequiredExecutionEnvironment: JavaSE-21

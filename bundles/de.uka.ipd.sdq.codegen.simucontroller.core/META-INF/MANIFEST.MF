@@ -15,4 +15,4 @@ Require-Bundle: de.uka.ipd.sdq.workflow,
  de.uka.ipd.sdq.simucomframework.simulationdock
 Bundle-ActivationPolicy: lazy
 Bundle-Vendor: sdq.ipd.uka.de
-Bundle-RequiredExecutionEnvironment: JavaSE-17
+Bundle-RequiredExecutionEnvironment: JavaSE-21
