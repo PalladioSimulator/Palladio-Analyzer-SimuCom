@@ -22,4 +22,4 @@ Require-Bundle: de.uka.ipd.sdq.identifier,
  de.uka.ipd.sdq.scheduler,
  org.palladiosimulator.analyzer.quality
 Bundle-Vendor: sdq.ipd.uka.de
-Bundle-RequiredExecutionEnvironment: JavaSE-17
+Bundle-RequiredExecutionEnvironment: JavaSE-21

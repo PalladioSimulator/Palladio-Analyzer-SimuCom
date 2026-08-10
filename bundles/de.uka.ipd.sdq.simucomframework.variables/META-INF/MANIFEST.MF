@@ -21,5 +21,5 @@ Require-Bundle: org.palladiosimulator.pcm,
 Bundle-Vendor: sdq.ipd.uka.de
 Bundle-ActivationPolicy: lazy
 Bundle-ClassPath: .
-Bundle-RequiredExecutionEnvironment: JavaSE-17
+Bundle-RequiredExecutionEnvironment: JavaSE-21
 Automatic-Module-Name: de.uka.ipd.sdq.simucomframework.variables

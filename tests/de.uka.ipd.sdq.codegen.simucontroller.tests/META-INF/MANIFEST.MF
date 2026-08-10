@@ -10,4 +10,4 @@ Require-Bundle: org.junit,
  org.palladiosimulator.analyzer.workflow,
  org.palladiosimulator.recorderframework
 Bundle-ActivationPolicy: lazy
-Bundle-RequiredExecutionEnvironment: JavaSE-17
+Bundle-RequiredExecutionEnvironment: JavaSE-21

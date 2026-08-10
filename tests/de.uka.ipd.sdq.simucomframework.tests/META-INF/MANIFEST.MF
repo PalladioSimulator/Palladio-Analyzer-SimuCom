@@ -5,7 +5,7 @@ Bundle-SymbolicName: de.uka.ipd.sdq.simucomframework.tests
 Bundle-Version: 1.0.0.qualifier
 Fragment-Host: de.uka.ipd.sdq.simucomframework
 Automatic-Module-Name: de.uka.ipd.sdq.simucomframework.tests
-Bundle-RequiredExecutionEnvironment: JavaSE-17
+Bundle-RequiredExecutionEnvironment: JavaSE-21
 Require-Bundle: org.junit,
  junit-jupiter-api,
  org.mockito.junit-jupiter,

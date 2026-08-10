@@ -11,5 +11,5 @@ Require-Bundle: org.eclipse.osgi;bundle-version="3.18.300",
  de.uka.ipd.sdq.simulation,
  de.uka.ipd.sdq.simulation.abstractsimengine
 Bundle-Vendor: palladiosimulator.org
-Bundle-RequiredExecutionEnvironment: JavaSE-17
+Bundle-RequiredExecutionEnvironment: JavaSE-21
 Bundle-ActivationPolicy: lazy

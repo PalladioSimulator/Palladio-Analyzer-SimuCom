@@ -9,4 +9,4 @@ Require-Bundle: de.uka.ipd.sdq.codegen.simucontroller,
  de.uka.ipd.sdq.simucomframework,
  org.eclipse.emf.mwe.core,
  org.palladiosimulator.pcm
-Bundle-RequiredExecutionEnvironment: JavaSE-17
+Bundle-RequiredExecutionEnvironment: JavaSE-21
