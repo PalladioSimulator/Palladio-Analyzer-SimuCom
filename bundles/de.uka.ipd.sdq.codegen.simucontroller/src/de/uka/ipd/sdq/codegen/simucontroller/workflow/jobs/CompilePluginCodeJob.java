@@ -18,7 +18,7 @@ import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jdt.launching.JavaRuntime;
 import org.eclipse.pde.core.plugin.PluginRegistry;
 import org.eclipse.pde.internal.core.ClasspathComputer;
-import org.eclipse.pde.internal.core.natures.PDE;
+import org.eclipse.pde.internal.core.natures.PluginProject;
 import org.palladiosimulator.analyzer.workflow.core.configurations.AbstractCodeGenerationWorkflowRunConfiguration;
 import org.palladiosimulator.analyzer.workflow.jobs.CreatePluginProjectJob;
 
@@ -91,12 +91,12 @@ public class CompilePluginCodeJob implements IJob {
     }
 
     /**
-     * Create a project description and set the JavaCore.NATURE_ID and PDE.PLUGIN_NATURE
+     * Create a project description and set the JavaCore.NATURE_ID and PluginProject.NATURE
      */
     private void createDescription(IProject project, IProgressMonitor monitor) throws JobFailedException {
         IProjectDescription description = ResourcesPlugin.getWorkspace().newProjectDescription(project.getName());
         description.setNatureIds(new String[] {
-                JavaCore.NATURE_ID, PDE.PLUGIN_NATURE, SimuComNature.NATURE_ID
+                JavaCore.NATURE_ID, PluginProject.NATURE, SimuComNature.NATURE_ID
         });
         description.setLocation(null);
         // set java builders
