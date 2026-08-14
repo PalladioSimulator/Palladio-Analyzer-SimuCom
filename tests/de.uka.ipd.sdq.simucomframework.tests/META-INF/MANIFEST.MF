@@ -10,5 +10,5 @@ Require-Bundle: org.junit,
  junit-jupiter-api,
  org.mockito.junit-jupiter,
  org.mockito.mockito-core,
- net.bytebuddy.byte-buddy;bundle-version="1.9.0",
- org.objenesis;bundle-version="2.6.0"
+ net.bytebuddy.byte-buddy,
+ org.objenesis
