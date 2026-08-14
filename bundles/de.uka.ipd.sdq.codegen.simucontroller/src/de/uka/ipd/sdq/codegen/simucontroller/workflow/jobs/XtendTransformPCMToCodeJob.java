@@ -9,7 +9,6 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.mwe2.runtime.workflow.IWorkflowComponent;
 import org.eclipse.emf.mwe2.runtime.workflow.IWorkflowContext;
 import org.eclipse.emf.mwe2.runtime.workflow.Workflow;
-import org.eclipse.xtend.expression.AbstractExpressionsUsingWorkflowComponent.GlobalVarDef;
 
 import com.google.inject.Injector;
 
@@ -44,11 +43,6 @@ public class XtendTransformPCMToCodeJob extends SequentialBlackboardInteractingJ
         IBlackboardInteractingJob<MDSDBlackboard> {
 
     /**
-     * Name of the global variable used in the XPand generation to access the quality annotation
-     * repository. Used for accuracy influence analysis only.
-     */
-    private static final String GLOBAL_VARIABLE_NAME_QUALITY_ANNOTATION_REPOSITORY = "qualityAnnotationRepository";
-    /**
      * Name of the slot containing the model with the quality annotation repository.
      */
     private static final String SLOT_NAME_QUALITY_ANNOTATION_MODEL = "qualityannotationmodel";
@@ -78,15 +72,6 @@ public class XtendTransformPCMToCodeJob extends SequentialBlackboardInteractingJ
         // 1. Generate all repositories
         // private static final String REPOSITORY_ROOT_EXPAND_EXPRESSION =
         // "m2t_transforms::repository::Root FOR pcmmodel";
-
-        final GlobalVarDef[] globalVars = new GlobalVarDef[1];
-        globalVars[0] = new GlobalVarDef();
-        globalVars[0].setName(GLOBAL_VARIABLE_NAME_QUALITY_ANNOTATION_REPOSITORY);
-        if (configuration.isAccuracyInfluenceAnalysisEnabled()) {
-            globalVars[0].setValue(SLOT_NAME_QUALITY_ANNOTATION_MODEL);
-        } else {
-            globalVars[0].setValue("null");
-        }
 
         for (int repositoryIndex = 0; repositoryIndex < getRepositoryCount(); repositoryIndex++) {
             final Map<String, Object> currentRepositorySlot = getRepositoryTransformationSlots(repositoryIndex);

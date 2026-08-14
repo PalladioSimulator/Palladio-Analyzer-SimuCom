@@ -24,9 +24,6 @@ loader.
       <import plugin="de.uka.ipd.sdq.pcm.stochasticexpressions"/>
       <import plugin="org.eclipse.ocl"/>
       <import plugin="org.eclipse.ocl.ecore" version="1.2.1" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.xtend.typesystem.emf"/>
-      <import plugin="org.eclipse.xpand"/>
-      <import plugin="org.eclipse.xtend"/>
       <import plugin="org.eclipse.uml2.uml.ecore.importer"/>
       <import plugin="org.palladiosimulator.analyzer.quality"/>
       <import plugin="org.apache.log4j"/>
@@ -63,7 +60,6 @@ loader.
       <import plugin="org.palladiosimulator.pcm.edit"/>
       <import plugin="org.eclipse.emf.edit.ui" version="2.5.0" match="greaterOrEqual"/>
       <import plugin="org.palladiosimulator.pcm.ui"/>
-      <import plugin="org.apache.commons.lang" version="2.3.0" match="greaterOrEqual"/>
       <import plugin="org.junit" version="4.11.0" match="greaterOrEqual"/>
       <import plugin="de.uka.ipd.sdq.featureinstance.editor"/>
       <import plugin="org.palladiosimulator.commons"/>
@@ -85,7 +81,6 @@ loader.
       <import plugin="org.eclipse.xtend.standalone" version="2.5.3" match="greaterOrEqual"/>
       <import plugin="org.objectweb.asm" version="3.3.1" match="greaterOrEqual"/>
       <import plugin="de.uka.ipd.sdq.codegen.simucontroller"/>
-      <import plugin="de.uka.ipd.sdq.pcm.codegen.m2m"/>
       <import plugin="org.eclipse.swt" version="3.7.1" match="greaterOrEqual"/>
       <import plugin="de.uka.ipd.sdq.simucomframework"/>
       <import plugin="de.desmoj"/>
@@ -97,12 +92,6 @@ loader.
       <import feature="de.uka.ipd.sdq.simulation.abstractsimengine.feature" version="4.1.0.qualifier"/>
       <import plugin="org.palladiosimulator.branding"/>
    </requires>
-
-   <plugin
-         id="de.uka.ipd.sdq.pcm.codegen.m2m"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"/>
 
    <plugin
          id="de.uka.ipd.sdq.simucomframework.core"
